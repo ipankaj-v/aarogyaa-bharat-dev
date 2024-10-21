@@ -1,0 +1,1 @@
+<h1>Contact index page</h1>
