@@ -14,6 +14,7 @@
                         <strong>₹ 1200</strong>
                     </div> 
                 </div> -->
+                @if(isset($recentViewedProducts))
                 @foreach ($recentViewedProducts as $product)
                     <div class="product_slider2padd">
                         <div class="product_slider2block">
@@ -25,6 +26,7 @@
                         </div> 
                     </div>
                 @endforeach
+                @endif
             </div>
             <div class="progressBar"></div>
         </div>

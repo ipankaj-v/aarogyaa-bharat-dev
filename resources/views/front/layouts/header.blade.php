@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('front/css/sweetalert.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/toaster.css') }}">
-
 </head>
 
 <body class="bodyback">
@@ -45,7 +44,7 @@
                         <a class="notificationpopupjs"> <img src="{{ asset('front/images/notification.svg') }}" alt="notification"></a>
                     </li>
                     <li>
-                        <a href="{{route('cart')}}"><img src="{{ asset('front/images/cart.svg') }}" alt=""><span>{{$cartProductCount}}</span></a>
+                        <a href="{{route('cart')}}"><img src="{{ asset('front/images/cart.svg') }}" alt=""><span>{{$cartProductCount ?? 0}}</span></a>
                     </li>
                 </ul>
                 <div id="customerlocationPin">
@@ -75,13 +74,22 @@
     <div id="notification-pop">
         
     </div>
+
+    <form id="demo-form" action="{{ route('re-captcha') }}" method="POST">
+    @csrf
+    <button class="g-recaptcha" 
+            data-sitekey="{{ env('GOOGLE_RECATCHA_SITE_KEY') }}" 
+            data-callback="onSubmit">Submit
+    </button>
+</form>
     <script src="{{ asset('front/js/jquery.min.js') }}"></script>
     <script src="{{ asset('front/js/script.js') }}"></script>
     <script src="{{ asset('front/js/sweetalert.js') }}"></script>
     <script src="{{ asset('front/js/toaster.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
     <script>
         $(document).ready(function() {
-
             $('#searchInput').on('keyup', function() {
                 var query = $(this).val(); // Get the input value
 
@@ -130,7 +138,7 @@
                 }
             }
         });
-    });
+        });
         $('.notificationBlock > a').click(function(){
             $('.notificationPop').hide();
         });
@@ -138,4 +146,9 @@
         function closeonotificationPopUp() {
             $('.notificationPop').hide();
         }
+        
+        var onloadCallback = function() {
+            alert("grecaptcha is ready!");
+            document.getElementById("demo-form").submit();
+        };
     </script>

@@ -1,4 +1,5 @@
 
+@if(isset($offerAndDiscounts))
 @foreach($offerAndDiscounts as $offer)
 <div class="offer_slider_padd">
                 <div class="offer_slider_block">
@@ -13,4 +14,5 @@
                     </div>
                 </div>
             </div>
-@endforeach            
+@endforeach
+@endif            

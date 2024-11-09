@@ -38,7 +38,7 @@
         <div class="cartTitle">
             <img src="{{ asset('front/images/cart.svg') }}" alt="" />
             <div>
-                <h4>{{$cartProductCount}} Item in your cart</h4>
+                <h4>{{$cartProductCount ?? 0}} Item in your cart</h4>
                 <p>Enter your email or mobile to fill your need</p>
             </div>
         </div>

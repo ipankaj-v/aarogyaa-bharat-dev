@@ -51,6 +51,7 @@
                     </div>
                 </div>
             </div>
+            @if($contactusBlog)
             @foreach($contactusBlog  as $blog)
             <div class="our_blog_box">
                 <div class="blog_image"><img src="{{ asset('storage/' .$blog->images->first()->path) }}" alt="" /></div>
@@ -68,6 +69,7 @@
                 </div> 
              </div>
             @endforeach
+            @endif
             </div>
         </div>
         <div class="read_more_blogs"><a href="{{route('blogs')}}"><p>Read More Blogs</p><img src="{{asset('front/images/downArrow.svg')}}" alt="" /></a></div>

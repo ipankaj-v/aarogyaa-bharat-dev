@@ -51,11 +51,13 @@
 <section class="bannerPArt">
     <div class="container">
         <div class="bannerSlider getprogressWidth arrowOnProgress">
+            @if(isset($bannerImages))
             @foreach($bannerImages as $banner)
                     <div class="bannerBlock">
                         <img src="{{ asset('storage/' . $banner->image) }}" alt="Banner Image">
                     </div>
             @endforeach
+            @endif
 
             <!-- <div class="bannerBlock">
                 <img src="images/banner.jpg" alt="">

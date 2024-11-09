@@ -32,6 +32,7 @@
                     </a></div>
                 <div class="acco_text">
                     <div class="Products_tag">
+                        @if(isset($popularProducts))
                         <ul>
                             @foreach ($popularProducts as $product)
                             <li>
@@ -42,6 +43,7 @@
                             </li>
                             @endforeach
                         </ul>
+                        @endif
                         <!-- <ul>
                         <li><a href="#;"><p>Long product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
                         <li><a href="#;"><p>Long product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
