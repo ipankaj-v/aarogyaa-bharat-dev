@@ -75,7 +75,8 @@
         
     </div>
 
-    <form id="demo-form" action="{{ route('re-captcha') }}" method="POST">
+    <form id="demo-form">
+    <!-- <form id="demo-form" action="{{ route('re-captcha') }}" method="POST"> -->
     @csrf
     <button class="g-recaptcha" 
             data-sitekey="{{ env('GOOGLE_RECATCHA_SITE_KEY') }}" 
@@ -146,9 +147,4 @@
         function closeonotificationPopUp() {
             $('.notificationPop').hide();
         }
-        
-        var onloadCallback = function() {
-            alert("grecaptcha is ready!");
-            document.getElementById("demo-form").submit();
-        };
     </script>
