@@ -75,8 +75,9 @@
         
     </div>
 
+    <!-- use re-captcha route  -->
     <form id="demo-form">
-    <!-- <form id="demo-form" action="{{ route('re-captcha') }}" method="POST"> -->
+
     @csrf
     <button class="g-recaptcha" 
             data-sitekey="{{ env('GOOGLE_RECATCHA_SITE_KEY') }}" 
