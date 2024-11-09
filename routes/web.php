@@ -41,6 +41,8 @@ use App\Http\Controllers\SocialLoginController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//link storage route
+Route::get('/storage_link', function (){ Artisan::call('storage:link'); });
 
 //front routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
