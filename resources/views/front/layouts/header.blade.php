@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('front/css/style.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('front/css/sweetalert.css') }}">
     <link rel="stylesheet" href="{{ asset('front/css/toaster.css') }}">
+    <link rel="icon" href="{{ asset('front/images/arogya_bharat.svg') }}" type="image/x-icon">
 </head>
 
 <body class="bodyback">
