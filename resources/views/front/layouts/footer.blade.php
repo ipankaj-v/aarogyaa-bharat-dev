@@ -70,11 +70,11 @@
                 <div class="acco_text">
                     <div class="social_connects">
                         <ul>
-                            <li><a href="#;"><img src="{{asset('front/images/facebook.svg') }}" alt="" /></a></li>
-                            <li><a href="#;"><img src="{{asset('front/images/insta.svg') }}" alt="" /></a></li>
-                            <li><a href="#;"><img src="{{asset('front/images/Xtwit.svg') }}" alt="" /></a></li>
-                            <li><a href="#;"><img src="{{asset('front/images/youtube.png') }}" alt="" /></a></li>
-                            <li><a href="#;"><img src="{{asset('front/images/whatsapp.svg') }}" alt="" /></a></li>
+                            <li><a href="{{env('FACEBOOK_PAGE_URI')}}"><img src="{{asset('front/images/facebook.svg') }}" alt="" /></a></li>
+                            <li><a href="{{env('INSTA_PAGE_URI')}}"><img src="{{asset('front/images/insta.svg') }}" alt="" /></a></li>
+                            <li><a href="{{env('X_PAGE_URI')}}"><img src="{{asset('front/images/Xtwit.svg') }}" alt="" /></a></li>
+                            <li><a href="{{env('YOUTUBE_PAGE_URI')}}"><img src="{{asset('front/images/youtube.png') }}" alt="" /></a></li>
+                            <li><a href="{{env('WHATSAPP_PAGE_URI')}}"><img src="{{asset('front/images/whatsapp.svg') }}" alt="" /></a></li>
                         </ul>
                     </div>
                     <div class="emergency_help">
