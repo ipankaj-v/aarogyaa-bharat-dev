@@ -1,52 +1,6 @@
 
 @extends('front.layouts.layout')
 @section('content')
-<!-- <div class="searchPop winScrollStop">
-    <div class="searchPopBlock">
-        <strong>Recent Search</strong>
-        <p>Our highest rented or buying products.</p>
-        <ul>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Long product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Product</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Small product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-        </ul>
-        
-        <div class="popPro">
-        <strong>Popular Products</strong>
-        <a href="#;">Long product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">product <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Small product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Name of product <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Popular product name  <img src="images/curly_arrow.svg" alt="" /></a>
-        </div>
-    </div>
-</div> -->
 
 <div class="breadcrumbs">
     <div class="container">
@@ -77,7 +31,7 @@
                     <div class="features_specification">
                         <h2>Features & Specification</h2>
                         <ul>
-                        {!! $productDetails->features_specification !!}
+                        {!! html_entity_decode($productDetails->features_specification) !!}
                             <!-- <li><p>Frame style :-</p><p>Foldable</p></li>
                             <li><p>Frame material :-</p><p>M.S</p></li>
                             <li><p>Footrest :-</p><p>Retractable</p></li>
@@ -87,7 +41,7 @@
 					<div class="features_specification moredetail_product">
                         <h2>About this item</h2>
                         <ul>
-                        {!! $productDetails->about_item !!}
+                        {!! html_entity_decode($productDetails->about_item) !!}
                             <!-- <li><p>A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual </p></li>
                            <li><p>A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual </p></li>
 						   <li><p>A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual </p></li>
