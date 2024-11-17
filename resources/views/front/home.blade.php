@@ -412,8 +412,8 @@
         <div class="rowMob">
             <div class="customerSlider getprogressWidth">
             @if($happyCustomers->isNotEmpty())
-                    <div class="customerSlider_padd">
-                        @foreach($happyCustomers as $customer)
+            @foreach($happyCustomers as $customer)
+            <div class="customerSlider_padd">
                             <div class="customerSlider_block">
                                 <p>{{ $customer->comment }}</p>
                                 <strong>{{ $customer->name }}</strong>
@@ -432,8 +432,8 @@
                                 </ul>
                                 <i>{{ $rating }}</i> <!-- Show the rounded rating -->
                             </div>
+                        </div>
                         @endforeach
-                    </div>
                 @endif
                 <!-- <div class="customerSlider_padd">
                     <div class="customerSlider_block">
