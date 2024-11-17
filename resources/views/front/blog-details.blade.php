@@ -25,9 +25,9 @@
             <h2>{{ $blogDetails->title  }}</h2>
         </div>
         <div class="blog_tag_name">
-            <p class="articalauthor"><img src="{{ asset('front/images/author.svg') }}" alt="" />Article Author</p>
+            <p class="articalauthor"><img src="{{ asset('front/images/author.svg') }}" alt="" />{{ $blogDetails->author  }}</p>
             <ul>
-                <li class="tagBox"><p>Tagename</p></li>
+                <li class="tagBox"><p>{{ $blogDetails->tagname  }}</p></li>
                 <li class="blogdate"><img src="{{ asset('front/images/calendar.svg') }}" alt=""><p>{{$blogDetails->created_at->format('m/d/y')}}</p></li>
                 <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg') }}" alt=""><p>424</p></li>
                 <li><a href="#;"><img src="{{ asset('front/images/ri_share-line.svg') }}" alt=""></a></li>
@@ -52,7 +52,7 @@
                     <div class="text_one"><h2>{{$blog->title}}</h2><p>{{$blog->description}}</p></div>
                     <div class="blog_tag_name">
                         <ul>
-                            <li class="tagBox"><p>Tagename</p></li>
+                            <li class="tagBox"><p>{{ $blog->tagname  }}</p></li>
                             <li class="blogdate"><img src="{{ asset('front/images/calendar.svg')}}" alt="" /><p>{{$blog->created_at->format('m/d/y')}}</p></li>
                             <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg')}}" alt="" /><p>424</p></li>
                             <li><a href="#;"><img src="{{ asset('front/images/ri_share-line.svg')}}" alt="" /></a></li>

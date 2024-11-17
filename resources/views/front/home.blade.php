@@ -524,7 +524,7 @@
                             <div class="blog_tag_name">
                                 <ul>
                                     <!-- <li class="tagBox"><p>{{ $blog->tags }}</p></li> -->
-                                    <li class="tagBox"><p>Tagename</p></li>
+                                    <li class="tagBox"><p>{{ $blog->tagname  }}</p></li>
                                     <li class="blogdate">
                                         <img src="{{ asset('fornt/images/calendar.svg') }}" alt="" />
                                         <p>{{ $blog->created_at->format('d/m/Y') }}</p>
@@ -538,7 +538,7 @@
                                         <a href="#"><img src="{{ asset('front/images/ri_share-line.svg') }}" alt="" /></a>
                                     </li>
                                 </ul>
-                                <a href="" class="blogreadnow">Read Now</a>
+                                <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}" class="blogreadnow">Read Now</a>
                             </div>
                         </div>
                     </div>
@@ -546,7 +546,7 @@
             </div>
         </div>
         <div class="read_more_blogs">
-            <a href="">
+            <a href="{{ route('blogs')}}">
                 <p>Read More Blogs</p>
                 <img src="{{ asset('front/images/downArrow.svg') }}" alt="" />
             </a>

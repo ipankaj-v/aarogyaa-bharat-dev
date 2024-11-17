@@ -62,9 +62,23 @@
                                     <img id="previewImage" src="#" alt="Image Preview" width="100" class="mt-2 d-none">
                                 </div>
                                 <div class="form-group">
+                                    <label for="Article Author">Article Author</label>
+                                    <input type="text" name="article_author" class="form-control @error('article_author') is-invalid @enderror" id="blogarticle_author" placeholder="Enter Blog Article Author" value="{{ old('article_author', $blog->author) }}">
+                                    @error('article_author')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="blogTitle">Title</label>
                                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="blogTitle" placeholder="Enter Blog Title" value="{{ old('title', $blog->title) }}">
                                     @error('title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="Tagename">Tagename</label>
+                                    <input type="text" name="tagename" class="form-control @error('tagename') is-invalid @enderror" id="Tagename" placeholder="Enter Blog Title" value="{{ old('tagename', $blog->tagename) }}">
+                                    @error('tagename')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

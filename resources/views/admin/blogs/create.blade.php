@@ -58,9 +58,23 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="ArticleAuthor">Article Author</label>
+                                    <input type="text" name="article_author" class="form-control @error('article_author') is-invalid @enderror" id="article_author" placeholder="Enter Blog Article Author" value="{{ old('article_author') }}">
+                                    @error('article_author')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="blogTitle">Title</label>
                                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="blogTitle" placeholder="Enter Blog Title" value="{{ old('title') }}">
                                     @error('title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="blogTitle">Tagename</label>
+                                    <input type="text" name="tagename" class="form-control @error('tagename') is-invalid @enderror" id="tagename" placeholder="Enter Blog Tagename" value="{{ old('tagename') }}">
+                                    @error('tagename')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

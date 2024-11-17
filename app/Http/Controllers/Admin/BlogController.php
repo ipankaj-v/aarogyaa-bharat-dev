@@ -75,6 +75,8 @@ class BlogController extends Controller
         $blog->title = $request->title;
         $blog->description = $request->description;
         $blog->content_html = $request->content_html;
+        $blog->author = $request->article_author;
+        $blog->tagname = $request->tagename;
         $blog->save();
 
         // Handle file upload
@@ -108,6 +110,8 @@ class BlogController extends Controller
         $blog->title = $request->input('title');
         $blog->description = $request->input('description');
         $blog->content_html = $request->input('content_html');
+        $blog->tagname = $request->input('tagename');
+        $blog->author = $request->input('article_author');
         $blog->save();
         if ($request->hasFile('image')) {
             // Delete the old image if it exists

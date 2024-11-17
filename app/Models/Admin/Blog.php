@@ -16,6 +16,8 @@ class Blog extends Model
         'title',
         'description',
         'content_html',
+        'author',
+        'tagname'
     ];
 
 
