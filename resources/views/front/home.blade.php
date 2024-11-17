@@ -411,7 +411,31 @@
         </div>
         <div class="rowMob">
             <div class="customerSlider getprogressWidth">
-                <div class="customerSlider_padd">
+            @if($happyCustomers->isNotEmpty())
+                    <div class="customerSlider_padd">
+                        @foreach($happyCustomers as $customer)
+                            <div class="customerSlider_block">
+                                <p>{{ $customer->comment }}</p>
+                                <strong>{{ $customer->name }}</strong>
+                                <ul>
+                                    @php
+                                        $rating = round($customer->rate); 
+                                    @endphp
+
+                                    @for($i = 1; $i <= 5; $i++)  <!-- Loop to show 5 stars -->
+                                        <li>
+                                            <a href="#">
+                                                <img src="{{ $i <= $rating ? asset('front/images/fill_star.svg') : asset('front/images/empty_star.svg') }}" alt="" />
+                                            </a>
+                                        </li>
+                                    @endfor
+                                </ul>
+                                <i>{{ $rating }}</i> <!-- Show the rounded rating -->
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+                <!-- <div class="customerSlider_padd">
                     <div class="customerSlider_block">
                         <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
                         <strong>Piyush Gohil</strong>
@@ -494,7 +518,7 @@
                         </ul>
                         <i>4.5</i>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="progressBar"></div>
         </div>

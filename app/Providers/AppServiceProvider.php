@@ -8,6 +8,7 @@ use App\Models\Admin\Product;
 use App\Models\Admin\FAQ;
 use App\Models\Admin\OfferAndDiscount;
 use App\Models\Admin\Blog;
+use App\Models\Admin\HappyCustomer;
 use App\Models\Front\Cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Banner;
@@ -35,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $contactusBlog = Blog::with('images')->inRandomOrder()->take(4)->get();
         $faqs = FAQ::with('answers')->get();
         $bannerImages = Banner::select('*')->limit(5)->get();
-
+        $happyCustomers = HappyCustomer::all();
 
 
         View::share('recentViewedProducts', $recentViewedProducts);
@@ -44,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('offerAndDiscounts', $offerAndDiscounts);
         View::share('contactusBlog', $contactusBlog);
         View::share('bannerImages', $bannerImages);
+        View::share('happyCustomers', $happyCustomers);
         //cart count
         $session_id = Cache::get('session_id', Session::getId());
         \Log::info(['$session_id  Appserice provider' => $session_id]);
