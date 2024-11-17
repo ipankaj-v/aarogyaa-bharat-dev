@@ -8,8 +8,8 @@
 <div class="breadcrumbs">
     <div class="container">
         <ul>
-            <li><a href="#;">Home</a> </li>
-            <li><a href="#;">Contact us</a> </li>
+            <li><a href="{{ route('home') }}">Home</a> </li>
+            <li><a href="{{ route('front.contact') }}">Contact us</a> </li>
         </ul>
     </div>    
 </div>

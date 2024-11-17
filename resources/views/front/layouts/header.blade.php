@@ -22,7 +22,7 @@
     <header>
         <div class="container">
             <div class="headerBlock">
-                <a href="#;" class="logoPart">
+                <a href="{{ route('home') }}" class="logoPart">
                     <img src="{{ asset('front/images/arogya_bharat.svg') }}" alt="">
                 </a>
                 <ul class="menuList">

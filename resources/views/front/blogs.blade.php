@@ -3,8 +3,8 @@
 <div class="breadcrumbs">
     <div class="container">
         <ul>
-            <li><a href="#;">Home</a> </li>
-            <li><a href="#;">Blog</a> </li>
+            <li><a href="{{route('home')}}">Home</a> </li>
+            <li><a href="{{route('blogs')}}">Blog</a> </li>
         </ul>
     </div>    
 </div>
@@ -34,9 +34,11 @@
             <div class="left_part_blog">
             @foreach($blogs as $blog)
             <div class="our_blog_box">
-                <div class="blog_image"><img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="" /></div>
+                <div class="blog_image"><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}"><img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="" /></a></div>
                 <div class="blog_text">
-                    <div class="text_one"><h2>{{$blog->name}}</h2><p>{{$blog->title}}</p></div>
+                    <div class="text_one"><h2>{{$blog->name}}</h2>
+                        <p><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" style="color: black;">{{$blog->title}}</a></p>
+                    </div>
                     <div class="blog_tag_name">
                         <ul>
                             <li class="tagBox"><p>{{ $blog->tagname  }}</p></li>
@@ -52,10 +54,14 @@
             </div>
             <div class="right_part_blog">
                 <div class="blog_image_box">
-                    <div class="blog_image_height"><img src="{{ asset('storage/' . $oneBlog->images->first()->path) }}" alt=""></div>
+                    <div class="blog_image_height">
+                       <a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}"><img src="{{ asset('storage/' . $oneBlog->images->first()->path) }}" alt=""></a>
+                    </div>
                 </div>
                 <div class="blog_text">
-                    <div class="text_two"><h2>{{$oneBlog->name}}</h2><p>{{$oneBlog->title}}</p></div>
+                    <div class="text_two"><h2>{{$oneBlog->name}}</h2>
+                        <p><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" style="color: black;">{{$oneBlog->title}}</a></p>
+                    </div>
                     <div class="blog_tag_name">
                         <ul>
                             <li class="tagBox"><p>{{ $oneBlog->tagname  }}</p></li>

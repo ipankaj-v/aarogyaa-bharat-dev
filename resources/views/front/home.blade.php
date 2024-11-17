@@ -72,32 +72,6 @@
         <div class="progressBar"></div>
     </div>
 </section>
-<!-- <section class="category_part">
-    <div class="container">
-       <div class="titlePart">
-            <h4>Category</h4>
-            <a href="#;">View All <img src="images/orange_arrow.svg" alt=""> </a>
-        </div>
-        <div class="category_all_box">
-        <div class="category_box">
-            <div class="category_icon"><img src="images/medical_equipment.svg" alt="" /></div>
-            <p>Medical Equipment</p>
-        </div>
-        <div class="category_box">
-            <div class="category_icon"><img src="images/medical_sowft.svg" alt="" /></div>
-            <p>Medical Software</p>
-        </div>
-        <div class="category_box">
-            <div class="category_icon"><img src="images/imaging_machine.svg" alt="" /></div>
-            <p>Imaging Machine</p>
-        </div>
-        <div class="category_box">
-            <div class="category_icon"><img src="images/single_use_device.svg" alt="" /></div>
-            <p>Single Use Device</p>
-        </div>
-        </div>
-    </div>
-</section> -->
 <!-- caterory part  -->
 <section class="category_part">
     <div class="container">
@@ -108,11 +82,13 @@
         <div class="category_all_box">
             @foreach ($categories as $category)
                 <div class="category_box">
+                <a href="{{ route('products.category') }}" style="text-decoration: none;"> 
                     <div class="category_icon">
                     <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" />
 
                     </div>
-                    <p>{{ $category->name }}</p>
+                    <p style="color: black;">{{ $category->name }}</p>
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -123,102 +99,11 @@
     <div class="container">
         <div class="titlePart">
             <h4>Offer & Discount</h4>
-            <a href="#;">View All <img src="{{ asset('front/images/orange_arrow.svg')}}" alt=""> </a>
+            <a href="{{route('products')}}">View All <img src="{{ asset('front/images/orange_arrow.svg')}}" alt=""> </a>
         </div>
         <div class="rowMob">
         <div class="offer_slider getprogressWidth arrowOnProgress">
-        @include('front.common.offer-discounts')    
-        <!-- <div class="offer_slider_padd">
-                <div class="offer_slider_block">
-                    <img src="images/offer_card_image.png" alt="" >
-                    <div class="offer_con">
-                        <h5>Offer & Discount</h5>
-                        <p>Lorem Ipsum placeholder text in any number of characters, words sentences.</p>
-                    </div>
-                    <div class="offer_det">
-                        <i>*T&C apply</i>
-                        <a href="#;">Offer Details </a>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_slider_padd">
-                <div class="offer_slider_block">
-                    <img src="images/offer_card_image.png" alt="" >
-                    <div class="offer_con">
-                        <h5>Offer & Discount</h5>
-                        <p>Lorem Ipsum placeholder text in any number of characters, words sentences.</p>
-                    </div>
-                    <div class="offer_det">
-                        <i>*T&C apply</i>
-                        <a href="#;">Offer Details </a>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_slider_padd">
-                <div class="offer_slider_block">
-                    <img src="images/offer_card_image.png" alt="" >
-                    <div class="offer_con">
-                        <h5>Offer & Discount</h5>
-                        <p>Lorem Ipsum placeholder text in any number of characters, words sentences.</p>
-                    </div>
-                    <div class="offer_det">
-                        <i>*T&C apply</i>
-                        <a href="#;">Offer Details </a>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_slider_padd">
-                <div class="offer_slider_block">
-                    <img src="images/offer_card_image.png" alt="" >
-                    <div class="offer_con">
-                        <h5>Offer & Discount</h5>
-                        <p>Lorem Ipsum placeholder text in any number of characters, words sentences.</p>
-                    </div>
-                    <div class="offer_det">
-                        <i>*T&C apply</i>
-                        <a href="#;">Offer Details </a>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_slider_padd">
-                <div class="offer_slider_block">
-                    <img src="images/offer_card_image.png" alt="" >
-                    <div class="offer_con">
-                        <h5>Offer & Discount</h5>
-                        <p>Lorem Ipsum placeholder text in any number of characters, words sentences.</p>
-                    </div>
-                    <div class="offer_det">
-                        <i>*T&C apply</i>
-                        <a href="#;">Offer Details </a>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_slider_padd">
-                <div class="offer_slider_block">
-                    <img src="images/offer_card_image.png" alt="" >
-                    <div class="offer_con">
-                        <h5>Offer & Discount</h5>
-                        <p>Lorem Ipsum placeholder text in any number of characters, words sentences.</p>
-                    </div>
-                    <div class="offer_det">
-                        <i>*T&C apply</i>
-                        <a href="#;">Offer Details </a>
-                    </div>
-                </div>
-            </div>
-            <div class="offer_slider_padd">
-                <div class="offer_slider_block">
-                    <img src="images/offer_card_image.png" alt="" >
-                    <div class="offer_con">
-                        <h5>Offer & Discount</h5>
-                        <p>Lorem Ipsum placeholder text in any number of characters, words sentences.</p>
-                    </div>
-                    <div class="offer_det">
-                        <i>*T&C apply</i>
-                        <a href="#;">Offer Details </a>
-                    </div>
-                </div>
-            </div> -->
+        @include('front.common.offer-discounts') 
         </div>
         <div class="progressBar"></div>
         </div>
@@ -407,13 +292,13 @@
     <div class="container">
         <div class="titlePart">
             <h4>Happy Customers..!</h4>
-            <a href="#;">View All <img src="{{asset('front/images/orange_arrow.svg')}}" alt=""> </a>
+            <!-- <a href="#;">View All <img src="{{asset('front/images/orange_arrow.svg')}}" alt=""> </a> -->
         </div>
         <div class="rowMob">
             <div class="customerSlider getprogressWidth">
             @if($happyCustomers->isNotEmpty())
-            @foreach($happyCustomers as $customer)
-            <div class="customerSlider_padd">
+                @foreach($happyCustomers as $customer)
+                    <div class="customerSlider_padd">
                             <div class="customerSlider_block">
                                 <p>{{ $customer->comment }}</p>
                                 <strong>{{ $customer->name }}</strong>
@@ -433,92 +318,8 @@
                                 <i>{{ $rating }}</i> <!-- Show the rounded rating -->
                             </div>
                         </div>
-                        @endforeach
-                @endif
-                <!-- <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div> -->
+                @endforeach
+            @endif
             </div>
             <div class="progressBar"></div>
         </div>

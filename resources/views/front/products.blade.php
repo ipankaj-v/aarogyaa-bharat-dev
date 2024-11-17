@@ -1,64 +1,15 @@
 @extends('front.layouts.layout')
 @section('content')
 
-
-<!-- <div class="searchPop winScrollStop">
-    <div class="searchPopBlock">
-        <strong>Recent Search</strong>
-        <p>Our highest rented or buying products.</p>
-        <ul>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Long product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Product</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Small product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-        </ul>
-        
-        <div class="popPro">
-        <strong>Popular Products</strong>
-        <a href="#;">Long product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">product <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Small product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Name of product <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Popular product name  <img src="images/curly_arrow.svg" alt="" /></a>
-        </div>
-    </div>
-</div> -->
-
 <div class="breadcrumbs">
     <div class="container">
         <ul>
-            <li><a href="#;">Home</a> </li>
-            <li><a href="#;">Product Cateogry</a> </li>
-            <li><a href="#;">Product Listing</a> </li>
+            <li><a href="{{ route('home') }}">Home</a> </li>
+            <li><a href="{{ route('products.category') }}">Product Cateogry</a> </li>
+            <li><a href="{{ route('products') }}">Product Listing</a> </li>
         </ul>
     </div>    
 </div>
-
 
 <div class="tabSec">
     <div class="container">
