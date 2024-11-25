@@ -100,28 +100,34 @@
 <div class="bottomBar">
     <ul>
         <li>
-            <a href="#;">
-                <img src="images/home_active.svg" alt="" />
+            <a href="{{ route('home') }}">
+                <img src="{{asset('front/images/home_active.svg')}}" alt="" />
                 Home
             </a>
         </li>
         <li>
-            <a href="#;">
-                <img src="images/productbar.svg" alt="" />
+            <a href="{{ route('products') }}">
+                <img src="{{asset('front/images/productbar.svg')}}" alt="" />
                 Product
             </a>
         </li>
         <li>
-            <a href="#;">
-                <img src="images/offerbar.svg" alt="" />
+            <a href="{{ route('products') }}">
+                <img src="{{asset('front/images/offerbar.svg')}}" alt="" />
                 Offers
             </a>
         </li>
-        <li>
-            <a href="profile.html">
+        <li>   
+        @if(Auth::check() && Auth::user()->hasRole('Customer'))
+                
+                <a href="{{route('customers.profile')}}">
+                <img src="{{asset('front/images/profilebar.svg')}}" alt="" />   
+                Profile</a>
+                @endif
+            <!-- <a href="profile.html">
                 <img src="images/profilebar.svg" alt="" />
                 Profile
-            </a>
+            </a> -->
         </li>
     </ul>
 </div>
