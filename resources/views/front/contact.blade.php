@@ -1,6 +1,6 @@
 @extends('front.layouts.layout')
 @section('content')
-  <div class="banneranimationbox" >
+<div class="banneranimationbox" >
                 <div class="container">
                   <img src="{{asset('front/images/banner.jpg') }}" alt="">
 				</div>
@@ -44,7 +44,7 @@
                         <ul>
                             <li class="tagBox"><p>{{ $randomBlog->tagname  }}</p></li>
                             <li class="blogdate"><img src="{{ asset('front/images/calendar.svg')}}" alt="" /><p>{{$randomBlog->created_at->format('m/d/y')}}</p></li>
-                            <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg')}}" alt="" /><p>424</p></li>
+                            <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg')}}" alt="" /><p>{{ $randomBlog->views}}</p></li>
                             <li><a href="#;"><img src="{{ asset('front/images/ri_share-line.svg')}}" alt="" /></a></li>
                         </ul>
                         <a href="{{ route('blog.details', ['slug' => $randomBlog->slug]) }}" class="blogreadnow">Read Now</a>
@@ -61,7 +61,7 @@
                         <ul>
                             <li class="tagBox"><p>{{ $blog->tagname  }}</p></li>
                             <li class="blogdate"><img src="{{ asset('front/images/calendar.svg')}}" alt="" /><p>{{$blog->created_at->format('m/d/y')}}</p></li>
-                            <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg')}}" alt="" /><p>424</p></li>
+                            <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg')}}" alt="" /><p>{{ $blog->views}}</p></li>
                             <li><a href="#;"><img src="{{ asset('front/images/ri_share-line.svg')}}" alt="" /></a></li>
                         </ul>
                         <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}" class="blogreadnow">Read Now</a>

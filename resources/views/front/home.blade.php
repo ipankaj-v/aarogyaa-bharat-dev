@@ -356,8 +356,7 @@
                                     </li>
                                     <li class="blogview">
                                         <img src="{{ asset('front/images/carbon_view.svg') }}" alt="" />
-                                        <p>11</p>
-                                        <!-- <p>{{ $blog->views }}</p> -->
+                                        <p>{{ $blog->views}}</p>
                                     </li>
                                     <li>
                                         <a href="#"><img src="{{ asset('front/images/ri_share-line.svg') }}" alt="" /></a>
@@ -452,9 +451,9 @@
     </div>
 </section> -->
 
-
+@if(isset($partners))
 <section class="partners_we_work_with">
-    <div class="container">
+    <!-- <div class="container">
        <div class="titlePart">
             <h4>Partners - we work with</h4>
             <p>A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors electric propulsion by motors.</p>
@@ -467,9 +466,26 @@
             <img src="{{asset('front/images/Frame_5.png')}}" alt="" />
             <img src="{{asset('front/images/Frame_6.png')}}" alt="" />
         </div>
+    </div> -->
+    <div class="container">
+       <div class="titlePart">
+            <h4>{{ $partners->cms->title ?? 'Partners - we work with'}}</h4>
+            <p>{!! strip_tags($partners->cms->content) ?? 'A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors electric propulsion by motors.' !!}</p>
+        </div>
+        <div class="partners_we_work_logo">
+        @foreach($partners->cms->images as $img)
+            <img src="{{ asset('storage/' . $img->path) }}"/>
+        @endforeach
+            <!-- <img src="{{asset('front/images/Frame_1.png')}}" alt="" />
+            <img src="{{asset('front/images/Frame_2.png')}}" alt="" />
+            <img src="{{asset('front/images/Frame_3.png')}}" alt="" />
+            <img src="{{asset('front/images/Frame_4.png')}}" alt="" />
+            <img src="{{asset('front/images/Frame_5.png')}}" alt="" />
+            <img src="{{asset('front/images/Frame_6.png')}}" alt="" /> -->
+        </div>
     </div>
 </section>
-
+@endif
 <section class="about_aarogya_bharat">
     <div class="container">
         <div class="about_aarogya_title"><h2>About Aarogya Bharat</h2></div>

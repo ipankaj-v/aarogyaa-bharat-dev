@@ -9,10 +9,12 @@ class UserNotification extends Notification
 {
     use Queueable;
 
+    public $title;
     public $message;
 
-    public function __construct($message)
+    public function __construct($title, $message)
     {
+        $this->title = $title;
         $this->message = $message;
     }
 
@@ -24,7 +26,8 @@ class UserNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->message,
+            'title' => $this->title,     // Title of the notification
+            'message' => $this->message, // Message of the notification
         ];
     }
 }

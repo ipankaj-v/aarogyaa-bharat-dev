@@ -43,7 +43,7 @@
                         <ul>
                             <li class="tagBox"><p>{{ $blog->tagname  }}</p></li>
                             <li class="blogdate"><img src="{{ asset('front/images/calendar.svg')}}" alt="" /><p>{{$blog->created_at->format('m/d/y')}}</p></li>
-                            <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg')}}" alt="" /><p>424</p></li>
+                            <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg')}}" alt="" /><p>{{ $blog->views}}</p></li>
                             <li><a href="#;"><img src="{{ asset('front/images/ri_share-line.svg')}}" alt="" /></a></li>
                         </ul>
                         <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}" class="blogreadnow">Read Now</a>
@@ -66,7 +66,7 @@
                         <ul>
                             <li class="tagBox"><p>{{ $oneBlog->tagname  }}</p></li>
                             <li class="blogdate"><img src="{{asset('front/images/calendar.svg')}}" alt=""><p>{{$oneBlog->created_at->format('m/d/y')}}</p></li>
-                            <li class="blogview"><img src="{{asset('front/images/carbon_view.svg')}}" alt=""><p>424</p></li>
+                            <li class="blogview"><img src="{{asset('front/images/carbon_view.svg')}}" alt=""><p>{{ $blog->views}}</p></li>
                             <li><a href="#;"><img src="{{asset('front/images/ri_share-line.svg')}}" alt=""></a></li>
                         </ul>
                         <a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" class="blogreadnow">Read Now</a>

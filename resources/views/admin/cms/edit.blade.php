@@ -30,6 +30,15 @@
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title"><small>Edit CMS Record</small></h3>
+                            <!-- @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif -->
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -107,13 +116,13 @@
                                     <div class="row">
                                         @foreach($cms->images as $img)
                                             <div class="col-md-3">
-                                            <img src="{{ asset('storage/cms/' . $img->filename) }}" class="img-thumbnail mb-2" style="max-height: 100px;"/>
+                                            <img src="{{ asset('storage/' . $img->path) }}" class="img-thumbnail mb-2" style="max-height: 100px;"/>
 
-                                                <form action="{{ route('admin.cms.image.destroy', $img->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this image?');">
+                                                <!-- <form action="{{ route('admin.cms.image.destroy', $img->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this image?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                                </form>
+                                                </form> -->
                                             </div>
                                         @endforeach
                                     </div>
@@ -139,7 +148,7 @@
 <!-- Include CKEditor script -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        CKEDITOR.replace('cmsContent');  // Ensure this runs after the CKEditor script is loaded
+        CKEDITOR.replace('cmsContent');
     });
 </script>
 @endsection

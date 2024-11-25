@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="Tagename">Tagename</label>
-                                    <input type="text" name="tagename" class="form-control @error('tagename') is-invalid @enderror" id="Tagename" placeholder="Enter Blog Title" value="{{ old('tagename', $blog->tagename) }}">
+                                    <input type="text" name="tagename" class="form-control @error('tagename') is-invalid @enderror" id="Tagename" placeholder="Enter Blog Tag" value="{{ old('tagename', $blog->tagname) }}">
                                     @error('tagename')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

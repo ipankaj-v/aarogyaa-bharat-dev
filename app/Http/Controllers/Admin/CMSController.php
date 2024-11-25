@@ -8,6 +8,7 @@ use App\Models\Admin\Cms;
 use App\Models\Admin\Page;
 use Yajra\DataTables\DataTables;
 use Str;
+use Illuminate\Support\Facades\Storage;
 
 class CMSController extends Controller
 {
@@ -56,7 +57,6 @@ class CMSController extends Controller
             'is_active' => 'nullable|boolean',
             'image.*' => 'nullable|image|max:2048',
         ]);
-        
         $cms = new Cms();
         $cms->page_id = $request->page_id;
         $cms->title = $request->title;
@@ -87,7 +87,6 @@ class CMSController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate incoming request
         $request->validate([
             'page_id' => 'required|exists:pages,id',
             'title' => 'required|string|max:255',
@@ -112,9 +111,10 @@ class CMSController extends Controller
         // Handle image uploads
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $file) {
-                // Store each new image
+                // dd($cms->images->first()->path);
+                Storage::disk('public')->delete($cms->images->first()->path);
+                $cms->images()->delete();
                 $imagePath = $file->store('cms', 'public');
-                // Save the new image path in the images table
                 $cms->images()->create(['path' => $imagePath]);
             }
         }

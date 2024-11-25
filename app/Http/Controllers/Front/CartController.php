@@ -105,7 +105,7 @@ class CartController extends Controller
         // Notify customer (if logged in)
         $customer = Auth::user();
         if ($customer) {
-            $customer->notify(new UserNotification('Customer notification message testing.'));
+            $customer->notify(new UserNotification('Product added to cart', 'Your product has been added to cart, check now your cart.'));
         }
 
         return redirect()->route('cart')->with('success', 'Product added to cart!');

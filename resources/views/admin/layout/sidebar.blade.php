@@ -124,7 +124,7 @@
     </ul>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link {{ Request::is('admin/customers*') || Request::is('admin/users*') ? 'active' : '' }}">
+    <a href="#" class="nav-link {{ Request::is('admin/customers*') || Request::is('admin/users*') ||  Request::is('admin/notification*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-tachometer-alt"></i>
         <p>
             Customers / Users
@@ -148,6 +148,12 @@
             <a href="{{ route('admin.users') }}" class="nav-link {{ Request::is('admin/users') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Users</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.notification') }}" class="nav-link {{ Request::is('admin/notification') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Notifications</p>
             </a>
         </li>
     </ul>

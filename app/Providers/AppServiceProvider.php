@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Banner;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Admin\Page;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,9 @@ class AppServiceProvider extends ServiceProvider
         $bannerImages = Banner::select('*')->limit(5)->get();
         $happyCustomers = HappyCustomer::all();
 
+        $partners = Page::where('slug', 'partners')->with('cms.images')->first();
+        $whyAarogyaBharat = Page::where('slug', 'why-aarogya-bharat')->with('cms.images')->first();
+
 
         View::share('recentViewedProducts', $recentViewedProducts);
         View::share('popularProducts', $popularProducts);
@@ -46,6 +50,8 @@ class AppServiceProvider extends ServiceProvider
         View::share('contactusBlog', $contactusBlog);
         View::share('bannerImages', $bannerImages);
         View::share('happyCustomers', $happyCustomers);
+        View::share('partners', $partners);
+        View::share('whyAarogyaBharat', $whyAarogyaBharat);
         //cart count
         $session_id = Cache::get('session_id', Session::getId());
         \Log::info(['$session_id  Appserice provider' => $session_id]);

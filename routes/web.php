@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\CMSController;
+use App\Http\Controllers\Admin\CustomerNotification;
 use App\Http\Controllers\BannerController;
 //front  controller
 use App\Http\Controllers\Front\FrontCmsController;
@@ -230,6 +231,17 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/customers/update/{id}', 'update')->name('admin.customers.update');
             Route::get('/customers/{id}', 'destroy')->name('admin.customers.destroy');
             Route::get('/customers/view/{id}', 'Show')->name('admin.customers.view');
+        });
+
+        // Customer Notification Routes
+        Route::controller(CustomerNotification::class)->group(function () {
+            Route::get('/notification', 'index')->name('admin.notification');
+            Route::get('/notification/create', 'create')->name('admin.notification.create');
+            Route::post('/notification/store', 'store')->name('admin.notification.store');
+            Route::get('/notification/edit/{id}', 'edit')->name('admin.notification.edit');
+            Route::post('/notification/update/{id}', 'update')->name('admin.notification.update');
+            Route::get('/notification/{id}', 'destroy')->name('admin.notification.destroy');
+            Route::get('/notification/view/{id}', 'Show')->name('admin.notification.view');
         });
 
         // Happy Customer Routes

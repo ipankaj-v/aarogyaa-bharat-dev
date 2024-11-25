@@ -8,6 +8,7 @@ use App\Models\Admin\Blog;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Str;
+use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
@@ -46,10 +47,15 @@ class BlogController extends Controller
         return view('front.blogs', compact('blogs', 'oneBlog'));
     }
 
-    public function blogDetials($slug)
+    public function blogDetials(Request $request, $slug)
     {
         $blogDetails = Blog::where('slug', $slug)->with('images')->first();
         $twoBlogs = Blog::with('images')->inRandomOrder()->take(2)->get();
+        $viewCacheKey = 'viewed_' . Str::replace('.', '', $request->ip()) . '-' . $blogDetails->id;
+        if (!Cache::has($viewCacheKey)) {
+            $blogDetails->increment('views');            
+            Cache::put($viewCacheKey, true, now()->addDay(1));            
+        }
         return view('front.blog-details', compact('blogDetails', 'twoBlogs'));
     }
 
@@ -101,7 +107,7 @@ class BlogController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'content_html' => 'required|string',
-            'image' => 'required',
+            // 'image' => 'required',
             // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $blog = Blog::findOrFail($id);

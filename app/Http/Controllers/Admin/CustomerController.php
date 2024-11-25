@@ -39,7 +39,7 @@ class CustomerController extends Controller
 
     public function edit($id)
     {
-        $customer = User::with('addresses')->findOrFail($id); // Ensure to get customer with addresses if needed
+        $customer = User::with('addresses')->findOrFail($id); 
         return view('admin.customers.edit', compact('customer'));
     }
 
