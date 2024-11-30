@@ -44,6 +44,10 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="seo_meta_tag">SEO Meta Tag</label>
+                                    <input type="text" name="seo_meta_tag" class="form-control @error('seo_meta_tag') is-invalid @enderror" id="seo_meta_tag" placeholder="Enter Page Name" value="{{ old('seo_meta_tag') }}">
+                                </div>
+                                <div class="form-group">
                                     <label for="pageStatus">Status</label>
                                     <select name="status" id="pageStatus" class="form-control @error('status') is-invalid @enderror">
                                         <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Active</option>

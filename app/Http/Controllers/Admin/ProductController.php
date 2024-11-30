@@ -51,18 +51,31 @@ class ProductController extends Controller
     {
     
         $validated = $request->validated();
-
-        // Handle file upload
+        $product = new Product();
+        $product->name = $request->name;
+        $product->slug = \Str::slug($request->name);
+        $product->category_id = $request->category_id;
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->features_specification = $request->features_specification;
+        $product->price = $request->price;
+        $product->weekly_price = $request->weekly_price;
+        $product->is_rentable = $request->has('is_rentable') ? true : false;
+        $product->is_popular = $request->has('is_popular') ? true : false;
+        $product->is_new = $request->has('is_new') ? true : false;
+        $product->gst = $request->gst;
+        $product->about_item = $request->about_item;
+        $product->image = 'temp';
+        $product->save();
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
-            $validated['image'] = $imagePath;
+            $firstFile = $request->file('image')[0]; 
+            $firstImagePath = $firstFile->store('products', 'public'); 
+            $product->update(['image' => $firstImagePath]);
+            foreach ($request->file('image') as $key => $file) {
+                $imagePath = $file->store('products', 'public'); 
+                $product->images()->create(['path' => $imagePath]);
+            }
         }
-        $validated['slug'] = \Str::slug($request->name);
-        $validated['is_rentable'] = $request->has('is_rentable') ? true : false;
-        $validated['is_popular'] = $request->has('is_popular') ? true : false;
-        $validated['is_new'] = $request->has('is_new') ? true : false;
-    
-        Product::create($validated);
 
         return redirect()->route('admin.products')->with('success', 'Product created successfully.');
     }
@@ -106,13 +119,28 @@ class ProductController extends Controller
         $product->is_popular = $request->has('is_popular');
         $product->is_new = $request->has('is_new');
         $product->about_item = $request->about_item;
-    
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('products', 'public');
-            $product->image = $path;
+        
+            if ($request->hasFile('image')) {
+                if ($product->images->isNotEmpty()) {
+                    foreach ($product->images as $image) {
+                        if (Storage::disk('public')->exists($image->path)) {
+                            Storage::disk('public')->delete($image->path);
+                        }
+                        $image->delete();
+                    }
+                }
+            
+                $firstFile = $request->file('image')[0]; 
+                $firstImagePath = $firstFile->store('products', 'public'); 
+                $product->image = $firstImagePath;
+                $product->save();
+            $product->update(['image' => $firstImagePath]);
+            foreach ($request->file('image') as $key => $file) {
+                $imagePath = $file->store('products', 'public'); 
+                $product->images()->create(['path' => $imagePath]);
+            }
         }
     
-        $product->save();
     
         return redirect()->route('admin.products')->with('success', 'Product updated successfully.');
     }

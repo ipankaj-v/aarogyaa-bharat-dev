@@ -25,7 +25,7 @@ class StoreProductRequest extends FormRequest
                 'name'                  => 'required|string|max:255',
                 'category_id'           => 'required|exists:categories,id',
                 'title'                 => 'nullable|string|max:255',
-                'image'                 => 'nullable|max:2048',
+                'image.*'                 => 'nullable|max:2048',
                 // 'image'                 => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'description'           => 'nullable|string',
                 'features_specification' => 'nullable|string',

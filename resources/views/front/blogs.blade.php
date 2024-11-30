@@ -14,8 +14,8 @@
         <div class="Trending_Topics_title"><h2>Trending Topics</h2></div>
         <div class="Products_tag">
             <ul>
-                @foreach($blogs as $blog)
-                <li><a href="{{ route('blog.details', ['slug' => $blog->slug]) }}"><p>{{$blog->name}}</p><img src="{{asset('front/images/chartArrow.svg')}}" alt="" /></a></li>
+                @foreach($trendingBlogs as $trendingBlog)
+                <li><a href="{{ route('blog.details', ['slug' => $trendingBlog->slug]) }}"><p>{{$trendingBlog->name}}</p><img src="{{asset('front/images/chartArrow.svg')}}" alt="" /></a></li>
                 @endforeach
             </ul>
           </div>
@@ -31,50 +31,29 @@
         </div>
 
         <div class="part_blog">
-            <div class="left_part_blog">
-            @foreach($blogs as $blog)
-            <div class="our_blog_box">
-                <div class="blog_image"><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}"><img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="" /></a></div>
-                <div class="blog_text">
-                    <div class="text_one"><h2>{{$blog->name}}</h2>
-                        <p><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" style="color: black;">{{$blog->title}}</a></p>
-                    </div>
-                    <div class="blog_tag_name">
-                        <ul>
-                            <li class="tagBox"><p>{{ $blog->tagname  }}</p></li>
-                            <li class="blogdate"><img src="{{ asset('front/images/calendar.svg')}}" alt="" /><p>{{$blog->created_at->format('m/d/y')}}</p></li>
-                            <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg')}}" alt="" /><p>{{ $blog->views}}</p></li>
-                            <li><a href="#;"><img src="{{ asset('front/images/ri_share-line.svg')}}" alt="" /></a></li>
-                        </ul>
-                        <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}" class="blogreadnow">Read Now</a>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-            </div>
-            <div class="right_part_blog">
-                <div class="blog_image_box">
-                    <div class="blog_image_height">
-                       <a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}"><img src="{{ asset('storage/' . $oneBlog->images->first()->path) }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="blog_text">
-                    <div class="text_two"><h2>{{$oneBlog->name}}</h2>
-                        <p><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" style="color: black;">{{$oneBlog->title}}</a></p>
-                    </div>
-                    <div class="blog_tag_name">
-                        <ul>
-                            <li class="tagBox"><p>{{ $oneBlog->tagname  }}</p></li>
-                            <li class="blogdate"><img src="{{asset('front/images/calendar.svg')}}" alt=""><p>{{$oneBlog->created_at->format('m/d/y')}}</p></li>
-                            <li class="blogview"><img src="{{asset('front/images/carbon_view.svg')}}" alt=""><p>{{ $blog->views}}</p></li>
-                            <li><a href="#;"><img src="{{asset('front/images/ri_share-line.svg')}}" alt=""></a></li>
-                        </ul>
-                        <a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" class="blogreadnow">Read Now</a>
-                    </div>
-                </div>
-                <div class="read_more_blogs"><a href="{{ route('blogs')}}"><p>Read More Blogs</p><img src="{{asset('front/images/downArrow.svg')}}" alt=""></a></div>
-            </div>
+                @include('front.common.recommended-blog')
+                
         </div>
     </div>
 </section>
 @endsection
+<script src="{{ asset('front/js/jquery.min.js') }}"></script>
+<script>
+
+    $(document).on('click', '.pagination .page-link', function(e) {
+        e.preventDefault();
+        var page = $(this).text();
+        var data = { page: page };
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: data,
+            success: function(response) {
+                if(response.success) {
+                    $('.part_blog').html(response.recommendedBlogHtml);
+                }
+            }
+        });
+    });
+</script>

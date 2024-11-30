@@ -40,11 +40,23 @@ class BlogController extends Controller
     }
 
 
-    public function fontIndex()
+    public function fontIndex(Request $request)
     {
-        $blogs = Blog::with('images')->get();
+        $trendingBlogs = Blog::with('images')->inRandomOrder()->take(4)->get();
+        $totalBlogs = Blog::count();
+        $currentPage = $request->get('page', 1);
+        $perPage = 3;
+        $offset = ($currentPage - 1) * $perPage;
+        $blogs = Blog::with('images')->skip($offset)->take($perPage)->get();
         $oneBlog = Blog::with('images')->inRandomOrder()->first();
-        return view('front.blogs', compact('blogs', 'oneBlog'));
+        if($request->ajax()){
+            $currentPage = $request->get('page', 1);
+            $offset = ($currentPage - 1) * $perPage;
+            $blogs = Blog::with('images')->skip($offset)->take($perPage)->get();
+            $recommendedBlogHtml = view('front.common.recommended-blog', compact('blogs', 'oneBlog', 'totalBlogs', 'perPage', 'currentPage'))->render();
+            return response()->json(['success' => true, 'recommendedBlogHtml' => $recommendedBlogHtml]);
+        }
+        return view('front.blogs', compact('blogs', 'oneBlog', 'trendingBlogs', 'totalBlogs', 'perPage', 'currentPage'));
     }
 
     public function blogDetials(Request $request, $slug)

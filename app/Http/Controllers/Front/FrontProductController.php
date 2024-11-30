@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
+use App\Models\Admin\Page;
 
 class FrontProductController extends Controller
 {
@@ -13,15 +14,15 @@ class FrontProductController extends Controller
     {
         $categoriesAndProducts = Category::with('products')->get();
         $products = Product::with('category')->take(12)->get();
-        // $recentViewedProducts = Product::all(); 
-        return view('front.products', compact('categoriesAndProducts', 'products'));
+        $seoMetaTag = Page::where('slug', 'products')->value('seo_meta_tag'); 
+        return view('front.products', compact('categoriesAndProducts', 'products', 'seoMetaTag'));
     }
 
     public function productDetail($slug)
     {
         // dd('AAA');
         $productDetails = Product::where('slug', $slug)->first();
-        $products = Product::with('category')->take(12)->get();
+        $products = Product::with('category', 'images')->take(12)->get();
         // dd($productDetails);
         return view('front.product-details', compact('productDetails', 'products'));
     }

@@ -15,17 +15,19 @@ class FrontCmsController extends Controller
         if (!$page || !$page->cms) {
             abort(404); // or redirect or show a custom message
         }
-        return view('front.about-us', compact('page'));
+        $seoMetaTag = $page->seo_meta_tag;
+        return view('front.about-us', compact('page', 'seoMetaTag'));
     }
 
     public function TermsAndConditions(Request $request)
     {
         $lastSegment = basename(parse_url($request->url(), PHP_URL_PATH));
         $page = Page::where('slug', $lastSegment)->with('cms.images')->first();
+        $seoMetaTag = $page->seo_meta_tag;
         if (!$page || !$page->cms) {
             abort(404); // or redirect or show a custom message
         }
-        return view('front.terms-conditions', compact('page'));
+        return view('front.terms-conditions', compact('page','seoMetaTag'));
     }
 
 }

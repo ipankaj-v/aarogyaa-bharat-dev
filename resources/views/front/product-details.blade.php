@@ -16,9 +16,20 @@
     <div class="container">
         <div class="product_details_box">
             <div class="product_details_slide slide_product">
-                <div class="prod_slide"><img src="{{ asset('storage/' . $productDetails->image) }}" alt="" /></div>
+            @if($productDetails->images->isNotEmpty())
+                @foreach($productDetails->images as $image)
+                    @if(!empty($image->path))
+                        <div class="prod_slide">
+                            <img src="{{ asset('storage/' . $image->path) }}" alt="Product Image" />
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <p>No images available for this product.</p>
+            @endif
+                <!-- <div class="prod_slide"><img src="{{ asset('storage/' . $productDetails->image) }}" alt="" /></div>
                 <div class="prod_slide"><img src="{{asset('front/images/wheelchair_2.png')}}" alt="" /></div>
-                <div class="prod_slide"><img src="{{asset('front/images/wheelchair_2.png')}}" alt="" /></div>
+                <div class="prod_slide"><img src="{{asset('front/images/wheelchair_2.png')}}" alt="" /></div> -->
             </div>
             <div class="product_details_data">
                 <div class="rentorpurchase"><img src="images/info-circle_svg.svg" alt="" /><p>Rent or Purchase this product now.!</p></div>
