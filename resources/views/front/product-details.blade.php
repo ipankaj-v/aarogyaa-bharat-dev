@@ -25,10 +25,9 @@
                     @endif
                 @endforeach
             @else
-                <p>No images available for this product.</p>
+                 <div class="prod_slide"><img src="{{ asset('storage/' . $productDetails->image) }}" alt="" /></div>
             @endif
-                <!-- <div class="prod_slide"><img src="{{ asset('storage/' . $productDetails->image) }}" alt="" /></div>
-                <div class="prod_slide"><img src="{{asset('front/images/wheelchair_2.png')}}" alt="" /></div>
+                <!--<div class="prod_slide"><img src="{{asset('front/images/wheelchair_2.png')}}" alt="" /></div>
                 <div class="prod_slide"><img src="{{asset('front/images/wheelchair_2.png')}}" alt="" /></div> -->
             </div>
             <div class="product_details_data">
