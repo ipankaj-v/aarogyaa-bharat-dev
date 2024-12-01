@@ -1298,7 +1298,13 @@ text-align: center;}
 }
 
 
-
+.qurery-errormsg {
+  position: absolute;
+  font-size: 14px;
+  color: #B40000;
+  bottom: -20px;
+  display: block;
+}
 
 
 

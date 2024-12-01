@@ -14,44 +14,35 @@
             <h4>Raised Your Query</h4>
             <p>Enter your email or mobile to fill your need</p>
         </div>
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
         <form class="raiseForm" id="raise_form" action="{{ route('query.submit') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div style="margin-left: -12px;margin-right: -12px;">
             <div class="inputMainBlock">
                 <span>Full Name<i>*</i></span>
-                <input type="text" name="full_name" class="FullNameVD" placeholder="Full Name"> 
+                <input type="text" name="full_name" class="FullNameVD" placeholder="Full Name" value="{{old('full_name')}}"> 
                 @error('full_name')
-                    <div class="errormsg">{{ $message }}</div>
+                    <div class="qurery-errormsg">{{ $message }}</div>
                 @enderror
             </div>
             <div class="inputMainBlock">
                 <span>E-mail ID<i>*</i></span>
-                <input type="text" name="email" class="emailVD" placeholder="example@gmail.com"> 
+                <input type="text" name="email" class="emailVD" placeholder="example@gmail.com" value="{{old('email')}}"> 
                 @error('email')
-                    <div class="errormsg">{{ $message }}</div>
+                    <div class="qurery-errormsg">{{ $message }}</div>
                 @enderror
             </div>
             <div class="inputMainBlock">
                 <span>Mobile Number<i>*</i></span>
-                <input type="text" name="mobile" class="mobileVD" placeholder="00000 00000"> 
+                <input type="text" name="mobile" class="mobileVD" placeholder="00000 00000" value="{{old('mobile')}}"> 
                 @error('mobile')
-                    <div class="errormsg">{{ $message }}</div>
+                    <div class="qurery-errormsg">{{ $message }}</div>
                 @enderror
             </div>
             <div class="inputMainBlock">
                 <span>Product Name</span>
-                <input type="text" name="product_name" class="AnyValueVD" placeholder="wheelchair"> 
+                <input type="text" name="product_name" class="AnyValueVD" placeholder="wheelchair" value="{{old('product_name')}}"> 
                 @error('product_name')
-                    <div class="errormsg">{{ $message }}</div>
+                    <div class="qurery-errormsg">{{ $message }}</div>
                 @enderror
             </div>
             <div class="inputMainBlock">
@@ -70,14 +61,14 @@
                     <p>Image Upload Successfully</p>
                 </div>
                 @error('file_upload')
-                    <div class="errormsg">{{ $message }}</div>
+                    <div class="qurery-errormsg">{{ $message }}</div>
                 @enderror
             </div>
             <div class="inputMainBlock">
                 <span>Description</span>
-                <textarea name="description" class="AnyValueVD"></textarea>
+                <textarea name="description" class="AnyValueVD" value="{{old('description')}}"></textarea>
                 @error('description')
-                    <div class="errormsg">{{ $message }}</div>
+                    <div class="qurery-qurery-errormsg">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -90,8 +81,9 @@
             I read and understand <a href="#;">Terms and Conditions</a>.
         </div>
         @error('terms')
-            <div class="errormsg">{{ $message }}</div>
+        <p class="qurery-qurery-qurery-errormsg" style="color:#B40000;" >Please check terms and conditions.</p>
         @enderror
+
         <button type="submit">Submit Query</button>
         </div>
         </form>
@@ -103,24 +95,24 @@
                     <span>Full Name<i>*</i></span>
                     <input type="text" class="FullNameVD" placeholder="Full Name" name="full_name"> 
                     @error('full_name')
-                        <div class="errormsg">{{ $message }}</div>
-                        <div class="errormsg">Please enter Full Name</div>
+                        <div class="qurery-errormsg">{{ $message }}</div>
+                        <div class="qurery-errormsg">Please enter Full Name</div>
                     @enderror
                 </div>
                 <div class="inputMainBlock">
                     <span>E-mail ID<i>*</i></span>
                     <input type="text" class="emailVD" placeholder="example@gmail.com"> 
-                    <div class="errormsg">Please enter E-mail ID</div>
+                    <div class="qurery-errormsg">Please enter E-mail ID</div>
                 </div>
                 <div class="inputMainBlock">
                     <span>Mobile Number<i>*</i></span>
                     <input type="text" class="mobileVD" placeholder="00000 00000"> 
-                    <div class="errormsg">Please enter Mobile Number</div>
+                    <div class="qurery-errormsg">Please enter Mobile Number</div>
                 </div>
                 <div class="inputMainBlock">
                     <span>Product Name</span>
                     <input type="text" class="AnyValueVD" placeholder="wheelchair"> 
-                    <div class="errormsg">Please enter Product Name</div>
+                    <div class="qurery-errormsg">Please enter Product Name</div>
                 </div>
                 <div class="inputMainBlock">
                     <span>Upload Reference<i>*</i></span>
@@ -137,12 +129,12 @@
                         </div>
                         <p>Image Upload Successfully</p>
                     </div>
-                    <div class="errormsg">Please choose picture</div>
+                    <div class="qurery-errormsg">Please choose picture</div>
                 </div>
                 <div class="inputMainBlock">
                     <span>Description</span>
                     <textarea class="AnyValueVD"></textarea>
-                    <div class="errormsg">Please enter description</div>
+                    <div class="qurery-errormsg">Please enter description</div>
                 </div>
                 
                 

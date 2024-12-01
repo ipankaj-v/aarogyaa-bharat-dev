@@ -44,7 +44,11 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="seo_meta_tag">SEO Meta Tag</label>
+                                    <label for="seo_meta_tag_title">SEO Meta Tag Title</label>
+                                    <input type="text" name="seo_meta_tag_title" class="form-control @error('seo_meta_tag_title') is-invalid @enderror" id="seo_meta_tag_title" placeholder="Enter Page Name" value="{{ old('seo_meta_tag_title') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seo_meta_tag">SEO Meta Tag Description</label>
                                     <input type="text" name="seo_meta_tag" class="form-control @error('seo_meta_tag') is-invalid @enderror" id="seo_meta_tag" placeholder="Enter Page Name" value="{{ old('seo_meta_tag') }}">
                                 </div>
                                 <div class="form-group">

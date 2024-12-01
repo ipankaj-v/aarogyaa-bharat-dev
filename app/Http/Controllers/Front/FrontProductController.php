@@ -14,8 +14,10 @@ class FrontProductController extends Controller
     {
         $categoriesAndProducts = Category::with('products')->get();
         $products = Product::with('category')->take(12)->get();
-        $seoMetaTag = Page::where('slug', 'products')->value('seo_meta_tag'); 
-        return view('front.products', compact('categoriesAndProducts', 'products', 'seoMetaTag'));
+        $seoMeta = Page::where('slug', 'products')->first(); 
+        $seoMetaTag = $seoMeta->seo_meta_tag; 
+        $seoMetaTagTitle = $seoMeta->seo_meta_tag_title; 
+        return view('front.products', compact('categoriesAndProducts', 'products', 'seoMetaTag', 'seoMetaTagTitle'));
     }
 
     public function productDetail($slug)

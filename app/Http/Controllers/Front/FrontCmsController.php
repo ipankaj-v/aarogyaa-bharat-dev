@@ -16,7 +16,8 @@ class FrontCmsController extends Controller
             abort(404); // or redirect or show a custom message
         }
         $seoMetaTag = $page->seo_meta_tag;
-        return view('front.about-us', compact('page', 'seoMetaTag'));
+        $seoMetaTagTitle = $page->seo_meta_tag_title;
+        return view('front.about-us', compact('page', 'seoMetaTag','seoMetaTagTitle'));
     }
 
     public function TermsAndConditions(Request $request)
@@ -24,10 +25,11 @@ class FrontCmsController extends Controller
         $lastSegment = basename(parse_url($request->url(), PHP_URL_PATH));
         $page = Page::where('slug', $lastSegment)->with('cms.images')->first();
         $seoMetaTag = $page->seo_meta_tag;
+        $seoMetaTagTitle = $page->seo_meta_tag_title;
         if (!$page || !$page->cms) {
             abort(404); // or redirect or show a custom message
         }
-        return view('front.terms-conditions', compact('page','seoMetaTag'));
+        return view('front.terms-conditions', compact('page','seoMetaTag', 'seoMetaTagTitle'));
     }
 
 }

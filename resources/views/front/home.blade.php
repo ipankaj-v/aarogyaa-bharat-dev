@@ -496,4 +496,22 @@
     </div>
 </section>
 @endsection('content')
-
+<script src="{{ asset('front/js/jquery.min.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const copyButtons = document.querySelectorAll('.copy-code');
+        copyButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const code = this.getAttribute('data-code');
+                const tempInput = document.createElement('input');
+                document.body.appendChild(tempInput);
+                tempInput.value = code;
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999);
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                alert('Offer code copied: ' + code);
+            });
+        });
+    });
+</script>

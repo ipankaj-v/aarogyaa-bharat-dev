@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Blog;
+use App\Models\Admin\Page;
+
 class HomeController extends Controller
 {
     public function index()
@@ -14,8 +16,12 @@ class HomeController extends Controller
         $categories = Category::take(12)->get();
         $products = Product::with('category')->take(12)->get(); 
         $blogs = Blog::with('images')->take(12)->get();
+
+        $seoMeta = Page::where('slug', 'home')->first(); 
+        $seoMetaTag = $seoMeta->seo_meta_tag; 
+        $seoMetaTagTitle = $seoMeta->seo_meta_tag_title;
          
-        return view('front.home', compact('categories', 'products', 'blogs'));
+        return view('front.home', compact('categories', 'products', 'blogs', 'seoMetaTag', 'seoMetaTagTitle'));
     }
 
     public function productPage()

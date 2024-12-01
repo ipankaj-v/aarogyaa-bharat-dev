@@ -45,6 +45,7 @@ class PageController extends Controller
         Page::create([
             'name' => $request->name,
             'slug' => \Str::slug($request->name),
+            'seo_meta_tag_title' => $request->seo_meta_tag_title,
             'seo_meta_tag' => $request->seo_meta_tag,
             'status' => $request->status,
         ]);
@@ -68,6 +69,7 @@ class PageController extends Controller
         $page = Page::findOrFail($id);
         $page->update([
             'name' => $request->name,
+            'seo_meta_tag_title' => $request->seo_meta_tag_title,
             'seo_meta_tag' => $request->seo_meta_tag,
             'status' => $request->status ?? true,
         ]);

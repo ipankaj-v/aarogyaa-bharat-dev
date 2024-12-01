@@ -12,6 +12,7 @@ class Page extends Model
     protected $fillable = [
         'name', 
         'slug', 
+        'seo_meta_tag_title', 
         'seo_meta_tag', 
         'status'
     ];

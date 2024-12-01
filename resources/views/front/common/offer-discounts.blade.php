@@ -10,7 +10,7 @@
                     </div>
                     <div class="offer_det">
                         <i>*T&C apply</i>
-                        <a href="#;">Offer Details </a>
+                        <a href="javascript:void(0);" class="copy-code" data-code="{{ $offer->code }}">Copy code</a>
                     </div>
                 </div>
             </div>

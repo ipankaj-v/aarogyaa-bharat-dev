@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
     <meta name="description" content="page description">
+    @if(isset($seoMetaTagTitle))
+    <meta name="title" content="{{$seoMetaTagTitle}}">
+    @endif
     @if(isset($seoMetaTag))
     <meta name="description" content="{{$seoMetaTag}}">
     @endif
@@ -31,7 +34,7 @@
                 <ul class="menuList">
                     <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
                     <li class="{{ Route::currentRouteName() == 'products' ? 'active' : '' }}"><a href="{{ route('products') }}">Products</a></li>
-                    <li><a href="#offer_Part" class="{{ Route::currentRouteName() == 'home#offer_Part' ? 'active' : '' }}">Offers</a></li>
+                    <li><a href="{{ route('home') }}#offer_Part" class="{{ Route::currentRouteName() == 'home#offer_Part' ? 'active' : '' }}">Offers</a></li>
                     <li><a href="{{route('customer.about.us')}}">About</a></li>
                 </ul>
                 @if(Auth::check() && Auth::user()->hasRole('Customer'))
