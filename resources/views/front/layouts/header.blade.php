@@ -51,7 +51,13 @@
                         <a class="notificationpopupjs"> <img src="{{ asset('front/images/notification.svg') }}" alt="notification"></a>
                     </li>
                     <li>
+                    @if(Auth::check() && Auth::user()->hasRole('Customer'))
+                        <!-- Display Cart Link -->
                         <a href="{{route('cart')}}"><img src="{{ asset('front/images/cart.svg') }}" alt=""><span>{{$cartProductCount ?? 0}}</span></a>
+                    @else
+                        <!-- Trigger Login Popup -->
+                        <a href="javascript:void(0)" class="trigger-login-popup"><img src="{{ asset('front/images/cart.svg') }}" alt=""><span>{{$cartProductCount ?? 0}}</span></a>
+                    @endif
                     </li>
                 </ul>
                 <div id="customerlocationPin">
@@ -155,4 +161,9 @@
         function closeonotificationPopUp() {
             $('.notificationPop').hide();
         }
+        $('.trigger-login-popup').click(function(e) {
+            e.preventDefault();
+            $('.LoginPop').show();
+        });
+
     </script>

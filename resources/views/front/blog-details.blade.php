@@ -30,7 +30,7 @@
                 <li class="tagBox"><p>{{ $blogDetails->tagname  }}</p></li>
                 <li class="blogdate"><img src="{{ asset('front/images/calendar.svg') }}" alt=""><p>{{$blogDetails->created_at->format('m/d/y')}}</p></li>
                 <li class="blogview"><img src="{{ asset('front/images/carbon_view.svg') }}" alt=""><p>{{ $blogDetails->views}}</p></li>
-                <li><a href="#;"><img src="{{ asset('front/images/ri_share-line.svg') }}" alt=""></a></li>
+                <li><a href="https://wa.me/?text={{ urlencode('Check out this blog: ' . $blogDetails->title . ' ' . route('blog.details', $blogDetails->slug)) }}"><img src="{{ asset('front/images/ri_share-line.svg') }}" alt="{{$blogDetails->title}}"></a></li>
             </ul>
         </div>
         <div class="for_renting">

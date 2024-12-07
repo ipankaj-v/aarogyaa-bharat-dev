@@ -41,6 +41,13 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="bannerLink">Link</label>
+                                    <input type="text" name="link" class="form-control @error('link') is-invalid @enderror" id="bannerLink" placeholder="Enter Banner Link" value="{{ old('link') }}">
+                                    @error('link')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="bannerDescription">Description</label>
                                     <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="bannerDescription" placeholder="Enter Banner Description">{{ old('description') }}</textarea>
                                     @error('description')

@@ -1,52 +1,7 @@
 
 @extends('front.layouts.layout')
 @section('content')
-<!-- <div class="searchPop winScrollStop">
-    <div class="searchPopBlock">
-        <strong>Recent Search</strong>
-        <p>Our highest rented or buying products.</p>
-        <ul>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Long product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Product</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-            <li>
-                <a href="#;">
-                    <img src="images/search_fil.svg" alt="" />
-                    <p>Small product name</p>
-                    <img src="images/curly_arrow.svg" alt="" /> 
-                </a>
-            </li>
-        </ul>
-        
-        <div class="popPro">
-        <strong>Popular Products</strong>
-        <a href="#;">Long product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">product <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Small product name <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Name of product <img src="images/curly_arrow.svg" alt="" /></a>
-        <a href="#;">Popular product name  <img src="images/curly_arrow.svg" alt="" /></a>
-        </div>
-    </div>
-</div> -->
+
 @include('front.common.welcome-message')
 <section class="bannerPArt">
     <div class="container">
@@ -54,7 +9,9 @@
             @if(isset($bannerImages))
             @foreach($bannerImages as $banner)
                     <div class="bannerBlock">
+                    <a href="{{$banner->link}}" target="_blank">
                         <img src="{{ asset('storage/' . $banner->image) }}" alt="Banner Image">
+                    </a>    
                     </div>
             @endforeach
             @endif
@@ -99,7 +56,7 @@
     <div class="container">
         <div class="titlePart">
             <h4>Offer & Discount</h4>
-            <a href="{{route('products')}}">View All <img src="{{ asset('front/images/orange_arrow.svg')}}" alt=""> </a>
+            <!-- <a href="{{route('products')}}">View All <img src="{{ asset('front/images/orange_arrow.svg')}}" alt=""> </a> -->
         </div>
         <div class="rowMob">
         <div class="offer_slider getprogressWidth arrowOnProgress">
@@ -123,12 +80,14 @@
                     <div class="product_slider_padd">
                         <div class="product_slider_block">
                             <div class="imagePart">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                                <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                                </a>   
                             </div>
                             <h5>{{ $product->name }}</h5>
                             <p>{{ $product->description }}</p>
                             <strong>₹ {{ number_format($product->price, 2) }}</strong><i>/ Per week</i>
-                            
+                            <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">View Details <img src="{{ asset('front/images/orange_arrow.svg') }}" alt=""> </a>
                         </div>
                     </div>
                 @endforeach
@@ -339,28 +298,29 @@
                 @foreach ($blogs as $blog)
                     <div class="our_blog_box">
                         <div class="blog_image">
+                        <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}">
                             <img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="{{ $blog->title }}" />
+                        </a>   
                         </div>
                         <div class="blog_text">
                             <div class="text_one">
+                            <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}">
                                 <h2>{{ $blog->title }}</h2>
+                            </a>    
                                 <p>{{ Str::limit($blog->content, 150) }}</p>
                             </div>
                             <div class="blog_tag_name">
                                 <ul>
-                                    <!-- <li class="tagBox"><p>{{ $blog->tags }}</p></li> -->
                                     <li class="tagBox"><p>{{ $blog->tagname  }}</p></li>
                                     <li class="blogdate">
-                                        <img src="{{ asset('fornt/images/calendar.svg') }}" alt="" />
+                                        <img src="{{ asset('front/images/calendar.svg') }}" alt="" />
                                         <p>{{ $blog->created_at->format('d/m/Y') }}</p>
                                     </li>
                                     <li class="blogview">
                                         <img src="{{ asset('front/images/carbon_view.svg') }}" alt="" />
                                         <p>{{ $blog->views}}</p>
                                     </li>
-                                    <li>
-                                        <a href="#"><img src="{{ asset('front/images/ri_share-line.svg') }}" alt="" /></a>
-                                    </li>
+                                    <li><a href="https://wa.me/?text={{ urlencode('Check out this blog: ' . $blog->title . ' ' . route('blog.details', $blog->slug)) }}"><img src="{{ asset('front/images/ri_share-line.svg') }}" alt="{{$blog->title}}"></a></li>
                                 </ul>
                                 <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}" class="blogreadnow">Read Now</a>
                             </div>

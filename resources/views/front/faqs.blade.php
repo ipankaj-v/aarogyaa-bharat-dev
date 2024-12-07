@@ -15,4 +15,12 @@
     </div>    
 </div>
 @include('front.common.faq-section')
+<script src="{{ asset('front/js/jquery.min.js') }}"></script>
+<script>
+function changeTab(categoryId) {
+    $('.faq_box').hide();
+    $('#category_' + categoryId).show();
+}
+
+</script>
 @endsection('content')

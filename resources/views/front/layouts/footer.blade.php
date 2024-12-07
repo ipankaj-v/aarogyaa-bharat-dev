@@ -3,7 +3,7 @@
         <div class="all_footer_parts">
             <div class="footer_acco_box">
                 <div class="acco_click"><a href="#;">
-                        <p>Quick links</p><img src="images/upArrow.svg" alt="" />
+                        <p>Quick links</p><img src="{{asset('front/images/upArrow.svg')}}" alt="" />
                     </a></div>
                 <div class="acco_text">
                     <div class="footer_links">
@@ -28,7 +28,7 @@
             </div>
             <div class="footer_acco_box">
                 <div class="acco_click"><a href="#;">
-                        <p>Popular Products</p><img src="images/upArrow.svg" alt="" />
+                        <p>Popular Products</p><img src="{{asset('front/images/upArrow.svg')}}" alt="" />
                     </a></div>
                 <div class="acco_text">
                     <div class="Products_tag">
@@ -44,28 +44,12 @@
                             @endforeach
                         </ul>
                         @endif
-                        <!-- <ul>
-                        <li><a href="#;"><p>Long product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>Long product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>Long product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>product</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>product</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>product</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>Small product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>Small product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>Small product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>Name of product</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                        <li><a href="#;"><p>Popular product name</p><img src="images/chartArrow.svg" alt="" /></a></li>
-                    </ul> -->
                     </div>
                 </div>
             </div>
             <div class="footer_acco_box">
                 <div class="acco_click"><a href="#;">
-                        <p>Social connects</p><img src="images/upArrow.svg" alt="" />
+                        <p>Social connects</p><img src="{{asset('front/images/upArrow.svg')}}" alt="" />
                     </a></div>
                 <div class="acco_text">
                     <div class="social_connects">
@@ -73,18 +57,18 @@
                             <li><a href="{{env('FACEBOOK_PAGE_URI')}}"><img src="{{asset('front/images/facebook.svg') }}" alt="" /></a></li>
                             <li><a href="{{env('INSTA_PAGE_URI')}}"><img src="{{asset('front/images/insta.svg') }}" alt="" /></a></li>
                             <li><a href="{{env('X_PAGE_URI')}}"><img src="{{asset('front/images/Xtwit.svg') }}" alt="" /></a></li>
-                            <li><a href="{{env('YOUTUBE_PAGE_URI')}}"><img src="{{asset('front/images/youtube.png') }}" alt="" /></a></li>
+                            <!-- <li><a href="{{env('YOUTUBE_PAGE_URI')}}"><img src="{{asset('front/images/youtube.png') }}" alt="" /></a></li> -->
                             <li><a href="{{env('WHATSAPP_PAGE_URI')}}"><img src="{{asset('front/images/whatsapp.svg') }}" alt="" /></a></li>
                         </ul>
                     </div>
                     <div class="emergency_help">
                         <h2>Need an emergency help</h2>
                         <ul>
-                            <li><a href="#;"><img src="{{asset('front/images/phone_call.svg') }}" alt="" />
-                                    <p>+91 00000 00000</p><span>Call Now</span>
+                            <li><a href="tel:{{ env('HELP_LINE_NO') }}"><img src="{{asset('front/images/phone_call.svg') }}" alt="" />
+                                    <p>{{env('HELP_LINE_NO')}}</p><span>Call Now</span>
                                 </a></li>
-                            <li><a href="#;"><img src="{{asset('front/images/mail.svg') }}" alt="" />
-                                    <p>help@aarogyabharat.com</p>
+                            <li><a href="mailto:{{ env('HELP_LINE_EMAIL') }}"><img src="{{asset('front/images/mail.svg') }}" alt="" />
+                                    <p>{{env('HELP_LINE_EMAIL')}}</p>
                                 </a></li>
                         </ul>
                     </div>
@@ -94,8 +78,9 @@
     </div>
 </footer>
 <div class="copyrights">
-    <p>Copyrights © 2020 Aarogya Bharat</p>
+    <p>Designed by <a href="https://webxds.com" target="_blank" class="designer-link">WebXDS</a></p>
 </div>
+
 
 <div class="bottomBar">
     <ul>
@@ -139,7 +124,7 @@
         <h4>Select Delivery Location</h4>
         <p>Please enter pin code to get current location.</p>
         <div class="inputPart">
-        <input type="text" placeholder="Enter pin code" name="pin" id="pinCode" />
+        <input type="number" placeholder="Enter pin code" name="pin" id="pinCode"  />
         <a href="javascript:void(0)" id="checkPin">Check</a>
         <div id="success" style="color: green;">
             
@@ -150,7 +135,7 @@
 
         </div>
         <div class="currLoc">
-            <img src="images/pin.svg" alt="" />
+            <img src="{{ asset('front/images/pin.svg') }}" alt="" />
             <a href="#;">Select Current Location</a>
         </div>
         <button>Get Location</button>
@@ -366,14 +351,8 @@
 
         $("#loginMo .submitBTN").click(function(e) {
     e.preventDefault();
-
-    // Get the CSRF token
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-    // Serialize the form data
     var formData = $('#loginMo').serialize();
-
-    // Append the CSRF token to the formData
     formData += '&_token=' + "{{ csrf_token() }}";
 
     $.ajax({
@@ -390,11 +369,11 @@
                 alert(response.success);
                 $('.mobForm').hide();
                 $('.optForm').show();
+                count3minut('otp_form');
                 mobileNumber = response.number;
                 otpUrl = "{{ route('verify.otp', ['number' => ':number']) }}".replace(':number', mobileNumber);
                 let maskedNumber = 'XXXXXX' + mobileNumber.slice(-4);
                 $('#number-section').text(maskedNumber);
-                // count3minut('otp_form');
             }
         },
         error: function(xhr) {
@@ -436,6 +415,33 @@
         });
     });
     });
+
+
+        // otp timer
+        var interval;
+    function count3minut(otpFid) {
+        var timer2 = "1:00";
+        interval = setInterval(function() {
+            var timer = timer2.split(':');
+            var minutes = parseInt(timer[0], 10);
+            var seconds = parseInt(timer[1], 10);
+            --seconds;
+            minutes = (seconds < 0) ? --minutes : minutes;
+            seconds = (seconds < 0) ? 59 : seconds;
+            seconds = (seconds < 10) ? '0' + seconds : seconds;
+        
+            $('#'+otpFid+' .a_otpPart .a_countText p i').html('0' + minutes + ':' + seconds);
+            if (minutes < 0) clearInterval(interval);
+            if ((seconds <= 0) && (minutes <= 0)) clearInterval(interval);
+            timer2 = minutes + ':' + seconds;
+
+            if ((seconds <= 0) && (minutes <= 0)) {
+                $('#'+otpFid+' .a_otpPart .a_countText').hide();
+                $('#'+otpFid+' .a_otpPart .a_resendOtp').show();
+            }
+
+        }, 1000);
+    }
 </script>
 
 </body>

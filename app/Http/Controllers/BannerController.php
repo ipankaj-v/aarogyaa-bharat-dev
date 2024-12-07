@@ -28,6 +28,7 @@ class BannerController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'link' => 'nullable|url',
             'image' => 'required|image|',
             'status' => 'nullable|boolean',
             'display_order' => 'nullable|integer',
@@ -51,34 +52,47 @@ class BannerController extends Controller
     }
 
     // Update a specific banner
-    public function update(Request $request, Banner $banner)
-    {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image',
-            'status' => 'nullable|boolean',
-            'display_order' => 'nullable|integer',
-        ]);
-
-        if ($request->hasFile('image')) {
-            if ($banner->image) {
-                \Storage::disk('public')->delete($banner->image);
-            }
-
-            $imagePath = $request->file('image')->store('banners', 'public');
-            $validatedData['image'] = $imagePath;
+    public function update(Request $request, $id)
+{
+    // Validate incoming data
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'link' => 'nullable|url',
+        'image' => 'nullable|image',
+        'status' => 'nullable|boolean',
+        'display_order' => 'nullable|integer',
+    ]);
+    $banner = Banner::find($id);
+    
+    if ($request->hasFile('image')) {
+        if ($banner->image) {
+            \Storage::disk('public')->delete($banner->image);
         }
-        // dd($request->has('status'));
-        if($request->status == true) {
-            $validatedData['status'] = 1;
-        } else {
-            $validatedData['status'] = 0;
-        }
-        $banner->update($validatedData);
-
-        return redirect()->route('banners.index')->with('success', 'Banner updated successfully.');
+        $imagePath = $request->file('image')->store('banners', 'public');
+        $validatedData['image'] = $imagePath;
+        $banner->image = $validatedData['image'];
     }
+
+    if ($request->status == true) {
+        $validatedData['status'] = 1;
+    } else {
+        $validatedData['status'] = 0;
+    }
+
+    $banner->title = $validatedData['title'];
+    $banner->description = $validatedData['description'];
+    $banner->link = $validatedData['link'];  // Set the link
+    $banner->status = $validatedData['status'];
+    $banner->display_order = $validatedData['display_order'];
+
+    // Save the banner to the database
+    $banner->save();
+
+    // Redirect with success message
+    return redirect()->route('banners.index')->with('success', 'Banner updated successfully.');
+}
+
 
     // Delete a specific banner
     public function destroy($id)

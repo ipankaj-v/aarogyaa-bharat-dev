@@ -77,9 +77,9 @@
                     </div>
                     <div class="helpBlock">
                         <p>Need an emergency help</p>
-                        <a href="#;"><img src="{{asset('front/images/help_whata-app.svg')}}" alt="" /> </a>
-                        <a href="#;"><img src="{{asset('front/images/help_call.svg')}}" alt="" /> </a>
-                        <a href="#;"><img src="{{asset('front/images/help_mail.svg')}}" alt="" /> </a>
+                        <a href="https://wa.me/{{ env('HELP_LINE_NO') }}"><img src="{{asset('front/images/help_whata-app.svg')}}" alt="" /> </a>
+                        <a href="tel:{{ env('HELP_LINE_NO') }}"><img src="{{asset('front/images/help_call.svg')}}" alt="" /> </a>
+                        <a href="mailto:{{ env('HELP_LINE_EMAIL') }}"><img src="{{asset('front/images/help_mail.svg')}}" alt="" /> </a>
                     </div>
                 </div>
             </div>
@@ -124,11 +124,6 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                        <!-- <li><a href="#;"><span>Delivery</span><img src="{{asset('front/images/Vector_plus.svg')}}" alt="" /></a></li>
-                                        <li><a href="#;"><span>On the way</span><img src="{{asset('front/images/Vector_plus.svg')}}" alt="" /></a></li>
-                                        <li><a href="#;"><span>Cancel</span><img src="{{asset('front/images/Vector_plus.svg')}}" alt="" /></a></li>
-                                        <li><a href="#;"><span>Returned</span><img src="{{asset('front/images/Vector_plus.svg')}}" alt="" /></a></li> -->
-                                        
                                 </div>
                                 <div id="orders">
                                     @include('front.common.customer-orders')
@@ -153,8 +148,8 @@
                         <div>
                             <div class="needaneme">
                                 <h2>Need an emergency help</h2>
-                                <a href="#;" class="phone_eme"><img src="{{asset('front/images/phone_call.svg')}}"><p>+91 00000 00000</p><span>Call Now</span></a>
-                                <a href="#;" class="mail_eme"><img src="{{asset('front/images/mail.svg')}}"><p>help@aarogyabharat.com</p></a>
+                                <a href="tel:{{ env('HELP_LINE_NO') }}" class="phone_eme"><img src="{{asset('front/images/phone_call.svg')}}"><p>{{ env('HELP_LINE_NO') }}</p><span>Call Now</span></a>
+                                <a href="mailto:{{ env('HELP_LINE_EMAIL') }}" class="mail_eme"><img src="{{asset('front/images/mail.svg')}}"><p>{{ env('HELP_LINE_EMAIL') }}</p></a>
                             </div>
                         </div>
                     </div>

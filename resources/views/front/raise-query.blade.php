@@ -66,9 +66,9 @@
             </div>
             <div class="inputMainBlock">
                 <span>Description</span>
-                <textarea name="description" class="AnyValueVD" value="{{old('description')}}"></textarea>
+                <textarea name="description" class="AnyValueVD" value="{{old('description')}}"> {{old('description')}} </textarea>
                 @error('description')
-                    <div class="qurery-qurery-errormsg">{{ $message }}</div>
+                    <div class="qurery-errormsg">{{ $message }}</div>
                 @enderror
             </div>
         </div>
@@ -78,7 +78,7 @@
                 <input type="checkbox" name="terms" />
                 <i></i>
             </label>
-            I read and understand <a href="#;">Terms and Conditions</a>.
+            I read and understand <a href="{{route('terms.and.conditions')}}">Terms and Conditions</a>.
         </div>
         @error('terms')
         <p class="qurery-qurery-qurery-errormsg" style="color:#B40000;" >Please check terms and conditions.</p>
@@ -87,69 +87,6 @@
         <button type="submit">Submit Query</button>
         </div>
         </form>
-
-        <!-- <form class="raiseForm" id="raise_form" action="{{ route('query.submit') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div style="margin-left: -12px;margin-right: -12px;">
-                <div class="inputMainBlock">
-                    <span>Full Name<i>*</i></span>
-                    <input type="text" class="FullNameVD" placeholder="Full Name" name="full_name"> 
-                    @error('full_name')
-                        <div class="qurery-errormsg">{{ $message }}</div>
-                        <div class="qurery-errormsg">Please enter Full Name</div>
-                    @enderror
-                </div>
-                <div class="inputMainBlock">
-                    <span>E-mail ID<i>*</i></span>
-                    <input type="text" class="emailVD" placeholder="example@gmail.com"> 
-                    <div class="qurery-errormsg">Please enter E-mail ID</div>
-                </div>
-                <div class="inputMainBlock">
-                    <span>Mobile Number<i>*</i></span>
-                    <input type="text" class="mobileVD" placeholder="00000 00000"> 
-                    <div class="qurery-errormsg">Please enter Mobile Number</div>
-                </div>
-                <div class="inputMainBlock">
-                    <span>Product Name</span>
-                    <input type="text" class="AnyValueVD" placeholder="wheelchair"> 
-                    <div class="qurery-errormsg">Please enter Product Name</div>
-                </div>
-                <div class="inputMainBlock">
-                    <span>Upload Reference<i>*</i></span>
-                    <label class="fileUpload">
-                        Browse Picture <img src="{{ asset('front/images/upload.svg') }}" alt="" />
-                        <input type="file" class="file-upload AnyValueVD" />
-                    </label>
-                    <div class="uploadedPart">
-                        <div class="imgDis">
-                            <a href="#;">
-                                <img src="{{ asset('front/images/Remove_x.svg') }}" alt="" class="close1" />
-                            </a>
-                            <img src="#" alt="" class="uploadeedImg" />
-                        </div>
-                        <p>Image Upload Successfully</p>
-                    </div>
-                    <div class="qurery-errormsg">Please choose picture</div>
-                </div>
-                <div class="inputMainBlock">
-                    <span>Description</span>
-                    <textarea class="AnyValueVD"></textarea>
-                    <div class="qurery-errormsg">Please enter description</div>
-                </div>
-                
-                
-            </div>
-            <div class="checkboxPart">
-                <div class="">
-                    <label>
-                        <input type="checkbox" />
-                        <i></i>
-                    </label>
-                    I read and understand <a href="#;">Terms and Conditions</a>.
-                </div>
-                <button type="submit">Submit Query</button>
-            </div>
-        </form> -->
     </div>
 </section>
 @endsection('content')

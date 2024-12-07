@@ -1,6 +1,6 @@
 @extends('front.layouts.layout')
 @section('content')
-<div class="banneranimationbox" >
+<!-- <div class="banneranimationbox" >
                 <div class="container">
                 @if ($page->cms && $page->cms->images->isNotEmpty())
                   <img src="{{ asset('storage/' .$page->cms->images->first()->path) }}" alt="">
@@ -8,7 +8,7 @@
                   <img src="{{asset('front/images/banner.jpg')}}" alt="">
 				@endif
 				</div>
-            </div>
+            </div> -->
 			
 <div class="breadcrumbs">
     <div class="container">

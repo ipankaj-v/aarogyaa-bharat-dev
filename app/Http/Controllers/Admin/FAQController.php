@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\FAQ;
 use App\Models\Admin\FAQAnswer;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Config;
 
 class FAQController extends Controller
 {
@@ -35,12 +36,14 @@ class FAQController extends Controller
 
     public function fontIndex()
     {
-        return view('front.faqs');
+        $faqFilters = Config::get('custom.faq_filter');
+        return view('front.faqs', compact('faqFilters'));
     }
 
     public function create()
     {
-        return view('admin.faq.create');
+        $categories = Config::get('custom.faq_filter');
+        return view('admin.faq.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -48,11 +51,13 @@ class FAQController extends Controller
 
         $request->validate([
             'question' => 'required|string|max:255',
+            'category' => 'required',
             'answer' => 'required|string|max:1000',
         ]);
 
         $faq = FAQ::create([
             'question' => $request->question,
+            'category' => $request->category,
         ]);
 
         $faq->answers()->create([
@@ -65,8 +70,8 @@ class FAQController extends Controller
     public function edit($id)
     {
         $faq = FAQ::with('answers')->findOrFail($id);
-        // dd($faq->answers);
-        return view('admin.faq.edit', compact('faq'));
+        $categories = Config::get('custom.faq_filter');
+        return view('admin.faq.edit', compact('faq', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -74,6 +79,7 @@ class FAQController extends Controller
         // Validate the input
         $request->validate([
             'question' => 'required|string|max:255',
+            'category' => 'required',
             'answer' => 'required|string',
         ]);
 
@@ -81,6 +87,7 @@ class FAQController extends Controller
 
         $faq->update([
             'question' => $request->question,
+            'category' => $request->category,
         ]);
 
         FAQAnswer::where('faq_id', $faq->id)->update([

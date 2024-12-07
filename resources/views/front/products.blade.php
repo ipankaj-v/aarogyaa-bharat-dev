@@ -40,9 +40,11 @@
                             <div class="product_slider_padd">
                                 <div class="product_slider_block">
                                     <div class="imagePart">
+                                    <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">
                                         <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" >
+                                    </a>   
                                     </div>
-                                    <h5>{{ $product->name }} <a href="#"> <img src="{{ asset('front/images/Share.svg')}}" alt=""> </a></h5>
+                                    <h5>{{ $product->name }} <a target="_blank" href="https://wa.me/?text={{ urlencode('Check out this product: ' . $product->title . ' ' . route('products.detail', $product->slug)) }}"> <img src="{{ asset('front/images/Share.svg')}}" alt="Share on WhatsApp"> </a></h5>
                                     <p>{{ $product->description }}</p>
                                     <strong>₹ {{ $product->price }}</strong>
                                     <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">View Details <img src="{{ asset('front/images/orange_arrow.svg') }}" alt=""> </a>
@@ -56,7 +58,46 @@
         </div>
     </section>
 
-<section class="customer_part">
+    <section class="customer_part">
+    <div class="container">
+        <div class="titlePart">
+            <h4>Happy Customers..!</h4>
+            <!-- <a href="#;">View All <img src="{{asset('front/images/orange_arrow.svg')}}" alt=""> </a> -->
+        </div>
+        <div class="rowMob">
+            <div class="customerSlider getprogressWidth">
+            @if($happyCustomers->isNotEmpty())
+                @foreach($happyCustomers as $customer)
+                    <div class="customerSlider_padd">
+                            <div class="customerSlider_block">
+                                <p>{{ $customer->comment }}</p>
+                                <strong>{{ $customer->name }}</strong>
+                                <ul>
+                                    @php
+                                        $rating = round($customer->rate); 
+                                    @endphp
+
+                                    @for($i = 1; $i <= 5; $i++)  <!-- Loop to show 5 stars -->
+                                        <li>
+                                            <a href="#">
+                                                <img src="{{ $i <= $rating ? asset('front/images/fill_star.svg') : asset('front/images/empty_star.svg') }}" alt="" />
+                                            </a>
+                                        </li>
+                                    @endfor
+                                </ul>
+                                <i>{{ $rating }}</i> <!-- Show the rounded rating -->
+                            </div>
+                        </div>
+                @endforeach
+            @endif
+            </div>
+            <div class="progressBar"></div>
+        </div>
+    </div>
+</section>
+
+
+<!-- <section class="customer_part">
     <div class="container">
         <div class="titlePart">
             <h4>Happy Customers..!</h4>
@@ -152,7 +193,7 @@
             <div class="progressBar"></div>
         </div>
     </div>
-</section>
+</section> -->
 
 @include('front.common.recentview')
 <!-- <section class="productSlidePart">

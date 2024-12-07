@@ -20,9 +20,41 @@ class RaiseQueryController extends Controller
             'email' => 'required|email',
             'mobile' => 'required|digits:10',
             'product_name' => 'nullable|string',
+            'file_upload' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120', 
+            'description' => ['nullable', 'string', function($attribute, $value, $fail) {
+                $wordCount = str_word_count($value);
+                if ($wordCount < 10) {
+                    $fail('The description must contain at least 10 words.');
+                }
+            }],  
+            'terms' => 'required|accepted',  
+        ], [
+            'full_name.required' => 'Full name is required.',
+            'email.required' => 'Please enter your email address.',
+            'email.email' => 'The email address must be a valid email.',
+            'mobile.required' => 'Please enter your mobile number.',
+            'mobile.digits' => 'The mobile number must be exactly 10 digits.',
+            'product_name.string' => 'Product name must be a valid string.',
+            'file_upload.required' => 'File upload is required.',
+            'file_upload.file' => 'Please upload a valid file.',
+            'file_upload.mimes' => 'The file must be an image (jpg, jpeg, png) or a PDF.',
+            'file_upload.max' => 'The file size must not exceed 5MB.',
+            'description.string' => 'Description must be a valid string.',
+            'description.regex' => 'The description must contain at least 10 words.',
+            'terms.required' => 'You must accept the terms and conditions.',
+            'terms.accepted' => 'You must accept the terms and conditions.',
+        ]);
+        
+
+
+        $validated = $request->validate([
+            'full_name' => 'required',
+            'email' => 'required|email',
+            'mobile' => 'required|digits:10',
+            'product_name' => 'nullable|string',
             'file_upload' => 'required|file',
             'description' => 'nullable|string',
-            'terms' => 'required|accepted',  // Terms checkbox usually needs the `accepted` rule
+            'terms' => 'required|accepted',  
         ], [
             'full_name.required' => 'Full name is required.',
             'email.required' => 'Please enter your email address.',
@@ -36,15 +68,6 @@ class RaiseQueryController extends Controller
             'terms.required' => 'You must accept the terms and conditions.',
             'terms.accepted' => 'You must accept the terms and conditions.',
         ]);
-        // $validated = $request->validate([
-        //     'full_name' => 'required',
-        //     'email' => 'required|email',
-        //     'mobile' => 'required|digits:10',
-        //     'product_name' => 'nullable|string',
-        //     'file_upload' => 'required|file',
-        //     'description' => 'nullable|string',
-        //     'terms' => 'required'
-        // ]);
 
         if ($request->hasFile('file_upload')) {
             $imagePath = $request->file('file_upload')->store('query', 'public');

@@ -1077,8 +1077,6 @@ $(document).ready(function(){
     function count3minut(otpFid) {
         var timer2 = "1:00";
         interval = setInterval(function() {
-
-
             var timer = timer2.split(':');
             var minutes = parseInt(timer[0], 10);
             var seconds = parseInt(timer[1], 10);
@@ -1086,6 +1084,9 @@ $(document).ready(function(){
             minutes = (seconds < 0) ? --minutes : minutes;
             seconds = (seconds < 0) ? 59 : seconds;
             seconds = (seconds < 10) ? '0' + seconds : seconds;
+            alert(otpFid);
+            alert(minutes);
+            alert(seconds);
             $('#'+otpFid+' .a_otpPart .a_countText p i').html('0' + minutes + ':' + seconds);
             if (minutes < 0) clearInterval(interval);
             if ((seconds <= 0) && (minutes <= 0)) clearInterval(interval);

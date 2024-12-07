@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $categories = Category::take(12)->get();
         $products = Product::with('category')->take(12)->get(); 
-        $blogs = Blog::with('images')->take(12)->get();
+        $blogs = Blog::with('images')->take(6)->get();
 
         $seoMeta = Page::where('slug', 'home')->first(); 
         $seoMetaTag = $seoMeta->seo_meta_tag; 

@@ -68,7 +68,9 @@ class BlogController extends Controller
             $blogDetails->increment('views');            
             Cache::put($viewCacheKey, true, now()->addDay(1));            
         }
-        return view('front.blog-details', compact('blogDetails', 'twoBlogs'));
+        $seoMetaTag = $blogDetails->seo_meta_tag;
+        $seoMetaTagTitle = $blogDetails->seo_meta_tag_title;
+        return view('front.blog-details', compact('blogDetails', 'twoBlogs', 'seoMetaTag','seoMetaTagTitle'));
     }
 
     public function create()
@@ -95,6 +97,8 @@ class BlogController extends Controller
         $blog->content_html = $request->content_html;
         $blog->author = $request->article_author;
         $blog->tagname = $request->tagename;
+        $blog->seo_meta_tag = $request->seo_meta_tag;
+        $blog->seo_meta_tag_title = $request->seo_meta_tag_title;
         $blog->save();
 
         // Handle file upload
@@ -130,6 +134,8 @@ class BlogController extends Controller
         $blog->content_html = $request->input('content_html');
         $blog->tagname = $request->input('tagename');
         $blog->author = $request->input('article_author');
+        $blog->seo_meta_tag = $request->seo_meta_tag;
+        $blog->seo_meta_tag_title = $request->seo_meta_tag_title;
         $blog->save();
         if ($request->hasFile('image')) {
             // Delete the old image if it exists

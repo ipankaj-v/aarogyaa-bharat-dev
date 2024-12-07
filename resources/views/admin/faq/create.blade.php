@@ -38,6 +38,20 @@
                     @enderror
                   </div>
                   <div class="form-group">
+                                    <label for="productCategory">Category</label>
+                                    <select name="category" class="form-control @error('category') is-invalid @enderror" id="productCategory">
+                                        <option value="">Select Category</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category['id'] }}" {{ old('category') == $category['id'] ? 'selected' : '' }}>
+                                                {{ $category['name'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('category')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                  <div class="form-group">
                     <label for="answerInput">Answer</label>
                     <textarea name="answer" class="form-control" id="answerInput" placeholder="Enter Answer">{{ old('answer') }}</textarea>
                     @error('answer')

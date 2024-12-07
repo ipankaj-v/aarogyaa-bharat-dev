@@ -18,7 +18,9 @@ class Blog extends Model
         'content_html',
         'author',
         'tagname',
-        'views'
+        'views',
+        'seo_meta_tag',
+        'seo_meta_tag_title'
     ];
 
 
