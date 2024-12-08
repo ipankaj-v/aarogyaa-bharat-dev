@@ -84,7 +84,7 @@ class RaiseQueryController extends Controller
             'description' => $validated['description'],
         ]);
 
-        return redirect()->back()->with('success', 'Your query has been submitted successfully.');
+        return redirect()->back()->with('submitted', 'Your query has been submitted successfully.');
     }
 
 }

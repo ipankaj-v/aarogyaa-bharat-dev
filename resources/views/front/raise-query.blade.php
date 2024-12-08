@@ -14,6 +14,13 @@
             <h4>Raised Your Query</h4>
             <p>Enter your email or mobile to fill your need</p>
         </div>
+          <!-- Show submitted message -->
+          @if(session('submitted'))
+            <div class="alert alert-success">
+                {{ session('submitted') }}
+            </div>
+        @endif
+
         <form class="raiseForm" id="raise_form" action="{{ route('query.submit') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div style="margin-left: -12px;margin-right: -12px;">

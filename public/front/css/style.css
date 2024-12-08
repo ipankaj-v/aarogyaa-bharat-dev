@@ -1307,6 +1307,28 @@ text-align: center;}
   display: block;
 }
 
+.alert {
+  background-color: transparent; 
+  color: #155724; 
+  padding: 15px; 
+  margin: 20px 0; 
+  border: 1px solid transparent; 
+  border-radius: 5px; 
+  text-align: center; 
+  font-size: 18px; 
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+}
+
+.alert-success {
+  background-color: transparent; 
+  border-color: transparent; 
+  color: #155724; 
+}
+
+.alert p {
+  margin: 0; /* Remove default margin around text */
+}
+
 
 
 
