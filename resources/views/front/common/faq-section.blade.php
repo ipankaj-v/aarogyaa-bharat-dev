@@ -7,6 +7,7 @@
         <img src="{{ asset('front/images/Filter.svg') }}" alt="" />
     </div>
     <ul>
+        @if(isset($faqFilters))
         @foreach($faqFilters as $filter)
             <li>
                 <a href="javascript:void(0);" onClick="changeTab('{{ $filter['id'] }}')">
@@ -15,6 +16,7 @@
                 </a>
             </li>
         @endforeach
+        @endif
     </ul>
 </div>
 
