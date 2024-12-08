@@ -106,7 +106,7 @@ class ProductController extends Controller
         ]);
     
         $product = Product::where('id',$id)->first();
-        // dd($product);
+        // dd($product ,$id, $request->all());
         $product->name = $request->name;
         $product->category_id = $request->category_id;
         $product->title = $request->title;
@@ -119,7 +119,7 @@ class ProductController extends Controller
         $product->is_popular = $request->has('is_popular');
         $product->is_new = $request->has('is_new');
         $product->about_item = $request->about_item;
-        
+        $product->save();
             if ($request->hasFile('image')) {
                 if ($product->images->isNotEmpty()) {
                     foreach ($product->images as $image) {
@@ -133,12 +133,11 @@ class ProductController extends Controller
                 $firstFile = $request->file('image')[0]; 
                 $firstImagePath = $firstFile->store('products', 'public'); 
                 $product->image = $firstImagePath;
-                $product->save();
-            $product->update(['image' => $firstImagePath]);
-            foreach ($request->file('image') as $key => $file) {
-                $imagePath = $file->store('products', 'public'); 
-                $product->images()->create(['path' => $imagePath]);
-            }
+                $product->update(['image' => $firstImagePath]);
+                foreach ($request->file('image') as $key => $file) {
+                    $imagePath = $file->store('products', 'public'); 
+                    $product->images()->create(['path' => $imagePath]);
+                }
         }
     
     
