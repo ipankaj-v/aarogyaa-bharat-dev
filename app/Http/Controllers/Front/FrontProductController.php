@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\Page;
+use Illuminate\Support\Facades\Config;
 
 class FrontProductController extends Controller
 {
@@ -22,11 +23,11 @@ class FrontProductController extends Controller
 
     public function productDetail($slug)
     {
-        // dd('AAA');
+        $faqFilters = Config::get('custom.faq_filter');
         $productDetails = Product::where('slug', $slug)->first();
         $products = Product::with('category', 'images')->take(12)->get();
         // dd($productDetails);
-        return view('front.product-details', compact('productDetails', 'products'));
+        return view('front.product-details', compact('productDetails', 'products', 'faqFilters'));
     }
 
     public function searchProducts(Request $request)
