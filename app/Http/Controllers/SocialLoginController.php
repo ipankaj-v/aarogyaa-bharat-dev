@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Socialite;
 use Auth;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Hash;
 class SocialLoginController extends Controller
 {
