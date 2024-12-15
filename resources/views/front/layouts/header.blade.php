@@ -13,7 +13,15 @@
     @endif
     <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 
-    <title>Arogya bharat</title>
+    <title>Arogya bharat
+    @if(isset($seoMetaTagTitle))
+       {{$seoMetaTagTitle}}
+    @endif
+    @if(isset($seoMetaTag))
+      {{$seoMetaTag}}
+    @endif
+
+    </title>
 
     <link rel="stylesheet" href="{{ asset('front/css/slick.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('front/css/slick-theme.css') }}" type="text/css" media="screen" />

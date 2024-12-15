@@ -19,7 +19,8 @@ class SocialLoginController extends Controller
     {   
         try {
         $googleUser = Socialite::driver('google')->user();
-        $user = User::where('google_id', $googleUser->id)->first();
+        $user = User::where('google_id', $googleUser->id)->orWhere('email', $googleUser->email)->first();
+       
         if (!$user) {
             $user = User::create([
                 'name' => $googleUser->name,
@@ -46,7 +47,7 @@ class SocialLoginController extends Controller
     {
         $facebookUser = Socialite::driver('facebook')->user();
 
-        $user = User::where('facebook_id', $facebookUser->id)->first();
+        $user = User::where('facebook_id', $facebookUser->id)->orWhere('email', $googleUser->email)->first();
 
         if (!$user) {
             // Create a new user if not exists

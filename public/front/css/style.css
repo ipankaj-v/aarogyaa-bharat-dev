@@ -154,7 +154,7 @@ header{float: left;width: 100%;box-shadow: 0 2px 5px rgb(0 0 0 / 5%);z-index: 9;
 .customerSlider .slick-track{margin-left: -15px;margin-right: -15px;}
 .customerSlider_padd{float: left;width: 36%;padding: 0 18px;}
 .customerSlider_block{float: left;width: 100%; box-shadow: 0 1px 6px rgb(35 63 140 / 15%);padding: 36px 24px;border-radius: 12px;background: #fff url('../images/qtback.png') no-repeat right 24px bottom;margin: 16px 0 10px;}
-.customerSlider_block p{float: left;width: 100%;font-size: 16px;margin-bottom: 24px;color: #504D4D;}
+.customerSlider_block p{float: left;width: 100%;font-size: 16px;margin-bottom: 24px;color: #504D4D; height: 200px;}
 .customerSlider_block strong{float: left;width: 100%;font-size: 16px;margin-bottom: 6px;color: #000;font-family: 'Nunito-Bold';margin-top: 7px;}
 .customerSlider_block ul{float: left;list-style-type: none;border-right: 1px solid #B6B3B3;padding-right: 4px;margin-bottom: 7px;}
 .customerSlider_block ul li{float: left;margin-right: 4px;}
@@ -318,7 +318,7 @@ text-align: left;float: left;padding-left: 6px;}
 .bottomBar ul li{width: 25%;float: left;padding: 0 20px;}
 .bottomBar ul li a{width: 100%;float: left;padding: 12px 0;color: #fff;font-family: 'Nunito-Med';font-size: 14px;text-align: center;display: flex;flex-direction: column;align-items: center;}
 .bottomBar ul li a img{margin-bottom: 4px;height: 25px;}
-.breadcrumbs{float: left;width: 100%;margin-top: 127px;margin-bottom: 24px;}
+.breadcrumbs{float: left;width: 100%;margin-top: 100px;margin-bottom: 24px;}
 .breadcrumbs ul{float: left;width: 100%;list-style-type: none;}
 .breadcrumbs ul li{float: left;margin-right: 5px;}
 .breadcrumbs ul li::after{content: "/";}
@@ -850,7 +850,7 @@ text-align: center;}
 .blog_tag_name .articalauthor img{margin: 0px 5px 0 0px;float: left;}
 .blog_text_data .for_renting{padding-top: 24px;}
 .blog_text_data .blog_image_box{background-size: 124% 30%;}
-.blog_text_data .blog_image_height{height: 492px;}
+.blog_text_data .blog_image_height{height: 290px;}
 
 
 .banneranimationbox{width:100%; float:left;margin: 127px 0 -115px 0;}
@@ -1306,6 +1306,8 @@ text-align: center;}
   display: block;
 }
 
+
+.slick-track{display: inline-flex;}
 
 
 

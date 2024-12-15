@@ -1274,14 +1274,17 @@ $(document).ready(function(){
     $('.areyousureBlock > a').click(function(){
         $('.areyousurePop').hide();
     });
-    $('div.profileAccorClick').click(function(){
+    $('div.profileAccorClick').click(function(e){
+        e.stopImmediatePropagation();
+
         $(this).toggleClass('active');
         $(this).parent().siblings().children('div.profileAccorClick').removeClass('active');
         $(this).parent().siblings().children('.profileAccorAns').slideUp(200);
         $(this).siblings().slideToggle(200);
     });
     
-    $('.acco_click a').click(function(){
+    $('.acco_click a').click(function(e){
+        e.stopImmediatePropagation();
         $(this).parent().siblings('.acco_text').slideToggle(200);
         $(this).toggleClass('inActive')
     });
