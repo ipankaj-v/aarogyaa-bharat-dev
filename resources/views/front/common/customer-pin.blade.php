@@ -6,7 +6,7 @@
             <p id="district">{{ $userPincode->district }}</p>
             <i id="state">{{ $userPincode->state }}</i>
         @else
-            @if(Auth::check() && Auth::user()->hasRole('Customer'))
+            @if(auth()->user() && auth()->user()->roles[0]->name == 'Customer')
                 @if(Auth::user()->pincode)
                     <p id="district">{{ Auth::user()->pincode->district }}</p>
                     <i id="state">{{ Auth::user()->pincode->state }}</i>
