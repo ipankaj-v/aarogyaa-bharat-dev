@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Admin\OfferAndDiscount;
+use App\Models\Admin\ProductAttribute;
 use App\Models\Front\Adress;
 
 class CartController extends Controller
@@ -40,7 +41,10 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $productId)
     {
-        $product = Product::findOrFail($productId);
+        $product = Product::with('productAttributes')->where('id', $productId)->first();
+        if($product->productAttributes->stock < 1){
+            return redirect()->back()->with('error', 'Product is out of stock!');
+        }
         $session_id = Cache::get('session_id');
 
         // If the session ID doesn't exist in the cache, create a new one and store it
@@ -101,7 +105,10 @@ class CartController extends Controller
         }
 
         $cart->save();
-
+        $ProductAttribute = ProductAttribute::where('product_id', $productId)->first();
+        $ProductNewStock = $ProductAttribute->stock - 1;
+        $ProductAttribute->stock = $ProductNewStock;
+        $ProductAttribute->save();
         // Notify customer (if logged in)
         $customer = Auth::user();
         if ($customer) {
@@ -130,12 +137,16 @@ class CartController extends Controller
 
     public function deleteItem(Request $request, $cartItemId)
         {
-            $cartItem = CartProduct::find($cartItemId);
+            $cartItem = CartProduct::with('cart')->where('id',$cartItemId)->first();
 
             if (!$cartItem) {
                 return response()->json(['success' => false, 'message' => 'Cart item not found']);
             }
-
+            $cart = $cartItem->cart;
+            $cartItemTotal = $cartItem->price * $cartItem->quantity;
+            $newSubTotal = $cart->sub_total - $cartItemTotal;
+            $cart->sub_total = $newSubTotal;
+            $cart->save();
             // Delete the cart item
             $cartItem->delete();
             $session_id = Cache::get('session_id', Session::getId());
@@ -146,9 +157,10 @@ class CartController extends Controller
                 
             $total = 0;
             $gst = 0;
+            $offer = 0;
 
             $cartItemsHtml = view('front.common.cart.items', compact('cartProducts', 'total', 'gst'))->render();
-            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst'))->render();
+            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst','offer'))->render();
 
              return response()->json(['success' => true, 'newQuantity' => $cartItem->quantity, 'cartItmes' => $cartItemsHtml, 'orderSummaryResponse' => $orderSummaryHtml, 'message' => 'Item deleted successfully']);
 
@@ -157,14 +169,33 @@ class CartController extends Controller
 
     public function updateCartItemVisibility(Request $request){
 
-        $cartItem = CartProduct::find($request->cartItemId);
+        $cartItem = CartProduct::with('cart')->where('id', $request->cartItemId)->first();
 
         if (!$cartItem) {
             return response()->json(['success' => false, 'message' => 'Cart item not found']);
         }
-
+        
         $cartItem->is_visible = $request->is_visible;
+        $cart = $cartItem->cart;
+        $cartItemTotal = $cartItem->price * $cartItem->quantity;
+        $ProductAttribute = ProductAttribute::where('product_id', $cartItem->product_id)->first();
+        if($request->is_visible) {
+            if ($ProductAttribute->stock < $cartItem->quantity) {
+                return response()->json(['success' => false, 'message' => 'You cant add these items to cart because product is out of stock!']);
+            }
+            $newSubTotal = $cart->sub_total + $cartItemTotal;
+            $ProductNewStock = $ProductAttribute->stock - $cartItem->quantity;
+        } else {
+            $newSubTotal = $cart->sub_total - $cartItemTotal;
+            $ProductNewStock = $ProductAttribute->stock + $cartItem->quantity;
+        }
+        $cart->sub_total = $newSubTotal;
+        $cart->save();
         $cartItem->save();
+        
+        $ProductAttribute->stock = $ProductNewStock;
+        $ProductAttribute->save();
+        
         $session_id = Cache::get('session_id', Session::getId());
             $cartProducts = Cart::with('cartProducts.product', 'offer')
                 ->Where('session_id', $session_id)
@@ -173,8 +204,9 @@ class CartController extends Controller
                 
             $total = 0;
             $gst = 0;
+            $offer = 0;
 
-            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst'))->render();
+            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst', 'offer'))->render();
 
              return response()->json(['success' => true, 'newQuantity' => $cartItem->quantity, 'orderSummaryResponse' => $orderSummaryHtml, 'message' => 'Visibility updated successfully']);
     }
@@ -185,22 +217,33 @@ class CartController extends Controller
             $request->validate([
                 'action' => 'required|in:plus,minus',
             ]);
-
             $cartItem = CartProduct::find($request->cartItemId);
+            $cart = Cart::find($request->cartId);
 
-            if (!$cartItem) {
+            if (!$cartItem || !$cart) {
                 return response()->json(['success' => false, 'message' => 'Cart item not found']);
             }
-
+            
+            $ProductAttribute = ProductAttribute::where('product_id', $cartItem->product_id)->first();
             // Update the quantity based on the action
             if ($request->action === 'plus') {
+                if ($ProductAttribute->stock == 0) {
+                    return response()->json(['success' => false, 'message' => 'Product is out of stocks!']);
+                }
                 $cartItem->quantity++;
+                $newSubTotal = $cart->sub_total + $cartItem->price;  
+                $cart->update(['sub_total' => $newSubTotal]);
+                $ProductNewStock = $ProductAttribute->stock - 1;
             } elseif ($request->action === 'minus') {
                 if ($cartItem->quantity > 1) { // Prevent quantity going below 1
                     $cartItem->quantity--;
+                    $newSubTotal = $cart->sub_total - $cartItem->price;  
+                    $cart->update(['sub_total' => $newSubTotal]);
+                    $ProductNewStock = $ProductAttribute->stock + 1;
                 }
             }
-
+            $ProductAttribute->stock = $ProductNewStock;
+            $ProductAttribute->save();
             $cartItem->save();
 
             $session_id = Cache::get('session_id', Session::getId());
@@ -211,8 +254,9 @@ class CartController extends Controller
                 
             $total = 0;
             $gst = 0;
+            $offer = 0;
 
-            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst'))->render();
+            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst', 'offer'))->render();
             // $orderSummaryHtml = '<h1> order summary</h1>';
             return response()->json(['success' => true, 'total' => $total,'newQuantity' => $cartItem->quantity, 'orderSummaryResponse' => $orderSummaryHtml,'message' => 'Quantity updated successfully']);
         }
@@ -228,46 +272,55 @@ class CartController extends Controller
 
             $cart = Cart::find($request->cartId);
             $coupon = OfferAndDiscount::where('code', $request->couponCode)->first();
-
+            
             if (!$cart || !$coupon) {
                 return response()->json(['success' => false, 'message' => 'Invalid cart or coupon']);
             }
-
+            
+            
             // Apply discount based on coupon type
             if ($coupon) {
                 if ($coupon->type === 'percentage') {
                     // Calculate the percentage amount
                     $couponAmount = ($cart->sub_total * $coupon->value) / 100; 
-                    $cart->sub_total -= $couponAmount; // Subtract the coupon amount from sub_total
-                    $cart->discount_offer_amount = $couponAmount; 
+                    // $cart->sub_total -= $couponAmount; 
+                    // $cart->discount_offer_amount = $couponAmount; 
                 } else {
                     // Direct discount amount
-                    $cart->sub_total -= $coupon->value; 
-                    $cart->discount_offer_amount = $coupon->value;
+                    $couponAmount -= $coupon->value; 
+                    // $cart->sub_total -= $coupon->value; 
+                    // $cart->discount_offer_amount = $coupon->value;
                 }
-
+                if ($cart->sub_total < $couponAmount) {
+                    return response()->json(['success' => false, 'message' => 'Coupon amount is greater than cart total.']);
+                }
+                $cart->sub_total -= $couponAmount; 
+                $cart->discount_offer_amount = $couponAmount; 
+                
                 // Ensure sub_total does not go below zero
                 $cart->sub_total = max($cart->sub_total, 0);
-
+                
                 // Save the discount offer ID
                 $cart->discount_offer_id = $coupon->id; 
             } else { 
-            return response()->json(['success' => false, 'message' => 'Coupon application failed']);
+                return response()->json(['success' => false, 'message' => 'Coupon application failed']);
             }
-        
+            
             $cart->save();
-
+            
             $session_id = Cache::get('session_id', Session::getId());
             $cartProducts = Cart::with('cartProducts.product', 'offer')
-                ->Where('session_id', $session_id)
-                ->orwhere('user_id', Auth::id())
-                ->get();
-                
+            ->Where('session_id', $session_id)
+            ->orwhere('user_id', Auth::id())
+            ->get();
+            
             $total = 0;
             $gst = 0;
-
-            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst'))->render();          
-            return response()->json(['success' => true, 'cart' => $cartProducts ,'code' => $request->couponCode, 'total' => $total, 'orderSummaryResponse' => $orderSummaryHtml, 'message' => 'Coupon applied successfully']);
+            $offer = 0;
+            
+            $couponHtml = view('front.common.offer-success', compact('couponAmount', 'coupon'))->render();          
+            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst', 'offer'))->render();          
+            return response()->json(['success' => true, 'cart' => $cartProducts ,'code' => $request->couponCode, 'total' => $total, 'orderSummaryResponse' => $orderSummaryHtml, 'couponHtml' => $couponHtml, 'message' => 'Coupon applied successfully']);
         }
 
     public function applyCouponCode(Request $request)
@@ -332,8 +385,9 @@ class CartController extends Controller
             
         $total = 0;
         $gst = 0;
+        $offer = 0;
 
-            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst'))->render();              
+            $orderSummaryHtml = view('front.common.cart.order-summary', compact('cartProducts', 'total', 'gst', 'offer'))->render();              
         return response()->json(['success' => true, 'code' => $request->couponCode, 'total' => $total, 'orderSummaryResponse' => $orderSummaryHtml, 'message' => 'Coupon removed successfully']);
     }
     

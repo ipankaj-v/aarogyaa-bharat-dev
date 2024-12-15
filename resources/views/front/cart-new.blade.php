@@ -1,16 +1,6 @@
 @extends('front.layouts.layout')
 @section('content')
 
-<!-- <div class="searchPop winScrollStop">
-    <div class="searchPopBlock">
-        <strong>Recent Search</strong>
-        <p>Our highest rented or buying products.</p>
-        <ul id="searchResultList">
-            @include('front.common.search-product-result')
-        </ul>
-    </div>
-</div> -->
-
 @include('front.common.welcome-message')
 <div class="breadcrumbs">
     <div class="container">
@@ -291,7 +281,9 @@
         </div>
     </div>
     <div class="offer-apply-success" style="display:none;">
-        @include('front.common.offer-success')
+        <div id="offer-html">
+            @include('front.common.offer-success')
+        </div>
     </div>
     <div class="offerPop winScrollStop" id="offerModal" style="display:none;">
         <div class="offerPopMiddle">
@@ -595,6 +587,7 @@
                             $('#apply-' + couponCode).hide();
                             $('#removeDiscount-' + couponCode).show();
                             $('.offer-apply-success').show();
+                            $('#offer-html').html(response.couponHtml);
                             $('.flatDicountPop').css('display', 'flex');
                         } else {
                             alert(response.message);

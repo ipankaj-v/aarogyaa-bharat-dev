@@ -9,7 +9,6 @@
                             @php
                             $total += $cartItem->product->price * $cartItem->quantity;
                             $gst += ($cartItem->product->price * $cartItem->quantity * $cartItem->product->gst / 100);
-                            $total -= $gst;
                             @endphp
                         </li>
                         @endif
@@ -20,7 +19,7 @@
                         </li>
                         <li class="discount_1">
                              @php
-                                $total -= ($cartProducts[0]->discount_offer_amount ? $cartProducts[0]->discount_offer_amount : 0);
+                                $offer = ($cartProducts[0]->discount_offer_amount ? $cartProducts[0]->discount_offer_amount : 0);
                             @endphp
                             <p>Offer Discount</p>
                             <strong>- ₹ {{$cartProducts[0]->discount_offer_amount }}</strong>
@@ -31,7 +30,7 @@
                         </li>
                         <li class="payable">
                             <p>Total Payable</p>
-                            <strong> <span id="total-display">₹ {{$total}}</span></strong>
+                            <strong> <span id="total-display">₹ {{$total - $offer + $gst }}</span></strong>
                             <input type="hidden" id="total-hidden" value="{{$total}}">
                         </li>
                     </ul>
