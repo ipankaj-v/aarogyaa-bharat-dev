@@ -155,10 +155,11 @@ class CustomerController extends Controller
         $validator = \Validator::make($request->all(), [
             'house_number' => 'required|string|max:255',
             'society_name' => 'required|string|max:255',
-            'locality' => 'required|string|max:255',
+            // 'locality' => 'required|string|max:255',
             'landmark' => 'required|string|max:255',
             'pincode' => 'required|string|max:6',
             'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -172,11 +173,12 @@ class CustomerController extends Controller
             'customer_id' => $customer->id,
             'house_number' => $request->house_number,
             'society_name' => $request->society_name,
-            'locality' => $request->locality,
+            // 'locality' => $request->locality,
             'landmark' => $request->landmark,
             'pincode' => $request->pincode,
             'city' => $request->city,
-            'is_delivery_address' => $deliveryAddressExists ? true : false,
+            'state' => $request->state,
+            'is_delivery_address' => $deliveryAddressExists ? false : true,
         ]);
 
         return response()->json(['success' => true, 'user' => $customer, 'message' => 'Address saved successfully.']);

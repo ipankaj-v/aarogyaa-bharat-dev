@@ -33,6 +33,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function productAttributes()
+    {
+        return $this->hasOne(ProductAttribute::class);
+    }
+
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');

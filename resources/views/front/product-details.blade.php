@@ -14,6 +14,11 @@
 
 <section class="product_details">
     <div class="container">
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="product_details_box">
             <div class="product_details_slide slide_product">
             @if($productDetails->images->isNotEmpty())

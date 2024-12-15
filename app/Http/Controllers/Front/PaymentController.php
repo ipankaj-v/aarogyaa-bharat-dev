@@ -25,7 +25,8 @@ class PaymentController extends Controller
     }
 
     public function store(Request $request) {
-        DB::beginTransaction(); 
+        DB::beginTransaction();
+
         if (Auth::check() && Auth::user()->hasRole('Customer')) {
         try {
             $deliveryAddressExists = Adress::where('customer_id', Auth::id())
@@ -43,9 +44,10 @@ class PaymentController extends Controller
             }      
             $total = 0;
             $orderItemsData = []; // Array to hold order items data
-    
+            $cartProductsCount = 0;
             foreach ($cart->cartProducts as $product) {
                 if ($product->is_visible) {
+                    $cartProductsCount++;
                     $total += $product->price * $product->quantity;    
                     $orderItemsData[] = [
                         'product_id' => $product->product_id,
@@ -56,6 +58,10 @@ class PaymentController extends Controller
                     ];
                 }
             }
+
+            if ($cartProductsCount == 0) {
+                return response()->json(['error' => 'At least one item should be in cart.'], 404);
+            }      
         
             if (!empty($cart->discount_offer_amount)) {
                 $total -= $cart->discount_offer_amount;
