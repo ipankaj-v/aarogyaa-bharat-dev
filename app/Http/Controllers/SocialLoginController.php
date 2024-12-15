@@ -28,6 +28,10 @@ class SocialLoginController extends Controller
                 'google_id' => $googleUser->id,
                 'password' => Hash::make('12345678'),
             ]);
+            $customerRole = Role::findByName('Customer');
+            if ($customerRole) {
+                $user->assignRole('Customer');
+            }
         }
 
         Auth::login($user, true);
@@ -57,6 +61,10 @@ class SocialLoginController extends Controller
                 'facebook_id' => $facebookUser->id,
                 'password' => Hash::make('12345678'),
             ]);
+            $customerRole = Role::findByName('Customer');
+            if ($customerRole) {
+                $user->assignRole('Customer');
+            }
         }
 
         Auth::login($user, true);
