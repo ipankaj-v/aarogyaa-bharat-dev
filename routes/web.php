@@ -311,50 +311,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-// Route::prefix('admin')->group(function() {
-//     Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
-//     Route::post('/login', [AdminController::class, 'loginAction'])->name('admin.login.submit');
-//     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('/');
-//     //category
-//     Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories');
-//     Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-//     Route::post('/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
-//     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('admin.categories.edit');
-//     Route::post('/categories/update/{id}', [CategoryController::class, 'update'])->name('admin.categories.update');
-//     Route::get('/categories/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
-//     //product
-//     Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
-//     Route::get('/products/create', [ProductController::class, 'create'])->name('admin.products.create');
-//     Route::post('/products/store', [ProductController::class, 'store'])->name('admin.products.store');
-//     Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
-//     Route::post('/products/update/{id}', [ProductController::class, 'update'])->name('admin.products.update');
-//     Route::get('/products/{id}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
-//     //customers
-//     Route::get('/customers', [CustomerController::class, 'index'])->name('admin.customers');
-//     Route::get('/customers/create', [CustomerController::class, 'create'])->name('admin.customers.create');
-//     Route::post('/customers/store', [CustomerController::class, 'store'])->name('admin.customers.store');
-//     Route::get('/customers/edit/{id}', [CustomerController::class, 'edit'])->name('admin.customers.edit');
-//     Route::post('/customers/update/{id}', [CustomerController::class, 'update'])->name('admin.customers.update');
-//     Route::get('/customers/{id}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
-//     //users
-//     Route::get('/users', [UserController::class, 'index'])->name('admin.users');
-//     Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
-//     Route::post('/users/store', [UserController::class, 'store'])->name('admin.users.store');
-//     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
-//     Route::post('/users/update/{id}', [UserController::class, 'update'])->name('admin.users.update');
-//     Route::get('/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
-    
-    
-//     Route::get('/blogs', [BlogController::class, 'index'])->name('admin.blogs');
-//     Route::get('/contactus', [ContactUsController::class, 'index'])->name('admin.contactus');
-//     Route::get('/aboutus', [AboutUsController::class, 'index'])->name('admin.aboutus');
-//     Route::get('/faq', [FAQController::class, 'index'])->name('admin.faq');
-//     Route::get('/customers', [CustomerController::class, 'index'])->name('admin.customers');
-//     Route::get('/status', [StatusController::class, 'index'])->name('admin.status');
-//     Route::get('/status/create', [StatusController::class, 'create'])->name('admin.status.create');
-// });
-
-
 
 
 

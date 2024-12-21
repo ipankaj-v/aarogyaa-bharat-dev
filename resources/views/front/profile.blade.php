@@ -63,14 +63,15 @@
             <div class="profilePaddL">
                 <div class="profileBlock">
                     <div class="profileTag_name">
-                        @php
-                            $nameParts = explode(' ', $customerDetail->name);
-                            $capitalizedParts = array_map(function($part) {
-                                return ucfirst(strtolower($part));
-                            }, $nameParts);
-                            $formattedName = implode(' ', $capitalizedParts);
-                        @endphp
-                        <div class="profileTag">NM</div>
+                    @php
+                        $nameParts = explode(' ', $customerDetail->name);
+                        $initials = array_map(function($part) {
+                            return strtoupper($part[0]); 
+                        }, $nameParts);
+                        $formattedName = implode('', $initials);
+                    @endphp
+
+                        <div class="profileTag">{{ $formattedName }}</div>
                         <div id="profileDetails">
                             @include('front.common.profile-detail')
                         </div>

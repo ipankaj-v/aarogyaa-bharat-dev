@@ -181,15 +181,17 @@
 
 <section class="raise_query">
     <div class="container">
+    <a href="{{ route('raise.query')}}">
         <div class="raise_query_box">
             <div class="rise_text_box">
-                <a href="{{ route('raise.query')}}"> <img src="{{ asset('front/images/raise.png')}}" alt="" /></a>
+                 <img src="{{ asset('front/images/raise.png')}}" alt="" />
                 <div class="rise_text_line">
                     <h4>Raise Query</h4>
                     <p>You can request anything by single click.</p>
                 </div>
             </div>
         </div>
+    </a>   
     </div>
 </section>
 
