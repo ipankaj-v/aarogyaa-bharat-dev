@@ -8,7 +8,6 @@
                 <div class="acco_text">
                     <div class="footer_links">
                         <div class="links_text">
-                            <h2>Aarogya Bharat</h2>
                             <ul>
                                 <li><a href="{{route('customer.about.us')}}">About</a></li>
                                 <li><a href="{{route('blogs')}}">Privacy Policy</a></li>
@@ -16,10 +15,9 @@
                             </ul>
                         </div>
                         <div class="links_text">
-                            <h2>Information</h2>
                             <ul>
                                 <li><a href="{{route('blogs')}}">Blogs</a></li>
-                                <li><a href="{{route('faqs')}}">Frequently asked questions</a></li>
+                                <li><a href="{{route('faqs')}}">Frequently Asked Questions</a></li>
                                 <li><a href="{{route('front.contact')}}">Contact us</a></li>
                             </ul>
                         </div>
@@ -138,7 +136,7 @@
             <img src="{{ asset('front/images/pin.svg') }}" alt="" />
             <a href="#;">Select Current Location</a>
         </div>
-        <button>Get Location</button>
+        <button id="getLocationBtn">Get Location</button>
     </div>
 </div>
 
@@ -350,10 +348,10 @@
         });
 
         $("#loginMo .submitBTN").click(function(e) {
-    e.preventDefault();
-    var csrfToken = $('meta[name="csrf-token"]').attr('content');
-    var formData = $('#loginMo').serialize();
-    formData += '&_token=' + "{{ csrf_token() }}";
+            e.preventDefault();
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var formData = $('#loginMo').serialize();
+            formData += '&_token=' + "{{ csrf_token() }}";
 
     $.ajax({
         url: "{{ route('customer.login') }}",
@@ -393,29 +391,75 @@
             return;
         }
 
-        $.ajax({
-            url: "{{route('checkpin')}}", // Change this to your actual endpoint
-            method: 'GET', // Use POST or GET as needed
-            data: {
-                pin: pinCode,
-            },
-            success: function(response) {
-                if (response.available) {
-                    $('#fail').text('');
-                    $('#success').text('Delivery is available at this pincode.');
-                    $('#pincodeContainer').html(response.userPincodeHtml);
-                } else {
-                    $('#success').text('');
-                    $('#fail').text('Undelivereable at this pincode.');
+            $.ajax({
+                url: "{{route('checkpin')}}", // Change this to your actual endpoint
+                method: 'GET', // Use POST or GET as needed
+                data: {
+                    pin: pinCode,
+                },
+                success: function(response) {
+                    if (response.available) {
+                        $('#fail').text('');
+                        $('#success').text('Delivery is available at this pincode.');
+                        $('#pincodeContainer').html(response.userPincodeHtml);
+                    } else {
+                        $('#success').text('');
+                        $('#fail').text('Undelivereable at this pincode.');
+                    }
+                },
+                error: function() {
+                    $('#result').text('An error occurred while checking the pin code.');
                 }
-            },
-            error: function() {
-                $('#result').text('An error occurred while checking the pin code.');
-            }
+            });
         });
     });
+
+    //get adress from current location start
+    $('#getLocationBtn').click(function() {
+            if (navigator.geolocation) {
+                // Use geolocation to get the current position
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Get the latitude and longitude
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+
+                    var geocodeUrl = 'https://nominatim.openstreetmap.org/reverse?lat=' + latitude + '&lon=' + longitude + '&format=json';
+
+                        $.get(geocodeUrl, function(data) {
+                            if (data) {
+                                var address = data.address;
+                                $.ajax({
+                                url: "{{route('save.location')}}",
+                                method: 'GET',
+                                data: {
+                                    address: address,
+                                },
+                                success: function(response) {
+                                    console.log('response', response);
+                                    if(response.success) {
+                                        toastr.success(response.message);
+                                    } else {
+                                        toastr.error(response.message);
+                                    }
+                                    $('.locationPop').hide();
+                                },
+                                error: function(xhr, status, error) {
+                                    toastr.error(error);
+                                }
+                            });
+                            } 
+                        }).fail(function() {
+                            toastr.error('Address could not be retrieved');
+                        });
+                }, function(error) {
+                    toastr.error(error.message);
+                });
+            } else {
+                toastr.error('Geolocation is not supported by this browser.');
+            }
     });
 
+    //get adress from current location end
 
         // otp timer
         var interval;

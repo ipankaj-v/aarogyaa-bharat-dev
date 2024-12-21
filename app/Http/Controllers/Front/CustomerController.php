@@ -261,40 +261,73 @@ class CustomerController extends Controller
         return response()->json(['html' => $addressListHtml, 'message' => 'Address added successfully']);
     }
 
-public function customerLogout(Request $request){
-    if (Auth::check() && Auth::user()->hasRole('Customer')) {
-        Auth::logout();
+    public function customerLogout(Request $request){
+        if (Auth::check() && Auth::user()->hasRole('Customer')) {
+            Auth::logout();
+        }
+        return redirect()->back()->with('message', 'You have been logged out successfully.');
     }
-    return redirect()->back()->with('message', 'You have been logged out successfully.');
-}
-public function Notification(Request $request) {
+    public function Notification(Request $request) {
 
-    if (auth()->check() && auth()->user()->hasRole('Customer')) {
-        $notifications = auth()->user()->notifications; 
-        $notificationHtml = view('front.common.notification', compact('notifications'))->render();
-        return response()->json(['message' => 'User notifications', 'notificationHtml' => $notificationHtml], 200);
+        if (auth()->check() && auth()->user()->hasRole('Customer')) {
+            $notifications = auth()->user()->notifications; 
+            $notificationHtml = view('front.common.notification', compact('notifications'))->render();
+            return response()->json(['message' => 'User notifications', 'notificationHtml' => $notificationHtml], 200);
+        }
+
+        return response()->json(['message' => 'User not authenticated or not a customer'], 401);
     }
 
-    return response()->json(['message' => 'User not authenticated or not a customer'], 401);
-}
+    public function OrderStatusWise($statusId)
+    {
+            $customerDetail = User::with([
+                'orders' => function($query) use ($statusId) {
+                    $query->where('status_id', $statusId);
+                },
+                'orders.status',
+                'orders.orderItems.product.images',
+                'addresses'
+            ])
+            ->where('id', Auth::user()->id)
+            ->first();
+            // \Log::info([$statusId => $customerDetail]);    
+            $customerDetailHtml = view('front.common.customer-orders', compact('customerDetail'))->render();
+            return response()->json(['success' => true,  'customerDetailHtml' => $customerDetailHtml, 'message' => 'Fetch order status wise.']);
 
-public function OrderStatusWise($statusId)
-{
-        $customerDetail = User::with([
-            'orders' => function($query) use ($statusId) {
-                $query->where('status_id', $statusId);
-            },
-            'orders.status',
-            'orders.orderItems.product.images',
-            'addresses'
-        ])
-        ->where('id', Auth::user()->id)
-        ->first();
-        // \Log::info([$statusId => $customerDetail]);    
-        $customerDetailHtml = view('front.common.customer-orders', compact('customerDetail'))->render();
-        return response()->json(['success' => true,  'customerDetailHtml' => $customerDetailHtml, 'message' => 'Fetch order status wise.']);
+    }
 
-}
+    public function saveLocation(Request $request)
+    {
+        // Check if the user is authenticated
+        if (!auth()->check()) {
+            return response()->json(['success' => false, 'status' => 401, 'message' => 'Please login and try again.']);
+        }
 
+        // Get the authenticated user
+        $customer = auth()->user();
+
+        // Check if the authenticated user has the 'Customer' role
+        if (!$customer->hasRole('Customer')) {
+            return response()->json(['success' => false, 'status' => 403, 'message' => 'Access denied. You do not have the required permissions.']);
+        }
+
+        $deliveryAddressExists = Adress::where('customer_id', $customer->id)
+                                ->where('is_delivery_address', true)
+                                ->exists(); 
+        // Create the address
+        Adress::create([
+            'customer_id' => $customer->id,
+            'house_number' => $request->address['neighbourhood'],
+            'society_name' => $request->address['neighbourhood'],
+            'locality' => $request->address['neighbourhood'],
+            'landmark' => $request->landmark,
+            'pincode' => $request->address['postcode'],
+            'city' => $request->address['city'],
+            'state' => $request->address['state'],
+            'is_delivery_address' => $deliveryAddressExists ? false : true,
+        ]);
+
+        return response()->json(['success' => true, 'user' => $customer, 'message' => 'Address saved successfully.']);
+    }
 
 }
