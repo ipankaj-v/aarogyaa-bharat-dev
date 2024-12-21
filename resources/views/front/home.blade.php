@@ -181,22 +181,24 @@
 
 <section class="raise_query">
     <div class="container">
+    <a href="{{ route('raise.query')}}">
         <div class="raise_query_box">
             <div class="rise_text_box">
-                <a href="{{ route('raise.query')}}"> <img src="{{ asset('front/images/raise.png')}}" alt="" /></a>
+                 <img src="{{ asset('front/images/raise.png')}}" alt="" />
                 <div class="rise_text_line">
                     <h4>Raise Query</h4>
                     <p>You can request anything by single click.</p>
                 </div>
             </div>
         </div>
+    </a>   
     </div>
 </section>
 
 <section class="why_arogya_bharat">
     <div class="container">
        <div class="titlePart">
-            <h4>Why Aarogya Bharat ..?</h4>
+            <h4>Why Aarogyaa Bharat ?</h4>
             <p>We prioritize our clients, understanding their unique needs and preferences.</p>
         </div>
         <div class="why_arogya_bharat_all_box">

@@ -48,6 +48,7 @@ class PageController extends Controller
             'seo_meta_tag_title' => $request->seo_meta_tag_title,
             'seo_meta_tag' => $request->seo_meta_tag,
             'status' => $request->status,
+            'title_tag' => $request->title_tag
         ]);
 
         return redirect()->route('admin.pages')->with('success', 'Page created successfully.');
@@ -72,6 +73,7 @@ class PageController extends Controller
             'seo_meta_tag_title' => $request->seo_meta_tag_title,
             'seo_meta_tag' => $request->seo_meta_tag,
             'status' => $request->status ?? true,
+            'title_tag' => $request->title_tag,
         ]);
 
         return redirect()->route('admin.pages')->with('success', 'Page updated successfully.');

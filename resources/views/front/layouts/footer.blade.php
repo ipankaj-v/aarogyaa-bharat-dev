@@ -78,7 +78,7 @@
     </div>
 </footer>
 <div class="copyrights">
-    <p>Designed by <a href="https://webxds.com" target="_blank" class="designer-link">WebXDS</a></p>
+    <p>Copyrights © 2020 Aarogyaa Bharat | <a href="https://webxds.com" target="_blank" class="designer-link">Designed by WebXDS</a></p>
 </div>
 
 
@@ -86,19 +86,19 @@
     <ul>
         <li>
             <a href="{{ route('home') }}">
-                <img src="{{asset('front/images/home_active.svg')}}" alt="" />
+            <img src="{{ Route::currentRouteName() == 'home' ? asset('front/images/home_active.svg') : asset('front/images/home-inactive.svg') }}" alt="Home" />
                 Home
             </a>
         </li>
         <li>
-            <a href="{{ route('products') }}">
-                <img src="{{asset('front/images/productbar.svg')}}" alt="" />
+        <a href="{{ route('products') }}">
+            <img src="{{ Request::is('products') ? asset('front/images/productbar-active.svg') : asset('front/images/productbar.svg') }}" alt="Product" />
                 Product
-            </a>
+        </a>
         </li>
         <li>
-            <a href="{{ route('products') }}">
-                <img src="{{asset('front/images/offerbar.svg')}}" alt="" />
+        <a href="{{ route('home') }}#offer_Part">   
+        <img src="{{ Route::currentRouteName() == 'home#offer_Part' ? asset('front/images/offerbar-active.svg') : asset('front/images/offerbar.svg') }}" alt="Offers" />
                 Offers
             </a>
         </li>
@@ -106,7 +106,7 @@
         @if(Auth::check() && Auth::user()->hasRole('Customer'))
                 
                 <a href="{{route('customers.profile')}}">
-                <img src="{{asset('front/images/profilebar.svg')}}" alt="" />   
+                <img src="{{ Request::is('profile') ? asset('front/images/profilebar-active.svg') : asset('front/images/profilebar.svg') }}" alt="Profile" />
                 Profile</a>
                 @endif
             <!-- <a href="profile.html">

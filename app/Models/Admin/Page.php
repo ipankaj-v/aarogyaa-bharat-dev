@@ -14,7 +14,8 @@ class Page extends Model
         'slug', 
         'seo_meta_tag_title', 
         'seo_meta_tag', 
-        'status'
+        'status',
+        'title_tag',
     ];
 
     public function cms()
