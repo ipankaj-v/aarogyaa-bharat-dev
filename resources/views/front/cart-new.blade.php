@@ -323,14 +323,14 @@
                     landmark: $("#addressForm input[name='landmark']").val(),
                     pincode: $("#addressForm input[name='pincode']").val(),
                     city: $("#addressForm input[name='city']").val(),
+                    state: $("#addressForm input[name='state']").val(),
                 };
 
-                // Clear previous error messages
                 $(".errormsg").hide();
 
                 // AJAX call
                 $.ajax({
-                    url: '/customer/save-address', // Your endpoint to handle the request
+                    url: '/customer/save-address', 
                     type: 'GET',
                     data: formData,
                     success: function(response) {
