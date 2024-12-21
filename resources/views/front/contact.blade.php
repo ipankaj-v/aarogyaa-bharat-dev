@@ -2,7 +2,11 @@
 @section('content')
 <div class="banneranimationbox" >
                 <div class="container">
-                  <img src="{{asset('front/images/banner.jpg') }}" alt="">
+                @if (isset($contactPageData) && isset($contactPageData->cms) && $contactPageData->cms->images && $contactPageData->cms->images->isNotEmpty())
+                  <img src="{{ asset('storage/' .$contactPageData->cms->images->first()->path) }}" alt="" style="height: 300px; margin-bottom: 15px;">
+                @else
+                        <img src="{{ asset('front/images/banner.jpg') }}" alt="" style="height: 300px; margin-bottom: 15px;">
+                @endif
 				</div>
             </div>
 <div class="breadcrumbs">
@@ -19,8 +23,8 @@
         <div class="contact_us_now">
             <h2>Contact us</h2>
             <ul>
-                <li><a href="#;"><img src="{{asset('front/images/phone_call.svg') }}" alt="" /><p>+91 00000 00000</p><span>Call Now</span></a></li>
-                <li><a href="#;"><img src="{{asset('front/images/mail.svg') }}" alt="" /><p>help@aarogyabharat.com</p></a></li>
+                <li><a href="tel:{{ env('HELP_LINE_NO') }}"><img src="{{asset('front/images/phone_call.svg') }}" alt="" /><p>{{ env('HELP_LINE_NO')}} </p><span>Call Now</span></a></li>
+                <li><a href="mailto:{{ env('HELP_LINE_EMAIL') }}"><img src="{{asset('front/images/mail.svg') }}" alt="" /><p>{{ env('HELP_LINE_EMAIL') }}</p></a></li>
             </ul>
         </div>
     </div>

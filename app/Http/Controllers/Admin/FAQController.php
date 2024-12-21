@@ -8,6 +8,8 @@ use App\Models\Admin\FAQ;
 use App\Models\Admin\FAQAnswer;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Config;
+use App\Models\Admin\Page;
+use App\Models\Admin\Cms;
 
 class FAQController extends Controller
 {
@@ -34,10 +36,14 @@ class FAQController extends Controller
         return view('admin.faq.index');
     }
 
-    public function fontIndex()
+    public function fontIndex(Request $request)
     {
+        $lastSegment = basename(parse_url($request->url(), PHP_URL_PATH));
+        $faqPageData = Page::where('slug', $lastSegment)->with('cms.images')->first();
+        $seoMetaTag = $faqPageData->seo_meta_tag;
+        $seoMetaTagTitle = $faqPageData->seo_meta_tag_title;
         $faqFilters = Config::get('custom.faq_filter');
-        return view('front.faqs', compact('faqFilters'));
+        return view('front.faqs', compact('faqFilters', 'seoMetaTag', 'seoMetaTagTitle', 'faqPageData' ));
     }
 
     public function create()

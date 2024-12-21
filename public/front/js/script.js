@@ -1125,7 +1125,8 @@ $(document).ready(function(){
     });
 
     
-    $('.faq_box a').click(function(){
+    $('.faq_box a').click(function(e){
+        e.stopImmediatePropagation(e);
         $(this).siblings('.faq_box_text').slideToggle(200);
         $(this).parent().siblings().find('.faq_box_text').slideUp(200);
         
