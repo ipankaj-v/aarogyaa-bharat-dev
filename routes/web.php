@@ -105,6 +105,7 @@ Route::controller(FrontCustomerController::class)->group(function () {
     Route::post('/customers/login', 'login')->name('customer.login');
     Route::get('/customer/save-address', 'saveAddress')->name('save.address');
     Route::get('/customer/verify-otp/{number}', 'verifyOtp')->name('verify.otp');
+    Route::get('/customer/location', 'saveLocation')->name('save.location');
 });
 
 Route::controller(FrontContactUsController::class)->group(function () {
