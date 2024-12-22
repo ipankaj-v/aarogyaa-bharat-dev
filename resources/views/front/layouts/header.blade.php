@@ -47,7 +47,12 @@
                 </ul>
                 @if(Auth::check() && Auth::user()->hasRole('Customer'))
                 <div class="loginBtn">
-                <a href="{{route('customers.profile')}}">Profile</a>
+                @php    
+                $fullName = Auth::user()->name;
+                $nameParts = explode(' ', $fullName);
+                $firstName = ucfirst(strtolower($nameParts[0]));
+                @endphp
+                <a href="{{route('customers.profile')}}">Hi {{ $firstName }}</a>
                 </div>
                 @else
                 <div class="loginBtn">
