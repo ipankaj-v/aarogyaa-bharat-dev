@@ -140,23 +140,6 @@
     </div>
 </div>
 
-
-
-<div class="paymentFailedPop winScrollStop">
-    <div class="paymentFailedInner">
-        <a href="#;"><img src="images/cross.svg" alt="" /> </a>
-        <div>
-            <strong>Payment Failed</strong>
-            <p>Don’t worry your money in safe!  If money was debited form your account . It will be refunded automatically in 4-5 working days.</p>
-            <a href="#;">Retry Payment</a>
-        </div>
-    </div>
-</div>
-
-
-
-
-
 <div class="LoginPop winScrollStop">
     <div class="LoginPopMiddle">
         <div class="LoginPopInner">
@@ -192,21 +175,6 @@
                         <button type="button" class="submitBTN">Login with OTP</button>
                     </div>
                 </form>
-                <!-- <form id="loginMo">
-                    <div class="inputMainBlock fullwidth">
-                        <span>Mobile number</span>
-                        <input type="tel" class="mobileVD" placeholder="9876543210"> 
-                        <div class="errormsg">Please enter Mobile number</div>
-                        <div class="addressNote2">
-                           <img src="{{ asset('front/images/info-circle.svg') }}" alt="">
-                           <p>Enter your 10 - digit mobile number</p>
-                        </div>
-
-                    </div> 
-                    <div class="checkboxPart fullwidth"> 
-                        <button class="submitBTN">Login with OTP</button>
-                    </div>
-                </form> -->
                 <p>Don’t have an account ? <a href="#;">Register Now</a> </p>
             </div>
             <div class="optForm">
@@ -280,32 +248,6 @@
                         <button type="button" class="submitBTN">Submit</button>
                     </div>
                 </form>
-
-                <!-- <form id="register_form">
-                    <div class="inputMainBlock fullwidth">
-                        <span>Full Name<i>*</i></span>
-                        <input type="tel" class="FullNameVD" placeholder="Full Name"> 
-                        <div class="errormsg">Please enter Full Name</div>
-                    </div> 
-                    <div class="inputMainBlock fullwidth">
-                        <span>E-mail ID<i>*</i></span>
-                        <input type="tel" class="emailVD" placeholder="E-mail ID"> 
-                        <div class="errormsg">Please enter E-mail ID</div>
-                    </div> 
-                    <div class="inputMainBlock fullwidth">
-                        <span>Mobile Number<i>*</i></span>
-                        <input type="tel" class="mobileVD" placeholder="Mobile Number"> 
-                        <div class="errormsg">Please enter Mobile Number</div>
-                    </div> 
-                    <div class="inputMainBlock fullwidth">
-                        <span>City - Area<i>*</i></span>
-                        <input type="tel" class="AnyValueVD" placeholder="City - Area"> 
-                        <div class="errormsg">Please enter City - Area</div>
-                    </div>
-                    <div class="checkboxPart fullwidth"> 
-                        <button class="submitBTN">Submit</button>
-                    </div>
-                </form> -->
                 <p>Have an account on Aarogya Bharat? <a href="#;">Login Now</a> </p>
             </div>
         </div>
@@ -315,6 +257,15 @@
 <script src="{{ asset('front/js/jquery.min.js') }}"></script>
 <script src="{{ asset('front/js/slick.js') }}"></script>
 <script src="{{ asset('front/js/script.js') }}"></script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D1GEF2BB22"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D1GEF2BB22');
+</script>
 <script>
     $.ajaxSetup({
         headers: {

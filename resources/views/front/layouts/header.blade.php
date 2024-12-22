@@ -4,23 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
-    <meta name="description" content="page description">
     @if(isset($seoMetaTagTitle))
     <meta name="title" content="{{$seoMetaTagTitle}}">
     @endif
     @if(isset($seoMetaTag))
     <meta name="description" content="{{$seoMetaTag}}">
     @endif
-    <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
-
-    <title>Arogya bharat
+    <title>
     @if(isset($seoMetaTagTitle))
        {{$seoMetaTagTitle}}
     @endif
     @if(isset($seoMetaTag))
       {{$seoMetaTag}}
     @endif
-
     </title>
 
     <link rel="stylesheet" href="{{ asset('front/css/slick.css') }}" type="text/css" media="screen" />
