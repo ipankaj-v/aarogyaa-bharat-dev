@@ -14,10 +14,16 @@
 
 <section class="product_details">
     <div class="container">
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+    @if (session('success'))
+            <script>
+                toastr.success('{{ session('success') }}');
+            </script>
+        @endif
+
+        @if (session('error'))
+            <script>
+                toastr.error('{{ session('error') }}');
+            </script>
         @endif
         <div class="product_details_box">
             <div class="product_details_slide slide_product">
@@ -122,206 +128,12 @@
     </div>
 </section>
 @include('front.common.recentview')
-<!-- <section class="productSlidePart">
-    <div class="container">
-        <div class="titlePart2"> 
-            <h4>Recent Viewed</h4> 
-        </div>
-        <div class="rowMob">
-            <div class="product_slider2 getprogressWidth arrowOnProgress"> 
-                <div class="product_slider2padd">
-                    <div class="product_slider2block">
-                        <div class="product_inner">
-                            <img src="images/wheelchair_1.png" alt="" />
-                        </div>
-                        <p>Wheelchair</p>
-                        <strong>₹ 1200 <span>/ Per week</span></strong>
-                    </div> 
-                </div>
-                <div class="product_slider2padd">
-                    <div class="product_slider2block">
-                        <div class="product_inner">
-                            <img src="images/wheelchair_1.png" alt="" />
-                        </div>
-                        <p>Wheelchair</p>
-                        <strong>₹ 1200 <span>/ Per week</span></strong>
-                    </div> 
-                </div>
-                <div class="product_slider2padd">
-                    <div class="product_slider2block">
-                        <div class="product_inner">
-                            <img src="images/wheelchair_1.png" alt="" />
-                        </div>
-                        <p>Wheelchair</p>
-                        <strong>₹ 1200 <span>/ Per week</span></strong>
-                    </div> 
-                </div>
-                <div class="product_slider2padd">
-                    <div class="product_slider2block">
-                        <div class="product_inner">
-                            <img src="images/wheelchair_1.png" alt="" />
-                        </div>
-                        <p>Wheelchair</p>
-                        <strong>₹ 1200 <span>/ Per week</span></strong>
-                    </div> 
-                </div>
-                <div class="product_slider2padd">
-                    <div class="product_slider2block">
-                        <div class="product_inner">
-                            <img src="images/wheelchair_1.png" alt="" />
-                        </div>
-                        <p>Wheelchair</p>
-                        <strong>₹ 1200 <span>/ Per week</span></strong>
-                    </div> 
-                </div>
-                <div class="product_slider2padd">
-                    <div class="product_slider2block">
-                        <div class="product_inner">
-                            <img src="images/wheelchair_1.png" alt="" />
-                        </div>
-                        <p>Wheelchair</p>
-                        <strong>₹ 1200 <span>/ Per week</span></strong>
-                    </div> 
-                </div>
-            </div>
-            <div class="progressBar"></div>
-        </div>
-    </div>
-</section> -->
 
 <section class="customer_part">
 @include('front.common.happy-customer') 
 </section>
 
-<!-- <section class="customer_part">
-    <div class="container">
-        <div class="titlePart">
-            <h4>Happy Customers..!</h4>
-            <a href="#;">View All <img src="{{asset('front/images/orange_arrow.svg')}}" alt=""> </a>
-        </div>
-        <div class="rowMob">
-            <div class="customerSlider getprogressWidth arrowOnProgress">
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-                <div class="customerSlider_padd">
-                    <div class="customerSlider_block">
-                        <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                        <strong>Piyush Gohil</strong>
-                        <ul>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                            <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                        </ul>
-                        <i>4.5</i>
-                    </div>
-                </div>
-            </div>
-            <div class="progressBar"></div>
-        </div>
-    </div>
-</section> -->
 
 
 @include('front.common.faq-section')
-<!-- <section class="faq_section">
-    <div class="container">
-       <div class="titlePart2">
-            <h4>Frequently asked questions</h4> 
-        </div>
-        <div class="faq_box">
-            <a href="#;"><p>Is questions text will goes here..?</p><img src="images/jam_plus.svg" alt="" /></a>
-            <div class="faq_box_text">
-                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens konvertering hemissade Fredrik Åkesson.</p>
-            </div>
-        </div>
-        <div class="faq_box">
-            <a href="#;"><p>Is questions text will goes here..?</p><img src="images/jam_plus.svg" alt="" /></a>
-            <div class="faq_box_text">
-                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens konvertering hemissade Fredrik Åkesson.</p>
-            </div>
-        </div>
-        <div class="faq_box">
-            <a href="#;"><p>Is questions text will goes here..?</p><img src="images/jam_plus.svg" alt="" /></a>
-            <div class="faq_box_text">
-                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens konvertering hemissade Fredrik Åkesson.</p>
-            </div>
-        </div>
-        <div class="faq_box">
-            <a href="#;"><p>Is questions text will goes here..?</p><img src="images/jam_plus.svg" alt="" /></a>
-            <div class="faq_box_text">
-                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens konvertering hemissade Fredrik Åkesson.</p>
-            </div>
-        </div>
-    </div>
-</section> -->
 @endsection('content')

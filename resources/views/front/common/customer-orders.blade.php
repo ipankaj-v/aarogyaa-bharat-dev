@@ -5,7 +5,7 @@
                 <div class="order_info_box">
                     <div class="order_product">
                         @if($orderItem->product && $orderItem->product->image)
-                            <img src="{{ asset($orderItem->product->image) }}" alt="Product Image">
+                            <img src="{{ asset('storage/'.$orderItem->product->image) }}" alt="Product Image">
                         @else
                             <img src="{{ asset('front/images/default_image.png') }}" alt="Default Image">
                         @endif

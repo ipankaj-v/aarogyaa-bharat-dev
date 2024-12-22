@@ -142,6 +142,19 @@
 
 
 
+<div class="paymentFailedPop winScrollStop">
+    <div class="paymentFailedInner">
+        <a href="#;"><img src="images/cross.svg" alt="" /> </a>
+        <div>
+            <strong>Payment Failed</strong>
+            <p>Don’t worry your money in safe!  If money was debited form your account . It will be refunded automatically in 4-5 working days.</p>
+            <a href="#;">Retry Payment</a>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 <div class="LoginPop winScrollStop">

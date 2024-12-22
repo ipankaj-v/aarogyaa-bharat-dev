@@ -12,9 +12,6 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        // $orders = Order::with(['customer', 'status']) 
-        //     ->select('id', 'customer_id', 'amount', 'status_id', 'created_at')->get();
-        // dd($orders);
             if ($request->ajax()) {
             $orders = Order::with(['customer', 'status']) 
                 ->select('id', 'customer_id', 'amount', 'status_id', 'created_at');
@@ -40,8 +37,8 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $order = Order::with(['customer', 'status'])->findOrFail($id);
-        $statuses = Status::all();         
+        $order = Order::with(['customer', 'status', 'orderAddress', 'orderItems.product'])->findOrFail($id);
+        $statuses = Status::all();  
         return view('admin.order.show', compact('order', 'statuses'));
     }
 

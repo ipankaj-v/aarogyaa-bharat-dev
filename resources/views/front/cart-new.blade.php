@@ -13,16 +13,16 @@
 
 <section class="cartSec">
     <div class="container">
-        @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+            @if (session('success'))
+            <script>
+                toastr.success('{{ session('success') }}');
+            </script>
         @endif
 
         @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+            <script>
+                toastr.error('{{ session('error') }}');
+            </script>
         @endif
 
         <div class="cartTitle">
@@ -304,11 +304,10 @@
         </div>
     </div>
 
-
     <script src="{{ asset('front/js/jquery.min.js') }}"></script>
     <script src="{{ asset('front/js/slick.js') }}"></script>
     <script src="{{ asset('front/js/script.js') }}"></script>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         $(document).ready(function() {
 
@@ -380,15 +379,13 @@
                     type: 'POST',
                     data: paymentData,
                     success: function(response) {
-                        console.log(response);
+                        // console.log('response', response);
                         if (response.success) {
                             // Payment successful, handle UI changes or redirection
-                            alert('Payment successful!'); // Example success message
                             // Redirect or update UI as needed
                             payAmount(response.amount,response.order_id,response.customer);
                         } else {
-                            // Show error messages
-                            alert(response.message || 'Payment failed. Please try again.');
+                            toastr.error('Payment failed. Please try again.');
                         }
                     },
                     error: function(xhr, status, error) {
@@ -693,11 +690,11 @@
             "key": "{{env('RAZORPAY_KEY')}}", 
             "amount": amount,
             "currency": "INR",
-            "name": "Arogya Bharat",
+            "name": "Aarogyaa Bharat",
             "description": "Test Transaction",
-            "image": "https://example.com/your_logo",
+            "image": "{{ asset('admin/images/arogya_bharat.svg') }}",
             "order_id": order_id,
-            "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+            "callback_url": "{{route('payment.success')}}",
             "prefill": {
                 "name": customer.name,
                 "email": customer.email,
@@ -711,6 +708,12 @@
             rzp1.open();
         }
 
+        function closeOfferSuccessPopup() {
+            $('.flatDicountPop').hide();
+        }
+        function showPaymentSuccessPopup() {
+            $('.orderplacedPop').show();
+        }
     </script>
 </section>
 @endsection('content')

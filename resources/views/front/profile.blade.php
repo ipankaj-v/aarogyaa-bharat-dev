@@ -363,6 +363,7 @@ $(document).ready(function() {
         landmark: $('input[name="landmark"]').val(),
         pincode: $('input[name="pincode"]').val(),
         city: $('input[name="city"]').val(),
+        city: $('input[name="state"]').val(),
     };
 
     // Clear previous error messages
