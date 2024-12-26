@@ -2,7 +2,7 @@
 @extends('front.layouts.layout')
 @section('content')
 
-@include('front.common.welcome-message')
+<!-- @include('front.common.welcome-message') -->
 <section class="bannerPArt">
     <div class="container">
         <div class="bannerSlider getprogressWidth arrowOnProgress">

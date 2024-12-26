@@ -5,8 +5,8 @@
 <div class="breadcrumbs">
     <div class="container">
         <ul>
-            <li><a href="#;">Home</a> </li>
-            <li><a href="#;">Product Cateogry</a> </li>
+        <li><a href="{{ route('home') }}">Home</a> </li>
+        <li><a href="{{ route('products.category') }}">Product Cateogry</a> </li>
             <li><a href="#;">Product Details</a> </li>
         </ul>
     </div>    

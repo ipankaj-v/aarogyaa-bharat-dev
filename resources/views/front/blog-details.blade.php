@@ -3,8 +3,8 @@
 <div class="breadcrumbs">
     <div class="container">
         <ul>
-            <li><a href="#;">Home</a> </li>
-            <li><a href="#;">Blog</a> </li>
+            <li><a href="{{route('home')}}">Home</a> </li>
+            <li><a href="{{route('blogs')}}">Blog</a> </li>
             <li><a href="#;">Blog Details</a> </li>
         </ul>
     </div>    

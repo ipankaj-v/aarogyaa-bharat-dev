@@ -9,7 +9,7 @@
     </div>    
 </div>
 
-<section class="Trending_Topics">
+<!-- <section class="Trending_Topics">
     <div class="container">
         <div class="Trending_Topics_title"><h2>Trending Topics</h2></div>
         <div class="Products_tag">
@@ -20,7 +20,7 @@
             </ul>
           </div>
     </div>
-</section>
+</section> -->
 
 
 

@@ -101,16 +101,13 @@
             </a>
         </li>
         <li>   
-        @if(Auth::check() && Auth::user()->hasRole('Customer'))
-                
-                <a href="{{route('customers.profile')}}">
+        @if(Auth::check() && Auth::user()->hasRole('Customer'))   
+            <a href="{{route('customers.profile')}}">
                 <img src="{{ Request::is('profile') ? asset('front/images/profilebar-active.svg') : asset('front/images/profilebar.svg') }}" alt="Profile" />
-                Profile</a>
-                @endif
-            <!-- <a href="profile.html">
-                <img src="images/profilebar.svg" alt="" />
-                Profile
-            </a> -->
+            Profile</a>
+        @else
+            <a href="javascript:void(0)" onclick="openLoginPop()"><img src="{{ asset('front/images/profilebar.svg') }}" alt="">Profile</a>
+        @endif
         </li>
     </ul>
 </div>
@@ -449,6 +446,10 @@
             }
 
         }, 1000);
+    }
+    //open login popup
+    function openLoginPop() {
+        $('.LoginPop').show();
     }
 </script>
 
