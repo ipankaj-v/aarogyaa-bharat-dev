@@ -52,11 +52,11 @@
                 <div class="acco_text">
                     <div class="social_connects">
                         <ul>
-                            <li><a href="{{env('FACEBOOK_PAGE_URI')}}"><img src="{{asset('front/images/facebook.svg') }}" alt="" /></a></li>
-                            <li><a href="{{env('INSTA_PAGE_URI')}}"><img src="{{asset('front/images/insta.svg') }}" alt="" /></a></li>
-                            <li><a href="{{env('X_PAGE_URI')}}"><img src="{{asset('front/images/Xtwit.svg') }}" alt="" /></a></li>
+                            <li><a href="{{env('FACEBOOK_PAGE_URI')}}"><img src="{{asset('front/images/facebook.svg') }}" alt="Facebook" /></a></li>
+                            <li><a href="{{env('INSTA_PAGE_URI')}}"><img src="{{asset('front/images/insta.svg') }}" alt="Insta" /></a></li>
+                            <li><a href="{{env('X_PAGE_URI')}}"><img src="{{asset('front/images/Xtwit.svg') }}" alt="X" /></a></li>
                             <!-- <li><a href="{{env('YOUTUBE_PAGE_URI')}}"><img src="{{asset('front/images/youtube.png') }}" alt="" /></a></li> -->
-                            <li><a href="{{env('WHATSAPP_PAGE_URI')}}"><img src="{{asset('front/images/whatsapp.svg') }}" alt="" /></a></li>
+                            <li><a href="https://wa.me/{{ env('HELP_LINE_NO') }}" target="_blank"><img src="{{asset('front/images/whatsapp.svg') }}" alt="WhatsApp" /></a></li>
                         </ul>
                     </div>
                     <div class="emergency_help">

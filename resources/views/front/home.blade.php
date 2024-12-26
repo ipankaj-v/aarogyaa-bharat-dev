@@ -15,16 +15,6 @@
                     </div>
             @endforeach
             @endif
-
-            <!-- <div class="bannerBlock">
-                <img src="images/banner.jpg" alt="">
-            </div>
-            <div class="bannerBlock">
-                <img src="images/banner.jpg" alt="">
-            </div>
-            <div class="bannerBlock">
-                <img src="images/banner.jpg" alt="">
-            </div> -->
         </div> 
         <div class="progressBar"></div>
     </div>
