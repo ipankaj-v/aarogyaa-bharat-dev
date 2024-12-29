@@ -168,22 +168,133 @@ class CustomerController extends Controller
         $deliveryAddressExists = Adress::where('customer_id', $customer->id)
                                 ->where('is_delivery_address', true)
                                 ->exists(); 
-        // Create the address
-        Adress::create([
-            'customer_id' => $customer->id,
-            'house_number' => $request->house_number,
-            'society_name' => $request->society_name,
-            // 'locality' => $request->locality,
-            'landmark' => $request->landmark,
-            'pincode' => $request->pincode,
-            'city' => $request->city,
-            'state' => $request->state,
-            'is_delivery_address' => $deliveryAddressExists ? false : true,
-        ]);
+        if ($request->delivery == 1) {
+            Adress::where('customer_id', $customer->id)
+                    ->where('is_delivery_address', true)  
+                    ->update(['is_delivery_address' => false]);
+        }
+                                                     
+        // Update or Create the address
+        Adress::updateOrCreate(
+            [
+                'customer_id' => $customer->id,
+                'id' => $request->uuid,
+            ],
+            [
+                'house_number' => $request->house_number,
+                'society_name' => $request->society_name,
+                // 'locality' => $request->locality, // If you need it, uncomment it
+                'landmark' => $request->landmark,
+                'pincode' => $request->pincode,
+                'city' => $request->city,
+                'state' => $request->state,
+                'is_delivery_address' => $request->delivery ?? 0,
+            ]
+        );
+        
+        $customerAndAddresses = Auth::check() ? User::with(['addresses' => function ($query) {
+            $query->where('is_delivery_address', true);
+        }])->where('id', Auth::id())->first()->addresses 
+        : null;
 
-        return response()->json(['success' => true, 'user' => $customer, 'message' => 'Address saved successfully.']);
+        $adressHtml = view('front.common.delivery-address', ['customerAndAddresses' => $customerAndAddresses])->render();
+
+        return response()->json(['success' => true, 'adressHtml' => $adressHtml, 'message' => 'Address saved successfully.']);
     }
 
+    public function getAddress($id)
+    {
+        $address = Adress::findOrFail($id);
+        return response()->json($address);
+    }
+
+    public function removeAddress($id)
+    {
+        $address = Adress::find($id);
+        if ($address) {
+            $address->delete(); 
+            $customerDetail = User::with('orders', 'addresses')
+            ->where('id', Auth::user()->id)
+            ->first();
+            $addressListHtml = view('front.common.customer-address', ['customerDetail' => $customerDetail])->render();
+            return response()->json(['success' => true, 'html' => $addressListHtml, 'message' => 'Address removed successfully.']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Address not found.'], 404);
+        }
+    }
+
+    public function getUpdateAddress($id)
+    {
+        $address = Adress::findOrFail($id);
+        $addressHtml = view('front.common.update-customer-address', ['address' => $address])->render();
+        return response()->json(['success' => true, 'html' => $addressHtml, 'address' => $address]);
+    }
+
+    public function UpdateAddress(Request $request)
+    {
+        // Check if the user is authenticated
+        if (!auth()->check()) {
+            return response()->json(['success' => false, 'status' => 401, 'message' => 'Please login as a customer and try again.']);
+        }
+
+        // Get the authenticated user
+        $customer = auth()->user();
+
+        // Check if the authenticated user has the 'Customer' role
+        if (!$customer->hasRole('Customer')) {
+            return response()->json(['success' => false, 'status' => 403, 'message' => 'Access denied. You do not have the required permissions.']);
+        }
+
+        // Validate the incoming request
+        $validator = \Validator::make($request->all(), [
+            'house_number' => 'required|string|max:255',
+            'society_name' => 'required|string|max:255',
+            // 'locality' => 'required|string|max:255',
+            'landmark' => 'required|string|max:255',
+            'pincode' => 'required|string|max:6',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false,  'errors' => $validator->errors()]);
+        }
+        if ($request->delivery == 1) {
+            Adress::where('customer_id', $customer->id)
+                    ->where('is_delivery_address', true)  
+                    ->update(['is_delivery_address' => false]);
+        }
+                                                     
+        // Update the address
+        if ($request->delivery == 1) {
+            Adress::where('customer_id',  $request->uuid)
+                    ->where('is_delivery_address', true)  
+                    ->update(['is_delivery_address' => false]);
+        }
+        $address = Adress::where('id', $request->uuid)->first();
+        // Assuming $request contains the necessary data
+        $address = Adress::updateOrCreate(
+            [
+                'id' => $request->uuid,
+                'customer_id' => $customer->id
+            ],  // Condition: check if an address with this UUID exists
+            [
+                'house_number' => $request->house_number,
+                'society_name' => $request->society_name,
+                'landmark' => $request->landmark,
+                'pincode' => $request->pincode,
+                'city' => $request->city,
+                'state' => $request->state,
+                'is_delivery_address' => $request->delivery ?? 0,
+            ]
+        );
+
+        $customerDetail = User::with('orders', 'addresses')
+            ->where('id', Auth::user()->id)
+            ->first();
+            $addressListHtml = view('front.common.customer-address', ['customerDetail' => $customerDetail])->render();
+            return response()->json(['success' => true, 'html' => $addressListHtml, 'message' => 'Address updated successfully.']);
+    }
 
     public function profile(Request $request)
     {

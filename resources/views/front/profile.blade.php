@@ -96,7 +96,7 @@
                             <div class="profileAccorAns" id="customerAdress">
                                 <div class="profileAccorAnsTtl">
                                     <strong>My Addresses</strong>
-                                    <a href="#;" class="js-addadresspopup">Add New Address <img src="{{asset('front/images/jam_plus.svg')}}" alt="" /> </a>
+                                    <a href="javascript:void(0)" onclick="addNewAddress()" >Add New Address <img src="{{asset('front/images/jam_plus.svg')}}" alt="" /> </a>
                                 </div>
                                 <div id="addressList">
                                     @include('front.common.customer-address')
@@ -187,7 +187,11 @@
     </div>
 </div>
 
-<div class="addressFormPop winScrollStop">
+<div id="address">
+        @include('front.common.update-customer-address')
+</div>                    
+</div>
+<!-- <div class="addressFormPop winScrollStop">
     <div class="addressFormPopMiddle">
         <div class="addressFormPopInner">
             <a href="#;"><img src="{{asset('front/images/cross.svg')}}" alt="" /> </a>
@@ -230,7 +234,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
 
 
 <div class="updateprofilePop winScrollStop">
@@ -428,6 +432,137 @@ function changeStatusTab(statusId) {
                 alert('An error occurred while fetching orders.');
             }
         });
-    }
+}
+
+function removeAddress(addressId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You will be logged out!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Remove!',
+        cancelButtonText: 'No, cancel!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+            url: '/customer/remove-address/' + addressId,  
+            type: 'GET',
+            success: function(response) {
+                if (response.success) {
+                    $('#addressList').html(response.html);
+                    toastr.success(response.message);
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                toastr.error('Something went wrong. Please try again.');
+            }
+        });
+        }
+    });       
+}
+
+
+function editAddress(id) {
+    $.ajax({
+        url: '/customer/get-update-address/' + id,
+        type: 'GET',
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                $('#address').html(response.html);
+                $('#addressForm input[name="house_number"]').val(response.address.house_number);
+                    $('#addressForm input[name="society_name"]').val(response.address.society_name);
+                    $('#addressForm input[name="landmark"]').val(response.address.landmark);
+                    $('#addressForm input[name="pincode"]').val(response.address.pincode);
+                    $('#addressForm input[name="city"]').val(response.address.city);
+                    $('#addressForm input[name="state"]').val(response.address.state);
+                    $('#addressForm input[name="delivery"]').prop('checked', response.address.is_delivery_address);
+                    $('#addressForm input[name="uuid"]').val(id);
+                $('.addressFormPop').show();
+            } else {
+                toastr.error('Error fetching address data.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching address data:', error);
+            toastr.error('Something went wrong while fetching the address data.');
+        }
+    });
+}
+
+function updateAddress(event) {
+        event.preventDefault(); 
+
+        if (!$('#DA').prop('checked')) {
+                $('#DA').val('0');
+                } else {
+                    // If checked, ensure the value is 1 (it should already be by default)
+                    $('#DA').val('1');
+                }
+                // Collect form data
+        var formData = {
+            house_number: $("#addressForm input[name='house_number']").val(),
+            society_name: $("#addressForm input[name='society_name']").val(),
+            locality: $("#addressForm input[name='locality']").val(),
+            landmark: $("#addressForm input[name='landmark']").val(),
+            pincode: $("#addressForm input[name='pincode']").val(),
+            city: $("#addressForm input[name='city']").val(),
+            state: $("#addressForm input[name='state']").val(),
+            delivery: $("#addressForm input[name='delivery']").val(),
+            uuid: $("#addressForm input[name='uuid']").val(),
+        };
+        $('.errormsg').text('');
+        $.ajax({
+            url: "{{route('customers.profile.address.update')}}", // Update with your endpoint
+            type: 'GET',
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    $('.errormsg').text(''); 
+                    $('#addressForm')[0].reset();
+                    $('#addressList').html(response.html);
+                    toastr.success(response.message);
+                    hideAddressPop();
+                } else {
+                    // Show error messages
+                    if (response.status == 401) {
+                        toastr.error(response.message);
+                    } else {
+                        $.each(response.errors, function(key, value) {
+                            $("#addressForm input[name='" + key + "']").next('.errormsg').text(value).show();
+                        });
+                    }
+                }
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) { // Unprocessable Entity
+                var errors = xhr.responseJSON.errors;
+                $('.errormsg').text(''); 
+                $.each(errors, function(key, value) {
+                    var errorMessage = Array.isArray(value) ? value[0] : value;
+                    $('.' + key + 'Error').text(errorMessage);
+                });
+            } else {
+                $('.errormsg').text('');
+                toastr.error('An error occurred. Please try again.');
+            }
+            }
+        });
+}
+
+function addNewAddress() {
+    $('#addressForm')[0].reset();
+    $('.addressFormPop').show();
+}
+
+function hideAddressPop(){
+    $('#addressForm')[0].reset();
+    $('.addressFormPop').hide();
+}
+
 </script>
 @endsection('content')

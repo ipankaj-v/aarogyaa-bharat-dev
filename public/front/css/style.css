@@ -899,8 +899,8 @@ text-align: center;}
   .menuList{display: none;}
   .loginBtn{display: none;}
   .locationPin{clear: right;padding: 0;margin-top: 24px;}
-  .locationPin p{font-size: 14px;}
-  .locationPin i{font-size: 10px;}
+  .locationPin p{font-size: 12px;}
+  .locationPin i{font-size: 8px;}
   .SearchBlock{margin-right: 0;width: calc(100% - 129px);float: left;padding: 0;margin-top: 16px;clear: left;transition: 0.5s;}
   .SearchBlock div input{width: calc(100% - 43px);}
 
@@ -1277,26 +1277,40 @@ text-align: center;}
   text-align: center;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .page-link {
-  padding: 8px 12px;
+  display: inline-flex;           
+  justify-content: center;       
+  align-items: center;           
+  padding: 6px 12px;
   border: 1px solid #ccc;
   border-radius: 50%;
   text-decoration: none;
   color: #333;
   margin-left: 5px;
+  font-size: 14px;                
+  width: 30px;                    
+  height: 30px;
+  text-align: center;             
+  line-height: 18px;
 }
 
 .page-link.active {
   background-color: #007bff;
-  color: #fff;
+  color: white;
+  border-color: #007bff;
 }
 
 .page-link:hover {
-  background-color: #f1f1f1;
+  background-color: #f0f0f0;
+  cursor: pointer;
 }
 
+.page-link:focus {
+  outline: none;
+}
 
 .qurery-errormsg {
   position: absolute;
@@ -1330,6 +1344,13 @@ text-align: center;}
 
 
 .slick-track{display: inline-flex;}
+
+
+
+.inputMainBlock input[type="checkbox"] {
+  margin-top: -23px !important;
+}
+
 
 
 

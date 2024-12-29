@@ -169,41 +169,9 @@
                     <div id="orderSummery">
                         @include('front.common.cart.order-summary')
                     </div>
-                    @if($customerAndAddresses && $customerAndAddresses->isNotEmpty())
-                        <div class="deliveryAddress123">
-                            <div class="title1">
-                                <strong>Delivery Address</strong>
-                                <a href="#;"><img src="{{asset('front/images/edit_pen.svg')}}" alt="" /></a>
-                            </div>
-                            @foreach($customerAndAddresses as $address)
-                                <div class="deliveryAddressInner">
-                                    <label class="deliveryAddress1">
-                                        <input type="radio" name="addressRadio" {{ $address->is_delivery_address ? 'checked' : '' }} />
-                                        <span></span>
-                                        <div>
-                                            <strong>{{ $address->full_name }}</strong>
-                                            <p>{{ $address->house_number }}, {{ $address->society }}, {{ $address->locality }}, {{ $address->landmark }}, {{ $address->pincode }}, {{ $address->city }}</p>
-                                        </div>
-                                    </label>
-                                </div>
-                            @endforeach
-                            <div class="addDelAddress1">
-                                <a href="#;">Add New Address <img src="{{asset('front/images/jam_plus.svg')}}" alt="" /></a>
-                            </div>
-                        </div>
-                    @else
-                        <div class="addAddress">
-                            <div class="addressNote">
-                                <img src="{{asset('front/images/info-circle.svg')}}" alt="" />
-                                <p>Please add your delivery address</p>
-                            </div>
-                            <div class="addressNoteError">
-                                <img src="{{asset('front/images/alert_svgrepo.svg')}}" alt="" />
-                                <p>Please add your delivery address</p>
-                            </div>
-                            <button>Add Delivery Address <img src="{{asset('front/images/jam_plus.svg')}}" alt="" /></button>
-                        </div>
-                    @endif
+                   <div id="delivery-address">
+                        @include('front.common.delivery-address')
+                    </div>
 
                 <div class="proceedBtn">
                 <button id="proceedButton" data-cartid="{{$cartProducts[0]->id}}">Proceed to Pay</button>
@@ -232,53 +200,7 @@
     </div>
 
     <div class="addressFormPop winScrollStop">
-        <div class="addressFormPopMiddle">
-            <div class="addressFormPopInner">
-                <a href="#;"><img src="{{asset('front/images/cross.svg')}}" alt="" /> </a>
-                <h4>Add New Address</h4>
-                <p>Please enter pin code to get current location.</p>
-                <form id="addressForm">
-                    <div class="inputMainBlock fullwidth">
-                        <span>Flat,House no, Building, Company, Apertment  </span>
-                        <input type="text" name="house_number" class="AnyValueVD" placeholder="004">
-                        <div class="errormsg">Please enter Flat,House no, Building, Company, Apertment</div>
-                    </div>
-                    <div class="inputMainBlock fullwidth">
-                        <span>Area, Street, Sector, Village</span>
-                        <input type="text" name="society_name" class="AnyValueVD" placeholder="XYZ">
-                        <div class="errormsg">Please enter Area, Street, Sector, Village</div>
-                    </div>
-                    <div class="inputMainBlock fullwidth">
-                        <span>Landmark</span>
-                        <input type="text" name="landmark" class="AnyValueVD" placeholder="XYZ">
-                        <div class="errormsg">Please enter Landmark</div>
-                    </div>
-                    <!-- <div class="inputMainBlock fullwidth">
-                        <span>Locality</span>
-                        <input type="text" name="locality" class="AnyValueVD" placeholder="XYZ">
-                        <div class="errormsg">Please enter Locality</div>
-                    </div> -->
-                    <div class="inputMainBlock fullwidth">
-                        <span>Pincode</span>
-                        <input type="text" name="pincode" class="AnyValueVD" placeholder="000000">
-                        <div class="errormsg">Please enter Pincode</div>
-                    </div>
-                    <div class="inputMainBlock fullwidth">
-                        <span>Town/City</span>
-                        <input type="text" name="city" class="AnyValueVD" placeholder="XYZ">
-                        <div class="errormsg">Please enter Town/City</div>
-                    </div>
-                    <div class="inputMainBlock fullwidth">
-                        <span>State</span>
-                        <input type="text" name="state" class="AnyValueVD" placeholder="XYZ">
-                        <div class="errormsg">Please enter State</div>
-                    </div>
-                    <div class="checkboxPart fullwidth">
-                        <button class="submitBTN">Save Address</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+       @include('front.common.add-adress')
     </div>
     <div class="offer-apply-success" style="display:none;">
         <div id="offer-html">
@@ -313,7 +235,12 @@
 
             $("#addressForm .submitBTN").click(function(e) {
                 e.preventDefault(); // Prevent the form from submitting normally
-
+                if (!$('#DA').prop('checked')) {
+                $('#DA').val('0');
+                } else {
+                    // If checked, ensure the value is 1 (it should already be by default)
+                    $('#DA').val('1');
+                }
                 // Collect form data
                 var formData = {
                     house_number: $("#addressForm input[name='house_number']").val(),
@@ -323,6 +250,8 @@
                     pincode: $("#addressForm input[name='pincode']").val(),
                     city: $("#addressForm input[name='city']").val(),
                     state: $("#addressForm input[name='state']").val(),
+                    delivery: $("#addressForm input[name='delivery']").val(),
+                    uuid: $("#addressForm input[name='uuid']").val(),
                 };
 
                 $(".errormsg").hide();
@@ -335,10 +264,12 @@
                     success: function(response) {
                         if (response.success) {
                             // Address saved successfully, handle the UI changes
+                            $('#addressForm')[0].reset();
                             $('.addressFormPop').hide();
                             $('.addAddress').hide();
                             $('.deliveryAddress').show();
                             $('body').css('overflow-y', 'auto');
+                            $('#delivery-address').html(response.adressHtml);
                         } else {
                             // Show error messages
                             if (response.status == 401) {
@@ -714,6 +645,31 @@
         function showPaymentSuccessPopup() {
             $('.orderplacedPop').show();
         }
+
+        function addNewDeliveryAddress() {
+            $('#addressForm')[0].reset();
+            $('.addressFormPop').show();
+        }
+        function editDeliveryAddress(id) {
+            $.ajax({
+                url: '/customer/get-address/' + id,  // Make sure to create this route to fetch the address details
+                method: 'GET',
+                success: function(response) {
+                    // Populate the form with the existing address details
+                    $('#addressForm input[name="house_number"]').val(response.house_number);
+                    $('#addressForm input[name="society_name"]').val(response.society_name);
+                    $('#addressForm input[name="landmark"]').val(response.landmark);
+                    $('#addressForm input[name="pincode"]').val(response.pincode);
+                    $('#addressForm input[name="city"]').val(response.city);
+                    $('#addressForm input[name="state"]').val(response.state);
+                    $('#addressForm input[name="delivery"]').prop('checked', response.is_delivery_address);
+                    $('#addressForm input[name="uuid"]').val(id);
+                    $('.addressFormPop').show();
+                }
+            });
+        }
+
+
     </script>
 </section>
 @endsection('content')

@@ -18,18 +18,41 @@
                     </div>
                 </div>
                 @endforeach
-</br>              
-                <div class="pagination">
+</br> 
+
+<div class="pagination">
     @php
         $totalPages = ceil($totalBlogs / $perPage);
+        $windowSize = 3;
+        $startPage = max(1, $currentPage - 1);
+        $endPage = min($totalPages, $currentPage + 1);
+        if ($endPage - $startPage < 2) {
+            if ($startPage == 1) {
+                $endPage = min($totalPages, $startPage + 2); 
+            } else {
+                $startPage = max(1, $endPage - 2);
+            }
+        }
     @endphp
 
-    @for ($page = 1; $page <= $totalPages; $page++)
-        <a onClick=pageLoad({{$page}}) class="page-link {{ $currentPage == $page ? 'active' : '' }}">
+    <!-- Previous Button -->
+    @if ($currentPage > 1)
+        <a  class="page-link"> &laquo;&laquo;   </a>
+    @endif
+
+    <!-- Pages Window -->
+    @for ($page = $startPage; $page <= $endPage; $page++)
+        <a  class="page-link {{ $currentPage == $page ? 'active' : '' }}">
             {{ $page }}
         </a>
     @endfor
+
+    <!-- Next Button -->
+    @if ($currentPage < $totalPages)
+        <a  class="page-link">&raquo;&raquo;</a>
+    @endif
 </div>
+
 </div>
 @include('front.common.one-blog')
             

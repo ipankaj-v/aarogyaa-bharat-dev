@@ -6,14 +6,20 @@
                 <span></span>
                 <div>
                     <strong>{{ $customerDetail->name }}</strong>
-                    <p>{{ $address->house_number }}, {{ $address->house_number }}, {{ $address->society_name }}, {{ $address->locality }}, {{ $address->landmark }}, {{ $address->pincode }},
-                    {{ $address->city }}
-                    </p> <!-- Adjust the field name as necessary -->
+                    <p>
+                        {{ $address->house_number ? $address->house_number . ',' : '' }}
+                        {{ $address->society_name ? $address->society_name . ',' : '' }}
+                        {{ $address->locality ? $address->locality . ',' : '' }}
+                        {{ $address->landmark ? $address->landmark . ',' : '' }}
+                        {{ $address->pincode ? $address->pincode . ',' : '' }}
+                        {{ $address->city ? $address->city : '' }}
+                        {{ $address->state ? $address->state : '' }}
+                    </p> 
                 </div>
             </label>
             <div class="edit_remove">
-                <a href="#;" class="edit_box">Edit</a>
-                <a href="#;" class="remove_box">Remove</a>
+                <a href="#;" onclick="editAddress({{ $address->id }})" class="edit_box">Edit</a>
+                <a href="#" class="remove_box" onclick="removeAddress({{ $address->id }})" data-address-id="{{ $address->id }}">Remove</a>
             </div>
         </div>
     @endforeach

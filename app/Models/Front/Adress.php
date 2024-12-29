@@ -20,6 +20,7 @@ class Adress extends Model
         'landmark',
         'pincode',
         'city',
+        'state',
         'is_delivery_address'
     ];
 

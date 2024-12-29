@@ -104,6 +104,10 @@ Route::controller(FrontCustomerController::class)->group(function () {
     Route::post('/customers/store', 'store')->name('customers.store');
     Route::post('/customers/login', 'login')->name('customer.login');
     Route::get('/customer/save-address', 'saveAddress')->name('save.address');
+    Route::get('/customer/get-address/{id}', 'getAddress')->name('get.address');
+    Route::get('/customer/get-update-address/{id}', 'getUpdateAddress')->name('get.update.address');
+    Route::get('/customer/update-address', 'UpdateAddress')->name('customers.profile.address.update');
+    Route::get('/customer/remove-address/{id}', 'removeAddress')->name('remove.address');
     Route::get('/customer/verify-otp/{number}', 'verifyOtp')->name('verify.otp');
     Route::get('/customer/location', 'saveLocation')->name('save.location');
 });

@@ -436,11 +436,11 @@ $(document).ready(function(){
         }
         if($(window).width() <= 768){
             if($(this).val().length > 0){ 
-              $(this).parents('.SearchBlock').siblings('.locationPin').hide();
+              $(this).parents('.SearchBlock').siblings('#customerlocationPin').find('.locationPin').hide();
               $(this).parents('.SearchBlock').css('width','90%');
                 $(this).parents('.SearchBlock').children('a').show();
             }else{
-              $(this).parents('.SearchBlock').siblings('.locationPin').delay(500).fadeIn();
+              $(this).parents('.SearchBlock').siblings('#customerlocationPin').find('.locationPin').delay(10).fadeIn(10);
               $(this).parents('.SearchBlock').removeAttr('style');
                 $(this).parents('.SearchBlock').children('a').hide();
             }

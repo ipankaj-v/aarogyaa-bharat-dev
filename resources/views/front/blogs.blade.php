@@ -40,20 +40,34 @@
 <script src="{{ asset('front/js/jquery.min.js') }}"></script>
 <script>
 
-    $(document).on('click', '.pagination .page-link', function(e) {
-        e.preventDefault();
-        var page = $(this).text();
-        var data = { page: page };
-        var url = $(this).attr('href');
-        $.ajax({
-            url: url,
-            type: 'GET',
-            data: data,
-            success: function(response) {
-                if(response.success) {
-                    $('.part_blog').html(response.recommendedBlogHtml);
-                }
+$(document).on('click', '.pagination .page-link', function(e) {
+    e.preventDefault();
+
+    var pageText = $(this).text().trim();
+    var currentPage = parseInt($('.pagination .page-link.active').text()); 
+    var page;
+
+    if (pageText === '««') {
+        page = currentPage - 1;
+    } else if (pageText === '»»') {
+        page = currentPage + 1;
+    } else {
+        page = parseInt(pageText);
+    }
+
+    var data = { page: page };
+    var url = $(this).attr('href'); 
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: data,
+        success: function(response) {
+            if(response.success) {
+                $('.part_blog').html(response.recommendedBlogHtml);
             }
-        });
+        }
     });
+});
+
 </script>
