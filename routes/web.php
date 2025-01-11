@@ -138,6 +138,8 @@ Route::controller(FrontCmsController::class)->group(function () {
 // Route::get('razorpay-payment', [PaymentController::class, 'index']);
 Route::post('razorpay-payment', [PaymentController::class, 'store'])->name('order.create');
 Route::post('payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+Route::post('create-order/{productId}', [PaymentController::class, 'createOrder']);
+Route::post('verify-payment', [PaymentController::class, 'verifyPayment']);
 
 
 //admin routes

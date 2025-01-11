@@ -78,7 +78,7 @@
                         @csrf
                         <button type="submit" class="addtocart">Add to Cart</button>
                     </form>
-                    <a href="#;" class="btn_buynow">Buy Now</a>
+                    <a href="#;" class="btn_buynow" id="buy-now-button" data-productid="{{$productDetails->id}}">Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -134,6 +134,113 @@
 </section>
 
 
-
 @include('front.common.faq-section')
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+document.getElementById('buy-now-button').onclick = function(e) {
+    e.preventDefault();
+    var productId = this.getAttribute('data-productid');
+
+    // Make the POST request to create the order
+    fetch(`/create-order/${productId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'  // CSRF Token
+        },
+        body: JSON.stringify({
+            amount: 50000  // Example amount, modify as per your needs
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.log('Response error', response.status);
+            
+            // Handle non-200 status codes (e.g., 401, 404)
+            if (response.status == 401) {
+                toastr.error('Please login to proceed with payment.');
+                return;
+            } else if (response.status == 404) {
+                toastr.error('Product not found.');
+                return;
+            } else if (response.status == 400) {
+                return response.json().then(data => {
+                    toastr.error(data.message || 'Product is out of stock.');
+                });
+            } else {
+                return response.json().then(data => {
+                    toastr.error(data.error || 'Something went wrong!');
+                });
+            }
+        }
+        return response.json();  // Proceed if response is OK (status 200)
+    })
+    .then(data => {
+        // console.log('Order Data', data);
+        
+        if (data && data.error) {
+            // Show the error from the backend if the error key exists
+            toastr.error(data.error || 'An error occurred.');
+            return;  // Stop further execution if there's an error
+        }
+
+        // Handle other errors when data is undefined or not in expected format
+        if (!data) {
+            toastr.error('Unexpected error occurred. Please try again.');
+            return;
+        }
+
+        // If the data contains order details, proceed with Razorpay integration
+        if (data.id) {
+            var options = {
+                "key": "{{ env('RAZORPAY_KEY') }}", // Your Razorpay key
+                "amount": data.amount, // Amount in paise
+                "currency": "INR",
+                "name": "My Shop",
+                "description": "Purchase Description",
+                "order_id": data.id, // The order ID created in the backend
+                "handler": function(response) {
+                    // Send the payment details to the backend for verification
+                    fetch('/verify-payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.message === 'Payment Verified') {
+                            toastr.success('Payment successful!');
+                        } else {
+                            toastr.error('Payment verification failed!');
+                        }
+                    });
+                },
+                "prefill": {
+                    "name": data.customer.name,
+                    "email": data.customer.email,
+                    "contact": data.customer.mobile
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+    })
+    .catch(error => {
+        console.log('Fetch Error', error);
+        toastr.error(error.message || 'An error occurred while processing your request.');
+    });
+}
+
+</script>
 @endsection('content')

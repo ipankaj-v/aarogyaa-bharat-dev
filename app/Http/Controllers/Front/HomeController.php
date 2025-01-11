@@ -18,8 +18,8 @@ class HomeController extends Controller
         $blogs = Blog::with('images')->take(6)->get();
 
         $seoMeta = Page::where('slug', 'home')->first(); 
-        $seoMetaTag = $seoMeta->seo_meta_tag; 
-        $seoMetaTagTitle = $seoMeta->seo_meta_tag_title;
+        $seoMetaTag = $seoMeta->seo_meta_tag ?? ''; 
+        $seoMetaTagTitle = $seoMeta->seo_meta_tag_title ?? '';
          
         return view('front.home', compact('categories', 'products', 'blogs', 'seoMetaTag', 'seoMetaTagTitle'));
     }

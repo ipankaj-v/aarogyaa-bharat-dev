@@ -17,7 +17,10 @@ class Order extends Model
         'customer_id',
         'status_id',
         'payment_response',
-        'razorpay_order_id'
+        'razorpay_order_id',
+        'gst',
+        'razorpay_payment_id',
+        'razorpay_signature'
     ];
 
     public function customer()
