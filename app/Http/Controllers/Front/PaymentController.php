@@ -364,10 +364,11 @@ class PaymentController extends Controller
         return response()->json(['error' => 'Product not found'], 404);
     }
 
-    // Check stock availability
-    if ($product->productAttributes->stock < 1) {
+    // Check if product attributes exist and if stock is less than 1
+    if (!$product->productAttributes || $product->productAttributes->stock < 1) {
         return response()->json(['error' => 'Product is out of stock!'], 400);
     }
+
 
     // Check if the user is logged in and has the 'Customer' role
     if (!Auth::check() || !Auth::user()->hasRole('Customer')) {
