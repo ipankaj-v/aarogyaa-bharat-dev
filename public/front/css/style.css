@@ -1351,6 +1351,10 @@ text-align: center;}
   margin-top: -23px !important;
 }
 
+.part-offer {
+  scroll-margin-top: 200px; /* Adjust this value to match your header height or desired offset */
+}
+
 
 
 

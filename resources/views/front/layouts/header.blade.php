@@ -38,8 +38,9 @@
                 <ul class="menuList">
                     <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
                     <li class="{{ Route::currentRouteName() == 'products' ? 'active' : '' }}"><a href="{{ route('products') }}">Products</a></li>
-                    <li><a href="{{ route('home') }}#offer_Part" class="{{ Route::currentRouteName() == 'home#offer_Part' ? 'active' : '' }}">Offers</a></li>
-                    <li><a href="{{route('customer.about.us')}}">About</a></li>
+                    <li class="{{ request()->is('/') && request()->has('offer_Part') ? 'active' : '' }}"><a href="{{ route('home') }}#offer_Part">Offers</a></li>
+                    <li class="{{ Route::currentRouteName() == 'blogs' ? 'active' : '' }}" ><a href="{{route('blogs')}}">Blogs</a></li>
+                    <li class="{{ Route::currentRouteName() == 'about-us' ? 'active' : '' }}"><a href="{{route('customer.about.us')}}">About</a></li>
                 </ul>
                 @if(Auth::check() && Auth::user()->hasRole('Customer'))
                 <div class="loginBtn">

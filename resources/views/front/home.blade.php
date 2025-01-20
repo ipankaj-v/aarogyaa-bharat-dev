@@ -42,7 +42,7 @@
     </div>
 </section>
 
- <section class="offer_Part" id="offer_Part">
+ <section class="offer_Part part-offer" id="offer_Part">
     <div class="container">
         <div class="titlePart">
             <h4>Offer & Discount</h4>
