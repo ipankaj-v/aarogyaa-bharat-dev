@@ -361,11 +361,14 @@
                 success: function(response) {
                     if (response.available) {
                         $('#fail').text('');
-                        $('#success').text('Delivery is available at this pincode.');
-                        $('#pincodeContainer').html(response.userPincodeHtml);
+                        $('#success').text('Pincode is match.');
+                        // $('#pincodeContainer').html(response.userPincodeHtml);
                     } else {
                         $('#success').text('');
-                        $('#fail').text('Undelivereable at this pincode.');
+                        $('#fail').text('Pincode not match.');
+                        if (response.redirect) {
+                            window.location.href = response.redirect;
+                        }
                     }
                 },
                 error: function() {
@@ -398,6 +401,9 @@
                                 success: function(response) {
                                     console.log('response', response);
                                     if(response.success) {
+                                        if(response.userPincodeHtml) {
+                                            $('#pincodeContainer').html(response.userPincodeHtml);
+                                        }
                                         toastr.success(response.message);
                                     } else {
                                         toastr.error(response.message);

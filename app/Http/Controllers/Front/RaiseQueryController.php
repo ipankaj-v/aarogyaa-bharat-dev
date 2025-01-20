@@ -15,8 +15,8 @@ class RaiseQueryController extends Controller
     {
         $lastSegment = basename(parse_url($request->url(), PHP_URL_PATH));
         $rqPageData = Page::where('slug', $lastSegment)->with('cms.images')->first();
-        $seoMetaTag = $rqPageData->seo_meta_tag;
-        $seoMetaTagTitle = $rqPageData->seo_meta_tag_title;
+        $seoMetaTag = $rqPageData->seo_meta_tag ?? '';
+        $seoMetaTagTitle = $rqPageData->seo_meta_tag_title ?? '';
         return view('front.raise-query', compact('seoMetaTag', 'seoMetaTagTitle'));
     }
 

@@ -124,6 +124,6 @@ class BannerController extends Controller
             return response()->json(['available' => true, 'userPincodeHtml' => $userPincodeHtml]);
         }
         $userPincodeHtml =  view('front.common.customer-pin', compact('userPincode'))->render();
-        return response()->json(['available' => $exists, 'userPincodeHtml' => $userPincodeHtml]);        
+        return response()->json(['available' => $exists, 'userPincodeHtml' => $userPincodeHtml, 'redirect' => route('raise.query'),]);        
     }
 }

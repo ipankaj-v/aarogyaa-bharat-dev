@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
 use Spatie\Permission\Models\Role;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-
+use App\Models\Admin\PinOffice;
 
 class CustomerController extends Controller
 {
@@ -438,7 +438,15 @@ class CustomerController extends Controller
             'is_delivery_address' => $deliveryAddressExists ? false : true,
         ]);
 
-        return response()->json(['success' => true, 'user' => $customer, 'message' => 'Address saved successfully.']);
+        // $userPincode = PinOffice::where('pin', '413603')->first();
+        $userPincode = PinOffice::where('pin', $request->address['postcode'])->first();
+        if ($userPincode) {
+            if(Auth::check() && Auth::user()->hasRole('Customer')) {
+                Auth::user()->update(['pincode_id' => $userPincode->id]); 
+            }
+            $userPincodeHtml = view('front.common.customer-pin', compact('userPincode'))->render();
+            return response()->json(['success' => true, 'user' => $customer, 'userPincodeHtml' => $userPincodeHtml, 'message' => 'Address saved successfully.']);
+        }
+        return response()->json(['success' => true, 'user' => $customer, 'userPincodeHtml' => null, 'message' => 'Address saved successfully.']);
     }
-
 }
