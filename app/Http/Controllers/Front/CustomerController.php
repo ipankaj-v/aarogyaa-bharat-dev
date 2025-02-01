@@ -35,6 +35,7 @@ class CustomerController extends Controller
             'email' => 'required|email|unique:users,email',
             'mobile' => 'required|string|unique:users,mobile',
             'city' => 'required|string|max:255',
+            'pincode' => 'required|numeric|digits:6',
         ]);
         
         if ($validator->fails()) {
@@ -47,7 +48,19 @@ class CustomerController extends Controller
             'email' => $request->input('email'),
             'mobile' => $request->input('mobile'), 
             'city' => $request->input('city'), 
+            'pin_code' => $request->input('pincode'), 
+            'state' => $request->input('state'), 
         ]);
+
+        $pin = PinOffice::create([ 
+            'district' => $request->input('city'), 
+            'pin' => $request->input('pincode'), 
+            'state' => $request->input('state'), 
+            'available' => 1, 
+        ]);
+        if ($pin) {
+            $customer->update(['pincode_id' => $pin->id]);
+        }
         $customer->assignRole('Customer');
         return response()->json(['success' => 'Customer registered successfully!'], 200);
     }
@@ -316,6 +329,7 @@ class CustomerController extends Controller
 
     public function profileUpdate(Request $request)
     {
+        // return $request->all();
         $validatedData = $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
@@ -360,6 +374,7 @@ class CustomerController extends Controller
         $address->landmark = $validatedData['landmark'];
         $address->pincode = $validatedData['pincode'];
         $address->city = $validatedData['city'];
+        $address->state = $validatedData['ṣtate'];
         $address->is_delivery_address =  $deliveryAddressExists ? 0 : 1;
         $address->save();
 

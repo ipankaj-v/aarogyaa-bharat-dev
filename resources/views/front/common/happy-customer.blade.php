@@ -24,7 +24,7 @@
                                         </li>
                                     @endfor
                                 </ul>
-                                <i>{{ $rating }}</i> <!-- Show the rounded rating -->
+                                <!-- <i>{{ $rating }}</i> Show the rounded rating -->
                             </div>
                         </div>
                 @endforeach

@@ -11,7 +11,7 @@
 <section class="queryPart">
     <div class="container">
         <div class="titlePart">
-            <h4>Raised Your Query</h4>
+            <h4>Raise Your Query</h4>
             <p>Enter your email or mobile to fill your need</p>
         </div>
           <!-- Show submitted message -->

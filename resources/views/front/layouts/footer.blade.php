@@ -59,7 +59,19 @@
                             <li><a href="https://wa.me/{{ env('HELP_LINE_NO') }}" target="_blank"><img src="{{asset('front/images/whatsapp.svg') }}" alt="WhatsApp" /></a></li>
                         </ul>
                     </div>
-                    <div class="emergency_help">
+                    <!-- <div class="emergency_help">
+                        <h2>Need an emergency help</h2>
+                        <ul>
+                            <li><a href="tel:{{ env('HELP_LINE_NO') }}"><img src="{{asset('front/images/phone_call.svg') }}" alt="" />
+                                    <p>{{env('HELP_LINE_NO')}}</p><span>Call Now</span>
+                                </a></li>
+                            <li><a href="mailto:{{ env('HELP_LINE_EMAIL') }}"><img src="{{asset('front/images/mail.svg') }}" alt="" />
+                                    <p>{{env('HELP_LINE_EMAIL')}}</p>
+                                </a></li>
+                        </ul>
+                    </div> -->
+                </div>
+                <div class="emergency_help">
                         <h2>Need an emergency help</h2>
                         <ul>
                             <li><a href="tel:{{ env('HELP_LINE_NO') }}"><img src="{{asset('front/images/phone_call.svg') }}" alt="" />
@@ -70,7 +82,6 @@
                                 </a></li>
                         </ul>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -237,8 +248,18 @@
                         <div class="errormsg"></div>
                     </div>
                     <div class="inputMainBlock fullwidth">
-                        <span>City - Area<i>*</i></span>
+                        <span>City / Area<i>*</i></span>
                         <input type="text" name="city" class="AnyValueVD" placeholder="City - Area">
+                        <div class="errormsg"></div>
+                    </div>
+                    <div class="inputMainBlock fullwidth">
+                        <span>Pincode<i>*</i></span>
+                        <input type="text" name="pincode" class="AnyValueVD" placeholder="Pincode">
+                        <div class="errormsg"></div>
+                    </div>
+                    <div class="inputMainBlock fullwidth">
+                        <span>State<i></i></span>
+                        <input type="text" name="state" class="AnyValueVD" placeholder="State">
                         <div class="errormsg"></div>
                     </div>
                     <div class="checkboxPart fullwidth">

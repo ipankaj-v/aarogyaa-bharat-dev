@@ -47,4 +47,8 @@ class Order extends Model
     {
         return $this->hasOne(OrderAddress::class); 
     }
+    public function orderOffer()
+    {
+        return $this->belongsTo(OfferAndDiscount::class, 'offer_id'); 
+    }
 }

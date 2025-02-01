@@ -33,7 +33,7 @@
 
                 <!-- Order Address -->
                 <h5>Shipping Address</h5>
-                <p><strong>House Number:</strong> {{ $order->orderAddress->house_number }}</p>
+               @if(isset($order->orderAddress->house_number)) <p><strong>House Number:</strong> {{ $order->orderAddress->house_number }}</p>@endif
                 <p><strong>Society Name:</strong> {{ $order->orderAddress->society_name }}</p>
                 <p><strong>Landmark:</strong> {{ $order->orderAddress->landmark }}</p>
                 <p><strong>Pincode:</strong> {{ $order->orderAddress->pincode }}</p>
@@ -84,7 +84,16 @@
                     </tbody>
                 </table>
                 <hr/>
-                <br/>    
+                <br/>
+                @php 
+                if(!empty($order->orderOffer)) {
+                                if($order->orderOffer->type == 'amount') {
+                                    $offerAmount = $order->orderOffer->value;
+                                } else {
+                                    
+                                }
+                }
+                @endphp
                 <!-- Calculation Section -->
                 <div class="row">
                     <div class="col-md-6">

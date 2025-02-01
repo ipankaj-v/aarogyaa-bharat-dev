@@ -156,7 +156,7 @@ header{float: left;width: 100%;box-shadow: 0 2px 5px rgb(0 0 0 / 5%);z-index: 9;
 .customerSlider_block{float: left;width: 100%; box-shadow: 0 1px 6px rgb(35 63 140 / 15%);padding: 36px 24px;border-radius: 12px;background: #fff url('../images/qtback.png') no-repeat right 24px bottom;margin: 16px 0 10px;}
 .customerSlider_block p{float: left;width: 100%;font-size: 16px;margin-bottom: 24px;color: #504D4D; height: 200px;}
 .customerSlider_block strong{float: left;width: 100%;font-size: 16px;margin-bottom: 6px;color: #000;font-family: 'Nunito-Bold';margin-top: 7px;}
-.customerSlider_block ul{float: left;list-style-type: none;border-right: 1px solid #B6B3B3;padding-right: 4px;margin-bottom: 7px;}
+.customerSlider_block ul{float: left;list-style-type: none;border-right: 0px solid #B6B3B3;padding-right: 4px;margin-bottom: 7px;}
 .customerSlider_block ul li{float: left;margin-right: 4px;}
 .customerSlider_block ul li img{float: left;} 
 .customerSlider_block i{float: left;font-size: 16px;color: #000;margin-left: 9px;font-style: normal;}
@@ -258,7 +258,7 @@ text-align: left;float: left;padding-left: 6px;}
 .blog_tag_name ul li.blogview img{float: left;}
 .blog_tag_name .blogreadnow{font-family: 'Nunito-Reg';font-size: 16px;font-weight: 700;line-height: 22px;color: #F2A602;
 }
-.read_more_blogs{width: 100%;float: left;border-top: 1px solid #D9D9D9;padding: 16px 18px;}
+.read_more_blogs{width: 100%;float: left;border-bottom: 1px solid #D9D9D9;padding: 16px 18px;}
 .read_more_blogs a{display: flex;flex-direction: row;align-items: center;justify-content: center;}
 .read_more_blogs p{font-family: 'Nunito-Reg';font-size: 16px;font-weight: 700;line-height: 22px;text-align: left;color:#F2A602;padding-right: 16px;}
 
@@ -1354,8 +1354,19 @@ text-align: center;}
 .part-offer {
   scroll-margin-top: 200px; /* Adjust this value to match your header height or desired offset */
 }
+.perrormsg{position: absolute;font-size: 14px;color: #B40000;bottom: -20px;display: none;}
 
+.our_blog_all_box{margin-top: 15px;}
 
+.our_blog_all_box .our_blog_box{padding-left: 0;}
+
+.category_box a{display: flex;    flex-direction: column;    align-items: center;}
+
+@media screen and (min-width: 218px) and (max-width: 991px) {
+.category_all_box {    overflow: auto;    white-space: nowrap;}
+.category_all_box .category_box {    padding: 0 10px;    width: 100%;}
+.category_all_box .category_box a {display: flex;    flex-direction: column;    align-items: center;}
+}
 
 
  

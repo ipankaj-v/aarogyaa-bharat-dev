@@ -28,7 +28,7 @@ class RaiseQueryController extends Controller
             'email' => 'required|email',
             'mobile' => 'required|digits:10',
             'product_name' => 'nullable|string',
-            'file_upload' => 'required|file|mimes:jpg,jpeg,png,pdf|max:5120', 
+            'file_upload' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120', 
             'description' => ['nullable', 'string', function($attribute, $value, $fail) {
                 $wordCount = str_word_count($value);
                 if ($wordCount < 10) {

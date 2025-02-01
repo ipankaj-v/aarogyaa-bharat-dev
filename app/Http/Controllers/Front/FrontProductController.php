@@ -24,7 +24,8 @@ class FrontProductController extends Controller
     public function productDetail($slug)
     {
         $faqFilters = Config::get('custom.faq_filter');
-        $productDetails = Product::where('slug', $slug)->first();
+        $productDetails = Product::with('productAttributes')->where('slug', $slug)->first();
+        // dd(isset($productDetails->productAttributes));
         $products = Product::with('category', 'images')->take(12)->get();
         // dd($productDetails);
         return view('front.product-details', compact('productDetails', 'products', 'faqFilters'));

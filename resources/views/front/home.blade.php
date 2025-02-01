@@ -45,7 +45,7 @@
  <section class="offer_Part part-offer" id="offer_Part">
     <div class="container">
         <div class="titlePart">
-            <h4>Offer & Discount</h4>
+            <h4>Special Offers & Discounts</h4>
             <!-- <a href="{{route('products')}}">View All <img src="{{ asset('front/images/orange_arrow.svg')}}" alt=""> </a> -->
         </div>
         <div class="rowMob">
@@ -188,7 +188,7 @@
 <section class="why_arogya_bharat">
     <div class="container">
        <div class="titlePart">
-            <h4>Why Aarogyaa Bharat ?</h4>
+            <h4>Why Aarogyaa Bharat?</h4>
             <p>We prioritize our clients, understanding their unique needs and preferences.</p>
         </div>
         <div class="why_arogya_bharat_all_box">
@@ -286,12 +286,12 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-        <div class="read_more_blogs">
+            <div class="read_more_blogs">
             <a href="{{ route('blogs')}}">
                 <p>Read More Blogs</p>
                 <img src="{{ asset('front/images/downArrow.svg') }}" alt="" />
             </a>
+        </div>
         </div>
     </div>
 </section>
@@ -428,7 +428,7 @@
                 tempInput.setSelectionRange(0, 99999);
                 document.execCommand('copy');
                 document.body.removeChild(tempInput);
-                alert('Offer code copied: ' + code);
+                toastr.success('Offer code copied: ' + code +'.');
             });
         });
     });

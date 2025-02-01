@@ -6,7 +6,7 @@
     <div class="container">
         <ul>
         <li><a href="{{ route('home') }}">Home</a> </li>
-        <li><a href="{{ route('products.category') }}">Product Cateogry</a> </li>
+        <li><a href="{{ route('products.category') }}">Cateogry</a> </li>
             <li><a href="#;">Product Details</a> </li>
         </ul>
     </div>    
@@ -42,7 +42,7 @@
                 <div class="prod_slide"><img src="{{asset('front/images/wheelchair_2.png')}}" alt="" /></div> -->
             </div>
             <div class="product_details_data">
-                <div class="rentorpurchase"><img src="images/info-circle_svg.svg" alt="" /><p>Rent or Purchase this product now.!</p></div>
+                <!-- <div class="rentorpurchase"><img src="images/info-circle_svg.svg" alt="" /><p>Rent or Purchase this product now.!</p></div> -->
                 <div class="product_name_details">
                     <div class="nameshare"><h2>{{$productDetails->title}}</h2><a href="#;"><img src="images/ri_share-line.svg" alt="" /></a></div>
                     <div class="product_description">
@@ -74,11 +74,20 @@
                         <a href="#;"><p>More Details</p><img src="images/downArrow.svg" alt="" /></a>
                     </div>
                     <div class="cart_buy">
-                    <form action="{{ route('cart.add', ['productId' => $productDetails->id]) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="addtocart">Add to Cart</button>
-                    </form>
-                    <a href="#;" class="btn_buynow" id="buy-now-button" data-productid="{{$productDetails->id}}">Buy Now</a>
+                        @if(!isset($productDetails->productAttributes) || $productDetails->productAttributes->stock == 0)
+                            <span style="color: red; font-weight: bold;">Out of Stock</span>
+                            <form action="{{ route('cart.add', ['productId' => $productDetails->id]) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="addtocart" disabled>Add to Cart</button>
+                            </form>
+                            <a href="#;" class="btn_buynow disabled" id="buy-now-button" data-productid="{{$productDetails->id}}">Buy Now</a>
+                        @else
+                            <form action="{{ route('cart.add', ['productId' => $productDetails->id]) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="addtocart">Add to Cart</button>
+                            </form>
+                            <a href="#;" class="btn_buynow" id="buy-now-button" data-productid="{{$productDetails->id}}">Buy Now</a>
+                        @endif
                     </div>
                 </div>
             </div>

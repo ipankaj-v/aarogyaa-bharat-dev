@@ -287,7 +287,7 @@ class CartController extends Controller
                     // $cart->discount_offer_amount = $couponAmount; 
                 } else {
                     // Direct discount amount
-                    $couponAmount -= $coupon->value; 
+                    $couponAmount = $coupon->value; 
                     // $cart->sub_total -= $coupon->value; 
                     // $cart->discount_offer_amount = $coupon->value;
                 }

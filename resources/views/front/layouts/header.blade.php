@@ -152,14 +152,14 @@
                     $('#notification-pop').html(data.notificationHtml);
                     $('.notificationPop').css('display', 'flex');
                 } else {
-                    alert('No notifications found.');
+                    toastr.error('No notifications found.');
                 }
             },
             error: function(xhr) {
                 if (xhr.status === 401) {
-                    alert('Please log in as a customer to see your notifications.');
+                    toastr.error('Please log to see your notifications.');
                 } else {
-                    alert('An error occurred while fetching notifications.');
+                    toastr.error('No notifications found.');
                 }
             }
         });

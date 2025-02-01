@@ -284,7 +284,7 @@
                     },
                     error: function(xhr, status, error) {
                         // Handle any unexpected errors
-                        alert('Something went wrong. Please try again later.');
+                        toastr.error('Something went wrong. Please try again later.');
                     }
                 });
             });
@@ -414,7 +414,7 @@
                         }
                     },
                     error: function(xhr, status, error) {
-                        alert('Something went wrong. Please try again later.');
+                        toastr.error('Something went wrong. Please try again later.');
                     }
                 });
             });
@@ -466,7 +466,7 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    alert('Something went wrong. Please try again later.');
+                    toastr.error('Something went wrong. Please try again later.');
                 }
             });
         }
@@ -481,7 +481,7 @@
                     },
                     success: function(response) {
                         if (response.success) {
-                            alert('Item deleted successfully.');
+                            toastr.success('Item deleted successfully.');
                             $('#cart-items').html(response.cartItmes);
                             $('#orderSummery').html(response.orderSummaryResponse);
                         } else {
@@ -489,7 +489,7 @@
                         }
                     },
                     error: function(xhr, status, error) {
-                        alert('Something went wrong. Please try again later.');
+                        toastr.error('Something went wrong. Please try again later.');
                     }
                 });
             }
@@ -522,7 +522,7 @@
                         }
                     },
                     error: function(xhr, status, error) {
-                        alert('Something went wrong. Please try again later.');
+                        toastr.error('Something went wrong. Please try again later.');
                     }
                 });
             }

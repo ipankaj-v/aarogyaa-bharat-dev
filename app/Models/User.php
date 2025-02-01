@@ -33,7 +33,9 @@ class User extends Authenticatable
         'otp_verified_at',
         'google_id',
         'facebook_id',
-        'pincode_id'
+        'pincode_id',
+        'pin_code',
+        'state',
     ];
 
     /**

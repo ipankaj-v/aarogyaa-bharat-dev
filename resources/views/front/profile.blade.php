@@ -247,22 +247,22 @@
                 <div class="inputMainBlock fullwidth">
                     <span>Full Name<i>*</i></span>
                     <input type="text" class="FullNameVD" name="full_name"  value="{{$customerDetail->name}}" placeholder="Full Name"> 
-                    <div class="errormsg full_nameError"></div> <!-- Error message container -->
+                    <div class="perrormsg full_nameError"></div> <!-- Error message container -->
                 </div>
                 <div class="inputMainBlock fullwidth">
                     <span>E-mail ID<i>*</i></span>
                     <input type="text" class="emailVD" name="email" placeholder="example@gmail.com" value="{{$customerDetail->email}}"> 
-                    <div class="errormsg emailError"></div> <!-- Error message container -->
+                    <div class="perrormsg emailError"></div> <!-- Error message container -->
                 </div>
                 <div class="inputMainBlock fullwidth">
                     <span>Mobile Number<i>*</i></span>
                     <input type="text" class="mobileVD" name="mobile" placeholder="00000 00000" value="{{$customerDetail->mobile}}"> 
-                    <div class="errormsg mobileError"></div> <!-- Error message container -->
+                    <div class="perrormsg mobileError"></div> <!-- Error message container -->
                 </div>
                 <div class="inputMainBlock fullwidth">
                     <span>City<i>*</i></span>
-                    <input type="text" class="AnyValueVD" name="city" placeholder="City" value="{{$customerDetail->city}}"> 
-                    <div class="errormsg cityError"></div> <!-- Error message container -->
+                    <input type="text" class="AnyValueVD" id="ccity" name="city" placeholder="City" value="{{$customerDetail->city}}"> 
+                    <div class="perrormsg cityError"></div> <!-- Error message container -->
                 </div>
                 <div class="checkboxPart fullwidth"> 
                     <button type="submit" class="submitBTN" onClick="updateProfile()">Save</button>
@@ -277,7 +277,6 @@
 <script>
 $(document).ready(function() {
     $('#updatepro').on('submit', function(event) {
-        alert();
         event.preventDefault(); // Prevent the default form submission
 
         // Clear previous error messages
@@ -294,7 +293,7 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 // Handle success
-                alert('Profile updated successfully!');
+                toastr.success('Profile updated successfully!');
                 $('#updatepro')[0].reset(); // Optionally reset the form
             },
             error: function(xhr) {
@@ -313,49 +312,50 @@ $(document).ready(function() {
     });
 });
 
-    function updateProfile(event) {
-        // event.preventDefault(); // Prevent the default form submission
+function updateProfile() {
+    
+    // Gather form data
+    var formData = {
+        _token: "{{ csrf_token() }}", // Include CSRF token directly
+        full_name: $('input[name="full_name"]').val(),
+        email: $('input[name="email"]').val(),
+        mobile: $('input[name="mobile"]').val(),
+        city: $("#ccity").val(),
+    };
 
-        // Gather form data
-        var formData = {
-            full_name: $('input[name="full_name"]').val(),
-            email: $('input[name="email"]').val(),
-            mobile: $('input[name="mobile"]').val(),
-            city: $('input[name="city"]').val(),
-        };
-        $('.errormsg').text('');
-        $.ajax({
-            url: "{{route('customers.profile.update')}}", // Update with your endpoint
-            type: 'GET',
-            data: formData,
-            success: function(response) {
-                // Handle success response
-                $('.errormsg').text('');
-                $('#profileDetails').html(response.html);
-                $('.updateprofilePop').hide(); 
-                alert('Profile updated successfully!');
-                // Optionally, you can update the UI or redirect
-            },
-            error: function(xhr) {
-                if (xhr.status === 422) { // Unprocessable Entity
+    // Clear previous error messages and hide them
+    $('.perrormsg').text('').hide();
+
+    $.ajax({
+        url: "{{ route('customers.profile.update') }}", // Your endpoint
+        type: 'POST', // Use POST for update
+        data: formData,
+        success: function(response) {
+            // Handle success
+            $('.perrormsg').text('').hide();
+            $('#profileDetails').html(response.html);
+            $('.updateprofilePop').hide();
+            toastr.success('Profile updated successfully!');
+        },
+        error: function(xhr) {
+            if (xhr.status === 422) { // Unprocessable Entity
                 var errors = xhr.responseJSON.errors;
-                // Clear previous error messages
-                $('.errormsg').text(''); 
+
+                // Display error messages
                 $.each(errors, function(key, value) {
-                    console.log('key: ' + key);
-                    console.log('value: ', value);
-                    
-                    // Check if value is an array or a single string
                     var errorMessage = Array.isArray(value) ? value[0] : value;
-                    $('.' + key + 'Error').text(errorMessage); // Display the error message
+                    var errorElement = $('.' + key + 'Error');                   
+                    errorElement.text(errorMessage).show(); // Set text and show error
                 });
             } else {
-                $('.errormsg').text('');
-                alert('An error occurred. Please try again.');
+                toastr.error('Something went wrong please try again!');
             }
-            }
-        });
-    }
+        }
+    });
+}
+
+
+
     function addAddress(event) {
     // event.preventDefault(); // Prevent the default form submission
 
@@ -367,7 +367,7 @@ $(document).ready(function() {
         landmark: $('input[name="landmark"]').val(),
         pincode: $('input[name="pincode"]').val(),
         city: $('input[name="city"]').val(),
-        city: $('input[name="state"]').val(),
+        ṣtate: $('input[name="state"]').val(),
     };
 
     // Clear previous error messages
@@ -380,7 +380,7 @@ $(document).ready(function() {
         success: function(response) {
             $('.errormsg').text('');
             $('#addressList').html(response.html); // Assuming you have an element to update with the new address list
-            alert('Address added successfully!');
+            toastr.success('Address added successfully!');
         },
         error: function(xhr) {
             if (xhr.status === 422) { // Unprocessable Entity
@@ -388,16 +388,13 @@ $(document).ready(function() {
                 // Clear previous error messages
                 $('.errormsg').text(''); 
                 $.each(errors, function(key, value) {
-                    console.log('key: ' + key);
-                    console.log('value: ', value);
-                    
                     // Check if value is an array or a single string
                     var errorMessage = Array.isArray(value) ? value[0] : value;
                     $('.' + key + 'Error').text(errorMessage); // Display the error message
                 });
             } else {
                 $('.errormsg').text('');
-                alert('An error occurred. Please try again.');
+                toastr.error('Something went wrong please try again');
             }
         }
     });
@@ -428,8 +425,7 @@ function changeStatusTab(statusId) {
                 $('#orders').html(response.customerDetailHtml);
             },
             error: function(xhr) {
-                console.error(xhr.responseText);
-                alert('An error occurred while fetching orders.');
+                toastr.error('Something went wrong please try again');
             }
         });
 }
@@ -471,7 +467,6 @@ function editAddress(id) {
         url: '/customer/get-update-address/' + id,
         type: 'GET',
         success: function(response) {
-            console.log(response);
             if (response.success) {
                 $('#address').html(response.html);
                 $('#addressForm input[name="house_number"]').val(response.address.house_number);
@@ -488,7 +483,6 @@ function editAddress(id) {
             }
         },
         error: function(xhr, status, error) {
-            console.error('Error fetching address data:', error);
             toastr.error('Something went wrong while fetching the address data.');
         }
     });

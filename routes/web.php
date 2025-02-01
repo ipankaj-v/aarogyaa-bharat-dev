@@ -91,7 +91,7 @@ Route::controller(BlogController::class)->group(function () {
 
 Route::middleware(['auth.customer'])->group(function () {
     Route::get('/profile', [FrontCustomerController::class, 'profile'])->name('customers.profile');
-    Route::get('/profile/update', [FrontCustomerController::class, 'profileUpdate'])->name('customers.profile.update');
+    Route::post('/profile/update', [FrontCustomerController::class, 'profileUpdate'])->name('customers.profile.update');
     Route::get('/profile/address', [FrontCustomerController::class, 'addAddress'])->name('customers.address.add');
     Route::post('/profile/logout', [FrontCustomerController::class, 'customerLogout'])->name('customer.logout');
     Route::get('/customer/notification', [FrontCustomerController::class, 'Notification'])->name('customer.notification');
