@@ -42,8 +42,9 @@ class FAQController extends Controller
         $faqPageData = Page::where('slug', $lastSegment)->with('cms.images')->first();
         $seoMetaTag = $faqPageData->seo_meta_tag;
         $seoMetaTagTitle = $faqPageData->seo_meta_tag_title;
+        $pageTitle = $faqPageData->page_title;
         $faqFilters = Config::get('custom.faq_filter');
-        return view('front.faqs', compact('faqFilters', 'seoMetaTag', 'seoMetaTagTitle', 'faqPageData' ));
+        return view('front.faqs', compact('faqFilters', 'seoMetaTag', 'seoMetaTagTitle', 'faqPageData' , 'pageTitle'));
     }
 
     public function create()

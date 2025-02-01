@@ -20,7 +20,8 @@ class Blog extends Model
         'tagname',
         'views',
         'seo_meta_tag',
-        'seo_meta_tag_title'
+        'seo_meta_tag_title',
+        'page_title'
     ];
 
 

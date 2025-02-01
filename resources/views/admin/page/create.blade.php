@@ -44,6 +44,13 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="pageName">Page Title(HEAD)</label>
+                                    <input type="text" name="page_title" class="form-control @error('page_title') is-invalid @enderror" id="pagetitle" placeholder="Enter Page title" value="{{ old('page_title') }}">
+                                    @error('page_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="title_tag">Tag Title</label>
                                     <input type="text" name="title_tag" class="form-control @error('title_tag') is-invalid @enderror" id="title_tag" placeholder="Enter Page Name" value="{{ old('title_tag') }}">
                                 </div>

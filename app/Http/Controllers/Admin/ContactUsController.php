@@ -19,6 +19,7 @@ class ContactUsController extends Controller
         $contactPageData = Page::where('slug', $lastSegment)->with('cms.images')->first();
         $seoMetaTag = $contactPageData->seo_meta_tag;
         $seoMetaTagTitle = $contactPageData->seo_meta_tag_title;
-        return view('front.contact' , compact('seoMetaTag', 'seoMetaTagTitle', 'contactPageData' ));
+        $pageTitle = $contactPageData->page_title;
+        return view('front.contact' , compact('seoMetaTag', 'seoMetaTagTitle', 'contactPageData' , 'pageTitle'));
     }
 }

@@ -48,6 +48,13 @@
                                     <input type="text" name="title_tag" class="form-control @error('title_tag') is-invalid @enderror" id="title_tag" placeholder="Enter Tag Title" value="{{ old('title_tag', $page->title_tag) }}">
                                 </div>
                                 <div class="form-group">
+                                    <label for="pageName">Page Title(HEAD)</label>
+                                    <input type="text" name="page_title" class="form-control @error('page_title') is-invalid @enderror" id="pagetitle" placeholder="Enter Page title" value="{{ old('page_title' , $page->page_title) }}">
+                                    @error('page_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="seo_meta_tag_title">SEO Meta Tag Title</label>
                                     <input type="text" name="seo_meta_tag_title" class="form-control @error('seo_meta_tag_title') is-invalid @enderror" id="seo_meta_tag_title" placeholder="Enter Page Name" value="{{ old('seo_meta_tag_title', $page->seo_meta_tag_title) }}">
                                 </div>

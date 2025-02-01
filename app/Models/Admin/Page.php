@@ -16,6 +16,7 @@ class Page extends Model
         'seo_meta_tag', 
         'status',
         'title_tag',
+        'page_title'
     ];
 
     public function cms()

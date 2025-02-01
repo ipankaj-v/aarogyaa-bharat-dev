@@ -11,11 +11,8 @@
     <meta name="description" content="{{$seoMetaTag}}">
     @endif
     <title>
-    @if(isset($seoMetaTagTitle))
-       {{$seoMetaTagTitle}}
-    @endif
-    @if(isset($seoMetaTag))
-      {{$seoMetaTag}}
+    @if(isset($pageTitle))
+       {{$pageTitle}}
     @endif
     </title>
 

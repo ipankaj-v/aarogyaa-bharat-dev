@@ -20,8 +20,9 @@ class HomeController extends Controller
         $seoMeta = Page::where('slug', 'home')->first(); 
         $seoMetaTag = $seoMeta->seo_meta_tag ?? ''; 
         $seoMetaTagTitle = $seoMeta->seo_meta_tag_title ?? '';
+        $pageTitle = $seoMeta->page_title ?? '';
          
-        return view('front.home', compact('categories', 'products', 'blogs', 'seoMetaTag', 'seoMetaTagTitle'));
+        return view('front.home', compact('categories', 'products', 'blogs', 'seoMetaTag', 'seoMetaTagTitle' , 'pageTitle'));
     }
 
     public function productPage()
