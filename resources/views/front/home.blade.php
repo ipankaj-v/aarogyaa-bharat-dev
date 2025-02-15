@@ -404,15 +404,23 @@
     </div>
 </section>
 @endif
+@if (isset($aboutAarogyaBharat)  && !empty($aboutAarogyaBharat) && isset($aboutAarogyaBharat->cms) && !empty($aboutAarogyaBharat->cms))
+    
 <section class="about_aarogya_bharat">
     <div class="container">
-        <div class="about_aarogya_title"><h2>About Aarogya Bharat</h2></div>
+        {{-- <div class="about_aarogya_title"><h2>About Aarogya Bharat</h2></div> --}}
+        <div class="about_aarogya_title"><h2>{{ $aboutAarogyaBharat->cms->description }}</h2></div>
         <div class="about_aarogya_bharat_text">
-            <p>A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors.A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors.</p>
-            <p>A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors. A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors <a href="#;">Read More..</a></p>
+            <div id="content" class="short-content">
+                {!! $aboutAarogyaBharat->cms->content !!}
+            </div>
+            <a id="toggleButton" class="readmore-aarogyaabharat">Read More..</a>
+            {{-- <p>A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors.A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors.</p>
+            <p>A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors. A wheelchair is a chair fitted with wheels. The device comes in variations allowing either manual propulsion by the seated occupant turning the rear wheels by hand or electric propulsion by motors <a href="#;">Read More..</a></p> --}}
         </div>
     </div>
 </section>
+@endif
 @endsection('content')
 <script src="{{ asset('front/js/jquery.min.js') }}"></script>
 <script>
@@ -430,6 +438,30 @@
                 document.body.removeChild(tempInput);
                 toastr.success('Offer code copied: ' + code +'.');
             });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let content = document.getElementById("content");
+        let button = document.getElementById("toggleButton");
+
+        // Store original content
+        let fullContent = content.innerHTML;
+        let shortContent = fullContent.substring(0, 500) + '...'; // Adjust the length as needed
+
+        // Initially show only a short version
+        content.innerHTML = shortContent;
+        let expanded = false;
+
+        button.addEventListener("click", function () {
+            if (expanded) {
+                content.innerHTML = shortContent;
+                button.innerText = "Read More";
+            } else {
+                content.innerHTML = fullContent;
+                button.innerText = "Read Less";
+            }
+            expanded = !expanded;
         });
     });
 </script>

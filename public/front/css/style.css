@@ -1368,6 +1368,14 @@ text-align: center;}
 .category_all_box .category_box a {display: flex;    flex-direction: column;    align-items: center;}
 .product_name_details{margin-top: 15px;}
 }
+.readmore-aarogyaabharat {
+  color: #F2A602;
+  cursor: pointer; 
+  text-decoration: none; 
+}
 
+.readmore-aarogyaabharat:hover {
+  text-decoration: underline; 
+}
 
  

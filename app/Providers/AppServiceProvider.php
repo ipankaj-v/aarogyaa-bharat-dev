@@ -41,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
 
         $partners = Page::where('slug', 'partners')->with('cms.images')->first();
         $whyAarogyaBharat = Page::where('slug', 'why-aarogya-bharat')->with('cms.images')->first();
+        $aboutAarogyaBharat = Page::where('slug', 'about-aarogya-bharat')->with('cms.images')->first();
 
 
         View::share('recentViewedProducts', $recentViewedProducts);
@@ -52,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('happyCustomers', $happyCustomers);
         View::share('partners', $partners);
         View::share('whyAarogyaBharat', $whyAarogyaBharat);
+        View::share('aboutAarogyaBharat', $aboutAarogyaBharat);
         //cart count
         $session_id = Cache::get('session_id', Session::getId());
         \Log::info(['$session_id  Appserice provider' => $session_id]);

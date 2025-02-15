@@ -33,9 +33,9 @@
                     <img src="{{ asset('front/images/arogya_bharat.svg') }}" alt="">
                 </a>
                 <ul class="menuList">
-                    <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
+                    <li id="home" class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
                     <li class="{{ Route::currentRouteName() == 'products' ? 'active' : '' }}"><a href="{{ route('products') }}">Products</a></li>
-                    <li id="offerLink" class="{{ request()->is('/') && request()->has('offer_Part') ? 'active' : '' }}"><a href="{{ route('home') }}#offer_Part">Offers</a></li>
+                    <li id="offerLink"><a href="{{ route('home') }}#offer_Part">Offers</a></li>
                     <li class="{{ Route::currentRouteName() == 'blogs' ? 'active' : '' }}" ><a href="{{route('blogs')}}">Blogs</a></li>
                     <li class="{{ Route::currentRouteName() == 'customer.about.us' ? 'active' : '' }}"><a href="{{route('customer.about.us')}}">About</a></li>
                 </ul>
@@ -176,6 +176,7 @@
         document.addEventListener("DOMContentLoaded", function () {
         if (window.location.hash === "#offer_Part") {
             document.getElementById("offerLink").classList.add("active");
+            document.getElementById("home").classList.remove("active");
         }
     });
 
