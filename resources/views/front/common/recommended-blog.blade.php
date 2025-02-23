@@ -1,10 +1,12 @@
 <div class="left_part_blog">
                 @foreach($blogs as $blog)
                 <div class="our_blog_box">
-                    <div class="blog_image"><a href="{{ route('blog.details', ['slug' => $blog->slug]) }}"><img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="" /></a></div>
+                    <div class="blog_image"><a href="{{ route('blog.details', ['slug' => $blog->slug]) }}">
+                        <img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="" />
+                    </a></div>
                     <div class="blog_text">
-                        <div class="text_one"><h2>{{$blog->name}}</h2>
-                            <p><a href="{{ route('blog.details', ['slug' => $blog->slug]) }}" style="color: black;">{{$blog->title}}</a></p>
+                        <div class="text_one"><a href="{{ route('blog.details', ['slug' => $blog->slug]) }}" style="color: black;"><h2>{{$blog->title}}</h2></a>
+                            <p><a href="{{ route('blog.details', ['slug' => $blog->slug]) }}" style="color: black;">{{$blog->description}}</a></p>
                         </div>
                         <div class="blog_tag_name">
                             <ul>

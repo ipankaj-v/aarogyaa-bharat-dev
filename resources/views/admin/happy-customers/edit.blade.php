@@ -59,6 +59,28 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" name="city"
+                                        class="form-control @error('city') is-invalid @enderror" id="city"
+                                        placeholder="Enter Customer City" value="{{ old('city' , $customer->city) }}">
+
+                                    @error('city')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city">State</label>
+                                    <input type="text" name="state"
+                                        class="form-control @error('state') is-invalid @enderror" id="state"
+                                        placeholder="Enter Customer State" value="{{ old('state' , $customer->state) }}">
+
+                                    @error('state')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

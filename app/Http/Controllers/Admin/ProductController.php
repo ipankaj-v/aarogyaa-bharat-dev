@@ -66,6 +66,11 @@ class ProductController extends Controller
         $product->gst = $request->gst;
         $product->about_item = $request->about_item;
         $product->image = 'temp';
+       
+        $product->discount_percentage = $request->dicount_percentage ?? null;
+        $product->page_title = $request->page_title ?? null;
+        $product->seo_meta_tag_title = $request->seo_meta_tag_title ??  null;
+        $product->seo_meta_tag = $request->seo_meta_tag ?? null;
         $product->save();
         if ($request->hasFile('image')) {
             $firstFile = $request->file('image')[0]; 
@@ -88,7 +93,6 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, $id) {
-       
         $request->validate([
             'name' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
@@ -115,10 +119,14 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->weekly_price = $request->weekly_price;
         $product->gst = $request->gst;
-        $product->is_rentable = $request->has('is_rentable');
-        $product->is_popular = $request->has('is_popular');
-        $product->is_new = $request->has('is_new');
+        $product->is_rentable = $request->has('is_rentable') ? true : false ;
+        $product->is_popular = $request->has('is_popular') ? true : false;
+        $product->is_new = $request->has('is_new') ? true : false;
         $product->about_item = $request->about_item;
+        $product->discount_percentage = $request->dicount_percentage;
+        $product->page_title = $request->page_title;
+        $product->seo_meta_tag_title = $request->seo_meta_tag_title;
+        $product->seo_meta_tag = $request->seo_meta_tag;
         $product->save();
             if ($request->hasFile('image')) {
                 if ($product->images->isNotEmpty()) {

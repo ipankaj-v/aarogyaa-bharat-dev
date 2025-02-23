@@ -72,6 +72,7 @@ Route::controller(BannerController::class)->group(function () {
     Route::post('/banners/{id}', 'update')->name('banners.update');
     Route::get('/banners/{id}', 'destroy')->name('banners.destroy');
     Route::get('pincheck', 'pinCheck')->name('checkpin');
+    Route::get('/get-city-state/{pincode}', 'getCityState')->name('get.city.state');
 });
 
 Route::controller(RaiseQueryController::class)->group(function () {
@@ -133,6 +134,7 @@ Route::controller(CartController::class)->group(function () {
 Route::controller(FrontCmsController::class)->group(function () {
     Route::get('/about-us', 'AboutUs')->name('customer.about.us');
     Route::get('/terms-and-conditions', 'TermsAndConditions')->name('terms.and.conditions');
+    Route::get('/privacy-policy', 'privacyPolicy')->name('privacy.policy');
 });
 
 // Route::get('razorpay-payment', [PaymentController::class, 'index']);

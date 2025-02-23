@@ -16,7 +16,7 @@
             <div class="card-body">
                 <!-- Order Amount & Status -->
                 <h5>Order Information</h5>
-                <p><strong>Amount:</strong> ₹{{ number_format($order->amount, 2) }}</p>
+                <p><strong>Amount:</strong> ₹{{ number_format($order->amount, 0) }}</p>
                 <p><strong>Status:</strong> {{ $order->status->name }}</p>
                 <p><strong>Created At:</strong> {{ $order->created_at }}</p>
                 <!-- Customer Information -->

@@ -61,7 +61,7 @@
 <section class="product_Part">
     <div class="container">
         <div class="titlePart">
-            <h4>Newly Product</h4>
+            <h4>Newly added products</h4>
             <a href="{{ route('products')}}">View All <img src="{{ asset('front/images/orange_arrow.svg') }}" alt="View All"> </a>
         </div>
         <div class="rowMob">
@@ -76,8 +76,29 @@
                             </div>
                             <h5>{{ $product->name }}</h5>
                             <p>{{ $product->description }}</p>
-                            <strong>₹ {{ number_format($product->price, 2) }}</strong><i>/ Per week</i>
-                            <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">View Details <img src="{{ asset('front/images/orange_arrow.svg') }}" alt=""> </a>
+                            <div class="discounted-product-price">
+                                @if (isset($product->discount_percentage) && $product->discount_percentage > 0)
+                                    <del class="original-price">₹  @indianCurrency($product->price) </del>
+                                    {{-- Original price with strikethrough --}}
+                                    <strong class="discounted-price">₹
+                                         @indianCurrency($product->price - ($product->price * $product->discount_percentage) / 100) </strong>
+                                    {{-- Discounted price --}}
+                                    <span
+                                        class="discount-percentage">( @indianCurrency($product->discount_percentage) %
+                                        OFF)</span> {{-- Discount percentage --}}
+                                @else
+                                    <strong class="discounted-price">₹
+                                        @indianCurrency($product->price)</strong> {{-- Price without discount --}}
+                                @endif
+
+                                <div class="view-details">
+                                    <a href="{{ route('products.detail', $product->id) }}"
+                                        class="view-details-link">View Details</a>
+                                </div>
+                            </div>
+                            {{-- <strong>₹ {{ number_format($product->price, 0) }}</strong>
+                            <i>/ Per week</i>
+                            <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">View Details <img src="{{ asset('front/images/orange_arrow.svg') }}" alt=""> </a> --}}
                         </div>
                     </div>
                 @endforeach
@@ -265,7 +286,8 @@
                             <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}">
                                 <h2>{{ $blog->title }}</h2>
                             </a>    
-                                <p>{{ Str::limit($blog->content, 150) }}</p>
+                                {{-- <p>{{ Str::limit($blog->content, 150) }}</p> --}}
+                                <p>{{ $blog->description }}</p>
                             </div>
                             <div class="blog_tag_name">
                                 <ul>

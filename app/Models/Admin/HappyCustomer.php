@@ -14,5 +14,7 @@ class HappyCustomer extends Model
         'name',
         'comment',
         'rate',
+        'city',
+        'state',
     ];
 }

@@ -25,13 +25,26 @@ class FrontCmsController extends Controller
     {
         $lastSegment = basename(parse_url($request->url(), PHP_URL_PATH));
         $page = Page::where('slug', $lastSegment)->with('cms.images')->first();
-        $seoMetaTag = $page->seo_meta_tag;
-        $seoMetaTagTitle = $page->seo_meta_tag_title;
-        $pageTitle = $page->page_title;
         if (!$page || !$page->cms) {
             abort(404); // or redirect or show a custom message
         }
+        $seoMetaTag = $page->seo_meta_tag;
+        $seoMetaTagTitle = $page->seo_meta_tag_title;
+        $pageTitle = $page->page_title;
         return view('front.terms-conditions', compact('page','seoMetaTag', 'seoMetaTagTitle'));
+    }
+
+    public function privacyPolicy(Request $request)
+    {
+        $lastSegment = basename(parse_url($request->url(), PHP_URL_PATH));
+        $page = Page::where('slug', $lastSegment)->with('cms.images')->first();
+        if (!$page || !$page->cms) {
+            abort(404); // or redirect or show a custom message
+        }
+        $seoMetaTag = $page->seo_meta_tag;
+        $seoMetaTagTitle = $page->seo_meta_tag_title;
+        $pageTitle = $page->page_title;
+        return view('front.privacy-policy', compact('page','seoMetaTag', 'seoMetaTagTitle'));
     }
 
 }

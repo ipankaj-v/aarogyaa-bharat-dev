@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Models\Admin\PinOffice;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class BannerController extends Controller
@@ -25,24 +26,48 @@ class BannerController extends Controller
     // Store a new banner
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'link' => 'nullable|url',
-            'image' => 'required|image|',
-            'status' => 'nullable|boolean',
-            'display_order' => 'nullable|integer',
+        $validator = Validator::make($request->all(), [
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'mobile' => 'required|string|unique:users,mobile',
+            'city' => 'required|string|max:255',
+            'pincode' => 'required|numeric|digits:6',
         ]);
-        // dd($validatedData);
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('banners', 'public');
-            $validatedData['image'] = $imagePath;
-        }
-        $validatedData['status'] = $request->has('status') ? true : false;
-        Banner::create($validatedData);
 
-        return redirect()->route('banners.index')->with('success', 'Banner created successfully.');
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            $customer = User::create([
+                'name' => $request->input('full_name'),
+                'password' => bcrypt($request->input('mobile')),
+                'email' => $request->input('email'),
+                'mobile' => $request->input('mobile'),
+                'city' => $request->input('city'),
+                'pin_code' => $request->input('pincode'),
+                'state' => $request->input('state'),
+            ]);
+
+            $customerPin = PinOffice::where(['pin' => $request->input('pincode')])->first();
+
+            if ($customerPin) {
+                $customer->update(['pincode_id' => $customerPin->id]);
+            }
+
+            $customer->assignRole('Customer');
+
+            DB::commit();
+
+            return response()->json(['success' => 'Customer registered successfully!'], 200);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'Something went wrong: ' . $e->getMessage()], 500);
+        }
     }
+
 
     // Show the form to edit a specific banner
     public function edit($id)
@@ -125,5 +150,24 @@ class BannerController extends Controller
         }
         $userPincodeHtml =  view('front.common.customer-pin', compact('userPincode'))->render();
         return response()->json(['available' => $exists, 'userPincodeHtml' => $userPincodeHtml, 'redirect' => route('raise.query'),]);        
+    }
+
+    public function getCityState($pincode)
+    {
+        try {
+            $data = PinOffice::where('pin', $pincode)->first();
+
+            if ($data) {
+                return response()->json([
+                    'success' => true,
+                    'city' => $data->district,
+                    'state' => $data->state
+                ]);
+            } else {
+                return response()->json(['success' => false, 'message' => 'No match found']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Something went wrong']);
+        }
     }
 }

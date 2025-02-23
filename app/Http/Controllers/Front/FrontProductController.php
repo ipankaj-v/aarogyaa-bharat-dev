@@ -29,7 +29,10 @@ class FrontProductController extends Controller
         // dd(isset($productDetails->productAttributes));
         $products = Product::with('category', 'images')->take(12)->get();
         // dd($productDetails);
-        return view('front.product-details', compact('productDetails', 'products', 'faqFilters'));
+        $seoMetaTag = $productDetails->seo_meta_tag ?? ''; 
+        $seoMetaTagTitle = $productDetails->seo_meta_tag_title ?? ''; 
+        $pageTitle = $productDetails->page_title ?? ''; 
+        return view('front.product-details', compact('productDetails', 'products', 'faqFilters', 'seoMetaTag', 'seoMetaTagTitle' , 'pageTitle'));
     }
 
     public function searchProducts(Request $request)

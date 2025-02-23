@@ -258,7 +258,7 @@ text-align: left;float: left;padding-left: 6px;}
 .blog_tag_name ul li.blogview img{float: left;}
 .blog_tag_name .blogreadnow{font-family: 'Nunito-Reg';font-size: 16px;font-weight: 700;line-height: 22px;color: #F2A602;
 }
-.read_more_blogs{width: 100%;float: left;border-bottom: 1px solid #D9D9D9;padding: 16px 18px;}
+.read_more_blogs{width: 100%;float: left;border-top: 1px solid #D9D9D9;padding: 16px 18px;}
 .read_more_blogs a{display: flex;flex-direction: row;align-items: center;justify-content: center;}
 .read_more_blogs p{font-family: 'Nunito-Reg';font-size: 16px;font-weight: 700;line-height: 22px;text-align: left;color:#F2A602;padding-right: 16px;}
 
@@ -295,7 +295,7 @@ text-align: left;float: left;padding-left: 6px;}
 .Products_tag ul li a{float: left;background: linear-gradient(94.59deg, rgba(35, 63, 140, 0.1) 46.28%, rgba(255, 204, 92, 0.1) 94.61%);padding: 12px 16px;border-radius: 8px;display: flex;flex-direction: row;justify-content: space-between;}
 .Products_tag ul li a p{font-family: 'Nunito-Reg';font-size: 16px;font-weight: 400;line-height: 22px;color: #000;padding-right: 6.5px;}
 .Products_tag ul li:last-child{padding-right: 0;}
-.social_connects{width: 100%;float: left;padding-bottom: 48px;}
+.social_connects{width: 100%;float: left;padding-bottom: 20px;}
 .social_connects ul{width: 100%;float: left;list-style-type: none;}
 .social_connects ul li{float: left;padding-right: 24px;}
 .social_connects ul li a{width: 48px;height: 48px;border-radius: 4px; float: left;}
@@ -1376,6 +1376,62 @@ text-align: center;}
 
 .readmore-aarogyaabharat:hover {
   text-decoration: underline; 
+}
+/* happy customer */
+.customerSlider_block ul{margin-top: 10px;}
+
+ /* Product Price Section */
+.discounted-product-price {
+    font-size: 16px;  
+    margin-bottom: 10px;
+
+    .original-price {
+        color: #888;
+        text-decoration: line-through;
+        margin-right: 8px;
+        font-size: 14px;
+    }
+
+    .discounted-price {
+      float: left;
+      font-size: 16px;
+      font-family: 'Nunito-Bold';
+      color: #000;
+      margin-right: 10px;
+    }
+
+    .discount-percentage {
+        color: #28a745;
+        font-weight: bold;
+        margin-left: 8px;
+        font-size: 15px;
+    }
+
+    .view-details {
+        margin-top: 5px;
+
+        .view-details-link {
+          float: right;
+          font-size: 16px;
+          font-family: 'Nunito-Bold';
+          color: #F2A602;
+          margin-top: 5px;
+          display: flex;
+        }
+    }
+}
+
+
+.our_blog_all_box{margin-top: 15px;}
+
+.our_blog_all_box .our_blog_box{padding-left: 0;}
+
+.category_box a{display: flex;    flex-direction: column;    align-items: center;}
+
+@media screen and (min-width: 218px) and (max-width: 991px) {
+.category_all_box {    overflow: auto;    white-space: nowrap;}
+.category_all_box .category_box {    padding: 0 10px;    width: 100%;}
+.category_all_box .category_box a {display: flex;    flex-direction: column;    align-items: center;}
 }
 
  

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\HappyCustomer;
+use App\Models\Admin\PinOffice;
 use Illuminate\Http\Request;
 use DataTables;
 
@@ -31,7 +32,8 @@ class HappyCustomerController extends Controller
 
     public function create()
     {
-        return view('admin.happy-customers.create');
+        $pins = PinOffice::get();
+        return view('admin.happy-customers.create' , compact('pins'));
     }
 
     public function store(Request $request)
@@ -40,6 +42,8 @@ class HappyCustomerController extends Controller
             'name' => 'required|string|max:255',
             'comment' => 'required|string',
             'rate' => 'required|integer|between:1,5', // Assuming a rating scale of 1-5
+            'city' => 'required',
+            'state' => 'required',
         ]);
 
         HappyCustomer::create($request->all());
@@ -49,7 +53,8 @@ class HappyCustomerController extends Controller
     public function edit($id)
     {
         $customer = HappyCustomer::findOrFail($id);
-        return view('admin.happy-customers.edit', compact('customer'));
+        $pins = PinOffice::get();
+        return view('admin.happy-customers.edit', compact('customer', 'pins'));
     }
 
     public function update(Request $request, $id)
@@ -58,6 +63,8 @@ class HappyCustomerController extends Controller
             'name' => 'required|string|max:255',
             'comment' => 'required|string',
             'rate' => 'required|integer|between:1,5',
+            'city' => 'required',
+            'state' => 'required'
         ]);
 
         $customer = HappyCustomer::findOrFail($id);

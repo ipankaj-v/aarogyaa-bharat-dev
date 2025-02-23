@@ -52,14 +52,15 @@ class CustomerController extends Controller
             'state' => $request->input('state'), 
         ]);
 
-        $pin = PinOffice::create([ 
-            'district' => $request->input('city'), 
-            'pin' => $request->input('pincode'), 
-            'state' => $request->input('state'), 
-            'available' => 1, 
-        ]);
-        if ($pin) {
-            $customer->update(['pincode_id' => $pin->id]);
+        $customerPin = PinOffice::where(['pin' => $request->input('pincode')])->first();
+        // $pin = PinOffice::create([ 
+        //     'district' => $request->input('city'), 
+        //     'pin' => $request->input('pincode'), 
+        //     'state' => $request->input('state'), 
+        //     'available' => 1, 
+        // ]);
+        if ($customerPin) {
+            $customer->update(['pincode_id' => $customerPin->id]);
         }
         $customer->assignRole('Customer');
         return response()->json(['success' => 'Customer registered successfully!'], 200);

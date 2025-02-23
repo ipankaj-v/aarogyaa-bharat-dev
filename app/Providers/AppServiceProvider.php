@@ -15,6 +15,8 @@ use App\Models\Banner;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Admin\Page;
+use App\Traits\FormatsIndianCurrency;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $recentViewedProducts = Product::orderBy('updated_at', 'desc')->take(10)->get();
-        $popularProducts = Product::orderBy('updated_at', 'desc')->take(10)->get();
+        $popularProducts = Product::where('is_popular', true)->orderBy('updated_at', 'desc')->take(10)->get();
         $offerAndDiscounts = OfferAndDiscount::orderBy('updated_at', 'desc')->take(10)->get();
         $contactusBlog = Blog::with('images')->inRandomOrder()->take(4)->get();
         $faqs = FAQ::with('answers')->get();
@@ -63,5 +65,10 @@ class AppServiceProvider extends ServiceProvider
         ->get()
     ->sum('cart_products_count');
         View::share('cartProductCount', $cartProductCount);
+    
+        Blade::directive('indianCurrency', function ($amount) {
+            return "<?php echo (new class { use \App\Traits\FormatsIndianCurrency; })->formatIndianCurrency($amount); ?>";
+        });
+    
     }
 }

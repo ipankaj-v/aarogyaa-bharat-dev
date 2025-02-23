@@ -1,6 +1,6 @@
 <div class="container">
         <div class="titlePart">
-            <h4>Happy Customers..!</h4>
+            <h4>Our Happy Customers</h4>
             <!-- <a href="#;">View All <img src="{{asset('front/images/orange_arrow.svg')}}" alt=""> </a> -->
         </div>
         <div class="rowMob">
@@ -10,8 +10,16 @@
                     <div class="customerSlider_padd">
                             <div class="customerSlider_block">
                             <p>{{ \Illuminate\Support\Str::limit($customer->comment, 400) }}</p>
-                                <strong>{{ $customer->name }}</strong>
-                                <ul>
+                                <div class="happy-customer-details">
+                                    <strong>{{ $customer->name }}</strong>
+                                    @if (isset($customer->city) && !empty($customer->city))
+                                    <span>{{ $customer->city }}</span>
+                                    @endif
+                                    @if (isset($customer->state) && !empty($customer->state))
+                                    <span>, {{ $customer->state }}</span>
+                                    @endif
+                                </div>
+                                <ul class="mt-3">
                                     @php
                                         $rating = round($customer->rate); 
                                     @endphp

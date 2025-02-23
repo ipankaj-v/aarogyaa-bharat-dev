@@ -3,22 +3,22 @@
         <div class="all_footer_parts">
             <div class="footer_acco_box">
                 <div class="acco_click"><a href="#;">
-                        <p>Quick links</p><img src="{{asset('front/images/upArrow.svg')}}" alt="" />
+                        <p>Quick links</p><img src="{{ asset('front/images/upArrow.svg') }}" alt="" />
                     </a></div>
                 <div class="acco_text">
                     <div class="footer_links">
                         <div class="links_text">
                             <ul>
-                                <li><a href="{{route('customer.about.us')}}">About</a></li>
-                                <li><a href="{{route('blogs')}}">Privacy Policy</a></li>
-                                <li><a href="{{route('terms.and.conditions')}}">Terms and Condtions</a></li>
+                                <li><a href="{{ route('customer.about.us') }}">About</a></li>
+                                <li><a href="{{ route('privacy.policy') }}">Privacy Policy</a></li>
+                                <li><a href="{{ route('terms.and.conditions') }}">Terms and Condtions</a></li>
                             </ul>
                         </div>
                         <div class="links_text">
                             <ul>
-                                <li><a href="{{route('blogs')}}">Blogs</a></li>
-                                <li><a href="{{route('faqs')}}">Frequently Asked Questions</a></li>
-                                <li><a href="{{route('front.contact')}}">Contact us</a></li>
+                                <li><a href="{{ route('blogs') }}">Blogs</a></li>
+                                <li><a href="{{ route('faqs') }}">Frequently Asked Questions</a></li>
+                                <li><a href="{{ route('front.contact') }}">Contact us</a></li>
                             </ul>
                         </div>
                     </div>
@@ -26,68 +26,75 @@
             </div>
             <div class="footer_acco_box">
                 <div class="acco_click"><a href="#;">
-                        <p>Popular Products</p><img src="{{asset('front/images/upArrow.svg')}}" alt="" />
+                        <p>Popular Products</p><img src="{{ asset('front/images/upArrow.svg') }}" alt="" />
                     </a></div>
                 <div class="acco_text">
                     <div class="Products_tag">
-                        @if(isset($popularProducts))
-                        <ul>
-                            @foreach ($popularProducts as $product)
-                            <li>
-                                <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">
-                                    <p>{{ $product->name }}</p>
-                                    <!-- <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"> -->
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
+                        @if (isset($popularProducts))
+                            <ul>
+                                @foreach ($popularProducts as $product)
+                                    <li>
+                                        <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">
+                                            <p>{{ $product->name }}</p>
+                                            <!-- <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"> -->
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         @endif
                     </div>
                 </div>
             </div>
             <div class="footer_acco_box">
                 <div class="acco_click"><a href="#;">
-                        <p>Social connects</p><img src="{{asset('front/images/upArrow.svg')}}" alt="" />
+                        <p>Social connects</p><img src="{{ asset('front/images/upArrow.svg') }}" alt="" />
                     </a></div>
                 <div class="acco_text">
                     <div class="social_connects">
                         <ul>
-                            <li><a href="{{env('FACEBOOK_PAGE_URI')}}"><img src="{{asset('front/images/facebook.svg') }}" alt="Facebook" /></a></li>
-                            <li><a href="{{env('INSTA_PAGE_URI')}}"><img src="{{asset('front/images/insta.svg') }}" alt="Insta" /></a></li>
-                            <li><a href="{{env('X_PAGE_URI')}}"><img src="{{asset('front/images/Xtwit.svg') }}" alt="X" /></a></li>
-                            <!-- <li><a href="{{env('YOUTUBE_PAGE_URI')}}"><img src="{{asset('front/images/youtube.png') }}" alt="" /></a></li> -->
-                            <li><a href="https://wa.me/{{ env('HELP_LINE_NO') }}" target="_blank"><img src="{{asset('front/images/whatsapp.svg') }}" alt="WhatsApp" /></a></li>
+                            <li><a href="{{ env('FACEBOOK_PAGE_URI') }}"><img
+                                        src="{{ asset('front/images/facebook.svg') }}" alt="Facebook" /></a></li>
+                            <li><a href="{{ env('INSTA_PAGE_URI') }}"><img src="{{ asset('front/images/insta.svg') }}"
+                                        alt="Insta" /></a></li>
+                            <li><a href="{{ env('X_PAGE_URI') }}"><img src="{{ asset('front/images/Xtwit.svg') }}"
+                                        alt="X" /></a></li>
+                            <!-- <li><a href="{{ env('YOUTUBE_PAGE_URI') }}"><img src="{{ asset('front/images/youtube.png') }}" alt="" /></a></li> -->
+                            <li><a href="https://wa.me/{{ env('HELP_LINE_NO') }}" target="_blank"><img
+                                        src="{{ asset('front/images/whatsapp.svg') }}" alt="WhatsApp" /></a></li>
                         </ul>
                     </div>
                     <!-- <div class="emergency_help">
                         <h2>Need an emergency help</h2>
                         <ul>
-                            <li><a href="tel:{{ env('HELP_LINE_NO') }}"><img src="{{asset('front/images/phone_call.svg') }}" alt="" />
-                                    <p>{{env('HELP_LINE_NO')}}</p><span>Call Now</span>
+                            <li><a href="tel:{{ env('HELP_LINE_NO') }}"><img src="{{ asset('front/images/phone_call.svg') }}" alt="" />
+                                    <p>{{ env('HELP_LINE_NO') }}</p><span>Call Now</span>
                                 </a></li>
-                            <li><a href="mailto:{{ env('HELP_LINE_EMAIL') }}"><img src="{{asset('front/images/mail.svg') }}" alt="" />
-                                    <p>{{env('HELP_LINE_EMAIL')}}</p>
+                            <li><a href="mailto:{{ env('HELP_LINE_EMAIL') }}"><img src="{{ asset('front/images/mail.svg') }}" alt="" />
+                                    <p>{{ env('HELP_LINE_EMAIL') }}</p>
                                 </a></li>
                         </ul>
                     </div> -->
                 </div>
                 <div class="emergency_help">
-                        <h2>Need an emergency help</h2>
-                        <ul>
-                            <li><a href="tel:{{ env('HELP_LINE_NO') }}"><img src="{{asset('front/images/phone_call.svg') }}" alt="" />
-                                    <p>{{env('HELP_LINE_NO')}}</p><span>Call Now</span>
-                                </a></li>
-                            <li><a href="mailto:{{ env('HELP_LINE_EMAIL') }}"><img src="{{asset('front/images/mail.svg') }}" alt="" />
-                                    <p>{{env('HELP_LINE_EMAIL')}}</p>
-                                </a></li>
-                        </ul>
-                    </div>
+                    <h2>Need an emergency help</h2>
+                    <ul>
+                        <li><a href="tel:{{ env('HELP_LINE_NO') }}"><img
+                                    src="{{ asset('front/images/phone_call.svg') }}" alt="" />
+                                <p>{{ env('HELP_LINE_NO') }}</p><span>Call Now</span>
+                            </a></li>
+                        <li><a href="mailto:{{ env('HELP_LINE_EMAIL') }}"><img
+                                    src="{{ asset('front/images/mail.svg') }}" alt="" />
+                                <p>{{ env('HELP_LINE_EMAIL') }}</p>
+                            </a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </footer>
 <div class="copyrights">
-    <p>Copyrights © 2020 Aarogyaa Bharat | <a href="https://webxds.com" target="_blank" class="designer-link">Designed by WebXDS</a></p>
+    <p>Copyrights © 2020 Aarogyaa Bharat | <a href="https://webxds.com" target="_blank" class="designer-link">Designed
+            by WebXDS</a></p>
 </div>
 
 
@@ -95,30 +102,35 @@
     <ul>
         <li>
             <a href="{{ route('home') }}">
-            <img src="{{ Route::currentRouteName() == 'home' ? asset('front/images/home_active.svg') : asset('front/images/home-inactive.svg') }}" alt="Home" />
+                <img src="{{ Route::currentRouteName() == 'home' ? asset('front/images/home_active.svg') : asset('front/images/home-inactive.svg') }}"
+                    alt="Home" />
                 Home
             </a>
         </li>
         <li>
-        <a href="{{ route('products') }}">
-            <img src="{{ Request::is('products') ? asset('front/images/productbar-active.svg') : asset('front/images/productbar.svg') }}" alt="Product" />
+            <a href="{{ route('products') }}">
+                <img src="{{ Request::is('products') ? asset('front/images/productbar-active.svg') : asset('front/images/productbar.svg') }}"
+                    alt="Product" />
                 Product
-        </a>
+            </a>
         </li>
         <li>
-        <a href="{{ route('home') }}#offer_Part">   
-        <img src="{{ Route::currentRouteName() == 'home#offer_Part' ? asset('front/images/offerbar-active.svg') : asset('front/images/offerbar.svg') }}" alt="Offers" />
+            <a href="{{ route('home') }}#offer_Part">
+                <img src="{{ Route::currentRouteName() == 'home#offer_Part' ? asset('front/images/offerbar-active.svg') : asset('front/images/offerbar.svg') }}"
+                    alt="Offers" />
                 Offers
             </a>
         </li>
-        <li>   
-        @if(Auth::check() && Auth::user()->hasRole('Customer'))   
-            <a href="{{route('customers.profile')}}">
-                <img src="{{ Request::is('profile') ? asset('front/images/profilebar-active.svg') : asset('front/images/profilebar.svg') }}" alt="Profile" />
-            Profile</a>
-        @else
-            <a href="javascript:void(0)" onclick="openLoginPop()"><img src="{{ asset('front/images/profilebar.svg') }}" alt="">Profile</a>
-        @endif
+        <li>
+            @if (Auth::check() && Auth::user()->hasRole('Customer'))
+                <a href="{{ route('customers.profile') }}">
+                    <img src="{{ Request::is('profile') ? asset('front/images/profilebar-active.svg') : asset('front/images/profilebar.svg') }}"
+                        alt="Profile" />
+                    Profile</a>
+            @else
+                <a href="javascript:void(0)" onclick="openLoginPop()"><img
+                        src="{{ asset('front/images/profilebar.svg') }}" alt="">Profile</a>
+            @endif
         </li>
     </ul>
 </div>
@@ -126,18 +138,18 @@
 
 <div class="locationPop winScrollStop">
     <div class="locationBlock">
-        <a href="#;"><img src="{{asset('front/images/cross.svg')}}" alt="" /></a>
+        <a href="#;"><img src="{{ asset('front/images/cross.svg') }}" alt="" /></a>
         <h4>Select Delivery Location</h4>
         <p>Please enter pin code to get current location.</p>
         <div class="inputPart">
-        <input type="number" placeholder="Enter pin code" name="pin" id="pinCode"  />
-        <a href="javascript:void(0)" id="checkPin">Check</a>
-        <div id="success" style="color: green;">
-            
-        </div>
-        <div id="fail" style="color: red;">
-            
-        </div>
+            <input type="number" placeholder="Enter pin code" name="pin" id="pinCode" />
+            <a href="javascript:void(0)" id="checkPin">Check</a>
+            <div id="success" style="color: green;">
+
+            </div>
+            <div id="fail" style="color: red;">
+
+            </div>
 
         </div>
         <div class="currLoc">
@@ -159,10 +171,12 @@
                 </div>
                 <div class="socialLogos">
                     <div>
-                    <a href="{{ route('google.login') }}"><img src="{{ asset('front/images/logos_google.svg') }}" alt="" /></a>
+                        <a href="{{ route('google.login') }}"><img
+                                src="{{ asset('front/images/logos_google.svg') }}" alt="" /></a>
                     </div>
                     <div>
-                    <a href="{{ route('facebook.login') }}"><img src="{{ asset('front/images/facebook_logo.svg') }}" alt="" /></a>
+                        <a href="{{ route('facebook.login') }}"><img
+                                src="{{ asset('front/images/facebook_logo.svg') }}" alt="" /></a>
                     </div>
                 </div>
                 <div class="orLine">
@@ -172,7 +186,7 @@
                     @csrf
                     <div class="inputMainBlock fullwidth">
                         <span>Mobile number</span>
-                        <input type="tel" name="mobile" class="mobileVD" placeholder="9876543210">
+                        <input type="tel" name="mobile" class="mobileVD" placeholder="9921407039" autocomplete="off">
                         <div class="errormsg"></div>
                         <div class="addressNote2">
                             <img src="{{ asset('front/images/info-circle.svg') }}" alt="">
@@ -188,19 +202,26 @@
             <div class="optForm">
                 <div class="title1">
                     <strong>Verify with OTP</strong>
-                    <p>Enter the OTP sent to <span id="number-section"><strong>XXXXXX9898</strong></span> <br> <a href="#;">Change Number</a> </p>
+                    <p>Enter the OTP sent to <span id="number-section"><strong>XXXXXX9898</strong></span> <br> <a
+                            href="#;">Change Number</a> </p>
                 </div>
                 <form id="otp_form">
                     <div class="a_otpPart">
                         <div class="inputMainBlock fullwidth">
                             <div class="form-group">
                                 <div class="otp-wrap" id="otp-inputs">
-                                    <input type="number" id="codeBox1" maxlength="1" title="OTP" onfocus="onFocusEvent(1)" autocomplete="one-time-code" />
-                                    <input type="number" id="codeBox2" maxlength="1" title="OTP" onfocus="onFocusEvent(2)" autocomplete="one-time-code" />
-                                    <input type="number" id="codeBox3" maxlength="1" title="OTP" onfocus="onFocusEvent(3)" autocomplete="one-time-code" />
-                                    <input type="number" id="codeBox4" maxlength="1" title="OTP" onfocus="onFocusEvent(4)" autocomplete="one-time-code" />
-                                    <input type="number" id="codeBox5" maxlength="1" title="OTP" onfocus="onFocusEvent(5)" autocomplete="one-time-code" />
-                                    <input type="number" id="codeBox6" maxlength="1" title="OTP" onfocus="onFocusEvent(6)" autocomplete="one-time-code" />
+                                    <input type="number" id="codeBox1" maxlength="1" title="OTP"
+                                        onfocus="onFocusEvent(1)" autocomplete="one-time-code" />
+                                    <input type="number" id="codeBox2" maxlength="1" title="OTP"
+                                        onfocus="onFocusEvent(2)" autocomplete="one-time-code" />
+                                    <input type="number" id="codeBox3" maxlength="1" title="OTP"
+                                        onfocus="onFocusEvent(3)" autocomplete="one-time-code" />
+                                    <input type="number" id="codeBox4" maxlength="1" title="OTP"
+                                        onfocus="onFocusEvent(4)" autocomplete="one-time-code" />
+                                    <input type="number" id="codeBox5" maxlength="1" title="OTP"
+                                        onfocus="onFocusEvent(5)" autocomplete="one-time-code" />
+                                    <input type="number" id="codeBox6" maxlength="1" title="OTP"
+                                        onfocus="onFocusEvent(6)" autocomplete="one-time-code" />
                                     <div class="errormsg">You have entered incorrect OTP</div>
                                 </div>
                             </div>
@@ -217,7 +238,8 @@
                                     <input type="checkbox" checked />
                                     <i></i>
                                 </label>
-                                I read and understand <a href="{{route('terms.and.conditions')}}">Terms and Conditions</a>.
+                                I read and understand <a href="{{ route('terms.and.conditions') }}">Terms and
+                                    Conditions</a>.
                             </div>
                             <button class="submitBTN">Submit</button>
                         </div>
@@ -228,38 +250,45 @@
             <div class="registerFormPart">
                 <div class="title1">
                     <strong>Register</strong>
-                    <p>Please below details to get regsiter</p>
+                    <p>Please enter below details to get register</p>
                 </div>
                 <form id="register_form" method="post" action="{{ route('customers.store') }}">
                     @csrf
                     <div class="inputMainBlock fullwidth">
-                        <span>Full Name<i>*</i></span>
+                        <span>Enter Your Full Name<i>*</i></span>
                         <input type="text" name="full_name" class="FullNameVD" placeholder="Full Name">
                         <div class="errormsg"></div>
                     </div>
                     <div class="inputMainBlock fullwidth">
-                        <span>E-mail ID<i>*</i></span>
-                        <input type="email" name="email" class="emailVD" placeholder="E-mail ID">
+                        <span>Enter Your E-mail ID<i>*</i></span>
+                        <input type="email" name="email" class="emailVD" placeholder="E-mail ID"
+                            autocomplete="off">
                         <div class="errormsg"></div>
                     </div>
                     <div class="inputMainBlock fullwidth">
-                        <span>Mobile Number<i>*</i></span>
-                        <input type="text" name="mobile" class="mobileVD" placeholder="Mobile Number">
+                        <span>Enter Your Mobile Number<i>*</i></span>
+                        <input type="text" name="mobile" class="mobileVD" placeholder="Mobile Number"
+                            autocomplete="off">
                         <div class="errormsg"></div>
                     </div>
+
                     <div class="inputMainBlock fullwidth">
-                        <span>City / Area<i>*</i></span>
-                        <input type="text" name="city" class="AnyValueVD" placeholder="City - Area">
+                        <span>Enter Your Pincode<i>*</i></span>
+                        <input type="text" name="pincode" class="AnyValueVD" placeholder="Pincode"
+                            autocomplete="off">
+                        <div class="pinmsg"></div>
                         <div class="errormsg"></div>
                     </div>
+
                     <div class="inputMainBlock fullwidth">
-                        <span>Pincode<i>*</i></span>
-                        <input type="text" name="pincode" class="AnyValueVD" placeholder="Pincode">
+                        <span>Enter Your City / Area<i>*</i></span>
+                        <input type="text" name="city" class="AnyValueVD" placeholder="City - Area" readonly>
                         <div class="errormsg"></div>
                     </div>
+
                     <div class="inputMainBlock fullwidth">
-                        <span>State<i></i></span>
-                        <input type="text" name="state" class="AnyValueVD" placeholder="State">
+                        <span>Enter Your State<i></i></span>
+                        <input type="text" name="state" class="AnyValueVD" placeholder="State" readonly>
                         <div class="errormsg"></div>
                     </div>
                     <div class="checkboxPart fullwidth">
@@ -275,14 +304,17 @@
 <script src="{{ asset('front/js/jquery.min.js') }}"></script>
 <script src="{{ asset('front/js/slick.js') }}"></script>
 <script src="{{ asset('front/js/script.js') }}"></script>
-    <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D1GEF2BB22"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-D1GEF2BB22');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-D1GEF2BB22');
 </script>
 <script>
     $.ajaxSetup({
@@ -309,10 +341,11 @@
                     $('.errormsg').html('');
                     if (response.errors) {
                         $.each(response.errors, function(key, value) {
-                            $('input[name="' + key + '"]').next('.errormsg').html(value[0]).css("display", "block");
+                            $('input[name="' + key + '"]').next('.errormsg').html(
+                                value[0]).css("display", "block");
                         });
                     } else {
-                        alert(response.success);
+                        toastr.success(response.success);
                         $('#register_form')[0].reset();
                         $('.registerFormPart').hide();
                         $('.LoginPop').show();
@@ -323,7 +356,8 @@
                 error: function(xhr) {
                     $('.errormsg').html('');
                     $.each(xhr.responseJSON.errors, function(key, value) {
-                        $('input[name="' + key + '"]').next('.errormsg').html(value[0]).css("display", "block");
+                        $('input[name="' + key + '"]').next('.errormsg').html(value[
+                            0]).css("display", "block");
                     });
                 }
             });
@@ -335,46 +369,49 @@
             var formData = $('#loginMo').serialize();
             formData += '&_token=' + "{{ csrf_token() }}";
 
-    $.ajax({
-        url: "{{ route('customer.login') }}",
-        type: 'POST',
-        data: formData,
-        success: function(response) {
-            $('.errormsg').html('');
-            if (response.errors) {
-                $.each(response.errors, function(key, value) {
-                    $('input[name="' + key + '"]').next('.errormsg').html(value[0]).css("display", "block");
-                });
-            } else {
-                alert(response.success);
-                $('.mobForm').hide();
-                $('.optForm').show();
-                count3minut('otp_form');
-                mobileNumber = response.number;
-                otpUrl = "{{ route('verify.otp', ['number' => ':number']) }}".replace(':number', mobileNumber);
-                let maskedNumber = 'XXXXXX' + mobileNumber.slice(-4);
-                $('#number-section').text(maskedNumber);
-            }
-        },
-        error: function(xhr) {
-            $('.errormsg').html('');
-            $.each(xhr.responseJSON.errors, function(key, value) {
-                $('input[name="' + key + '"]').next('.errormsg').html(value[0]).css("display", "block");
+            $.ajax({
+                url: "{{ route('customer.login') }}",
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    $('.errormsg').html('');
+                    if (response.errors) {
+                        $.each(response.errors, function(key, value) {
+                            $('input[name="' + key + '"]').next('.errormsg').html(
+                                value[0]).css("display", "block");
+                        });
+                    } else {
+                        toastr.success(response.success);
+                        $('.mobForm').hide();
+                        $('.optForm').show();
+                        count3minut('otp_form');
+                        mobileNumber = response.number;
+                        otpUrl = "{{ route('verify.otp', ['number' => ':number']) }}"
+                            .replace(':number', mobileNumber);
+                        let maskedNumber = 'XXXXXX' + mobileNumber.slice(-4);
+                        $('#number-section').text(maskedNumber);
+                    }
+                },
+                error: function(xhr) {
+                    $('.errormsg').html('');
+                    $.each(xhr.responseJSON.errors, function(key, value) {
+                        $('input[name="' + key + '"]').next('.errormsg').html(value[
+                            0]).css("display", "block");
+                    });
+                }
             });
-        }
-    });
-    });
-    $('#checkPin').on('click', function() {
-        var pinCode = $('#pinCode').val();
-        // Simple validation for empty input
-        if (pinCode === '') {
-            $('#fail').text('Please enter a pin code.');
-            $('#success').text('');
-            return;
-        }
+        });
+        $('#checkPin').on('click', function() {
+            var pinCode = $('#pinCode').val();
+            // Simple validation for empty input
+            if (pinCode === '') {
+                $('#fail').text('Please enter a pin code.');
+                $('#success').text('');
+                return;
+            }
 
             $.ajax({
-                url: "{{route('checkpin')}}", // Change this to your actual endpoint
+                url: "{{ route('checkpin') }}", // Change this to your actual endpoint
                 method: 'GET', // Use POST or GET as needed
                 data: {
                     pin: pinCode,
@@ -401,56 +438,59 @@
 
     //get adress from current location start
     $('#getLocationBtn').click(function() {
-            if (navigator.geolocation) {
-                // Use geolocation to get the current position
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Get the latitude and longitude
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
+        if (navigator.geolocation) {
+            // Use geolocation to get the current position
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // Get the latitude and longitude
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
 
-                    var geocodeUrl = 'https://nominatim.openstreetmap.org/reverse?lat=' + latitude + '&lon=' + longitude + '&format=json';
+                var geocodeUrl = 'https://nominatim.openstreetmap.org/reverse?lat=' + latitude +
+                    '&lon=' + longitude + '&format=json';
 
-                        $.get(geocodeUrl, function(data) {
-                            if (data) {
-                                var address = data.address;
-                                $.ajax({
-                                url: "{{route('save.location')}}",
-                                method: 'GET',
-                                data: {
-                                    address: address,
-                                },
-                                success: function(response) {
-                                    console.log('response', response);
-                                    if(response.success) {
-                                        if(response.userPincodeHtml) {
-                                            $('#pincodeContainer').html(response.userPincodeHtml);
-                                        }
-                                        toastr.success(response.message);
-                                    } else {
-                                        toastr.error(response.message);
+                $.get(geocodeUrl, function(data) {
+                    if (data) {
+                        var address = data.address;
+                        $.ajax({
+                            url: "{{ route('save.location') }}",
+                            method: 'GET',
+                            data: {
+                                address: address,
+                            },
+                            success: function(response) {
+                                console.log('response', response);
+                                if (response.success) {
+                                    if (response.userPincodeHtml) {
+                                        $('#pincodeContainer').html(response
+                                            .userPincodeHtml);
                                     }
-                                    $('.locationPop').hide();
-                                },
-                                error: function(xhr, status, error) {
-                                    toastr.error(error);
+                                    toastr.success(response.message);
+                                } else {
+                                    toastr.error(response.message);
                                 }
-                            });
-                            } 
-                        }).fail(function() {
-                            toastr.error('Address could not be retrieved');
+                                $('.locationPop').hide();
+                            },
+                            error: function(xhr, status, error) {
+                                toastr.error(error);
+                            }
                         });
-                }, function(error) {
-                    toastr.error(error.message);
+                    }
+                }).fail(function() {
+                    toastr.error('Address could not be retrieved');
                 });
-            } else {
-                toastr.error('Geolocation is not supported by this browser.');
-            }
+            }, function(error) {
+                toastr.error(error.message);
+            });
+        } else {
+            toastr.error('Geolocation is not supported by this browser.');
+        }
     });
 
     //get adress from current location end
 
-        // otp timer
-        var interval;
+    // otp timer
+    var interval;
+
     function count3minut(otpFid) {
         var timer2 = "1:00";
         interval = setInterval(function() {
@@ -461,15 +501,15 @@
             minutes = (seconds < 0) ? --minutes : minutes;
             seconds = (seconds < 0) ? 59 : seconds;
             seconds = (seconds < 10) ? '0' + seconds : seconds;
-        
-            $('#'+otpFid+' .a_otpPart .a_countText p i').html('0' + minutes + ':' + seconds);
+
+            $('#' + otpFid + ' .a_otpPart .a_countText p i').html('0' + minutes + ':' + seconds);
             if (minutes < 0) clearInterval(interval);
             if ((seconds <= 0) && (minutes <= 0)) clearInterval(interval);
             timer2 = minutes + ':' + seconds;
 
             if ((seconds <= 0) && (minutes <= 0)) {
-                $('#'+otpFid+' .a_otpPart .a_countText').hide();
-                $('#'+otpFid+' .a_otpPart .a_resendOtp').show();
+                $('#' + otpFid + ' .a_otpPart .a_countText').hide();
+                $('#' + otpFid + ' .a_otpPart .a_resendOtp').show();
             }
 
         }, 1000);
@@ -479,7 +519,52 @@
         $('.LoginPop').show();
     }
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const pincodeInput = document.querySelector("input[name='pincode']");
+        const cityInput = document.querySelector("input[name='city']");
+        const stateInput = document.querySelector("input[name='state']");
+        const errorMsg = document.querySelector(".pinmsg");
 
-</body>
+        let timer;
 
-</html>
+        pincodeInput.addEventListener("input", function() {
+            const pincode = this.value;
+
+            // Clear previous timer
+            clearTimeout(timer);
+
+            if (pincode.length >= 4) {
+                errorMsg.innerHTML = "Searching...";
+
+                timer = setTimeout(() => {
+                    fetch(`/get-city-state/${pincode}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                cityInput.value = data.city;
+                                stateInput.value = data.state;
+                                errorMsg.innerHTML = ""; // Clear error message
+                            } else {
+                                cityInput.value = "";
+                                stateInput.value = "";
+                                errorMsg.innerHTML = data.message;
+                            }
+                        })
+                        .catch(() => {
+                            cityInput.value = "";
+                            stateInput.value = "";
+                            errorMsg.innerHTML = "Something went wrong";
+                        });
+                }, 500); // Delay search to avoid too many requests
+            } else {
+                cityInput.value = "";
+                stateInput.value = "";
+                errorMsg.innerHTML = "";
+            }
+        });
+    });
+
+</script>
+    </body>
+    </html>

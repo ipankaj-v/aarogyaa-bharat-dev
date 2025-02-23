@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('pin_code', 10)->nullable()->after('pincode_id'); // Adjust the "after" column as needed
-            $table->string('state')->nullable()->after('pincode');
+            $table->string('state')->nullable()->after('pin_code');
         });
     }
 

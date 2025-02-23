@@ -3,9 +3,9 @@
 <div class="banneranimationbox" >
                 <div class="container">
                 @if ($page->cms && $page->cms->images->isNotEmpty())
-                  <img src="{{ asset('storage/' .$page->cms->images->first()->path) }}" alt="">
+                  {{-- <img src="{{ asset('storage/' .$page->cms->images->first()->path) }}" alt=""> --}}
                 @else  
-                  <img src="{{asset('front/images/banner.jpg')}}" alt="">
+                  {{-- <img src="{{asset('front/images/banner.jpg')}}" alt=""> --}}
 				@endif
                 </div>
             </div>
