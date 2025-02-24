@@ -28,7 +28,7 @@
                                     <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
                                 </div>
                                 <p>{{ $product->name }}</p>
-                                <strong>₹ {{ number_format($product->price, 0) }}</strong>
+                                <strong>₹ @indianCurrency($product->price, 0) </strong>
                             </div> 
                         </div>
                     @endforeach

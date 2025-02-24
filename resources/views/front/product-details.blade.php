@@ -48,7 +48,7 @@
                     <div class="product_description">
                     <p>{{$productDetails->description}}</p>
                     </div>
-                    <div class="productprice"><h2>₹ {{$productDetails->price}}</h2></div>
+                    <div class="productprice"><h2>₹ @indianCurrency($productDetails->price)</h2></div>
                     <div class="features_specification">
                         <h2>Features & Specification</h2>
                         <ul>

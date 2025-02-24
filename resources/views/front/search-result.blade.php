@@ -25,7 +25,7 @@
                             <div class="productbox_text">
                                 <h2>{{ $product->name }}</h2>
                                 <div class="priceshare">
-                                    <h3>₹ {{ $product->price }}</h3>
+                                    <h3>₹ @indianCurrency($product->price)</h3>
                                     <a target="_blank"
                                         href="https://wa.me/?text={{ urlencode('Check out this product: ' . $product->title . ' ' . route('products.detail', $product->slug)) }}">
                                         <img src="{{ asset('front/images/Share.svg') }}" alt="Share on WhatsApp">

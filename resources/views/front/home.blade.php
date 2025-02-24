@@ -74,7 +74,7 @@
                                     <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                                 </a>   
                             </div>
-                            <h5>{{ $product->name }}</h5>
+                            <h5>{{ $product->name }} </h5>
                             <p>{{ $product->description }}</p>
                             <div class="discounted-product-price">
                                 @if (isset($product->discount_percentage) && $product->discount_percentage > 0)
@@ -92,8 +92,10 @@
                                 @endif
 
                                 <div class="view-details">
-                                    <a href="{{ route('products.detail', $product->id) }}"
+                                    {{-- <img src="{{ asset('front/images/orange_arrow.svg') }}" alt=""> --}}
+                                    <a href="{{ route('products.detail', $product->slug) }}"
                                         class="view-details-link">View Details</a>
+                                    {{-- </img> --}}
                                 </div>
                             </div>
                             {{-- <strong>₹ {{ number_format($product->price, 0) }}</strong>
@@ -278,7 +280,7 @@
                     <div class="our_blog_box">
                         <div class="blog_image">
                         <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}">
-                            <img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="{{ $blog->title }}" />
+                            {{-- <img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="{{ $blog->title }}" /> --}}
                         </a>   
                         </div>
                         <div class="blog_text">

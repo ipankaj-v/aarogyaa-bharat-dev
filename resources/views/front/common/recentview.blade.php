@@ -15,7 +15,7 @@
                             </a>    
                             </div>
                             <a href="{{ route('products.detail', ['slug' => $product->slug]) }}"><p>{{ $product->name }}</p></a>
-                            <strong>₹ {{ $product->price }}</strong>
+                            <strong>₹ @indianCurrency($product->price)</strong>
                         </div> 
                     </div>
                 @endforeach

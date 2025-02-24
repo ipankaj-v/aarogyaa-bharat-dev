@@ -4,7 +4,7 @@
         <div class="container">
             <ul>
                 <li><a href="{{ route('home') }}">Home</a> </li>
-                <li><a href="{{ route('products.category') }}">Product Cateogry</a> </li>
+                <li><a href="{{ route('products.category') }}">Cateogry</a> </li>
                 <li><a href="{{ route('products') }}">Product Listing</a> </li>
             </ul>
         </div>
@@ -65,7 +65,7 @@
                                             @endif
 
                                             <div class="view-details">
-                                                <a href="{{ route('products.detail', $product->id) }}"
+                                                <a href="{{ route('products.detail', $product->slug) }}"
                                                     class="view-details-link">View Details</a>
                                             </div>
                                         </div>
