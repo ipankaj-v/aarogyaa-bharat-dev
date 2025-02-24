@@ -61,7 +61,7 @@
 <section class="product_Part">
     <div class="container">
         <div class="titlePart">
-            <h4>Newly added products</h4>
+            <h4>Newly Added products</h4>
             <a href="{{ route('products')}}">View All <img src="{{ asset('front/images/orange_arrow.svg') }}" alt="View All"> </a>
         </div>
         <div class="rowMob">
@@ -280,7 +280,7 @@
                     <div class="our_blog_box">
                         <div class="blog_image">
                         <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}">
-                            {{-- <img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="{{ $blog->title }}" /> --}}
+                            <img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="{{ $blog->title }}" />
                         </a>   
                         </div>
                         <div class="blog_text">
