@@ -58,6 +58,13 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="imagealt">Image Alt</label>
+                                    <input type="text" name="alt" class="form-control @error('alt') is-invalid @enderror" id="imagealt" placeholder="Image Alt" value="{{ old('alt') }}">
+                                    @error('alt')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="ArticleAuthor">Article Author</label>
                                     <input type="text" name="article_author" class="form-control @error('article_author') is-invalid @enderror" id="article_author" placeholder="Enter Blog Article Author" value="{{ old('article_author') }}">
                                     @error('article_author')

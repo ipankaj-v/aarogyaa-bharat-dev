@@ -2,12 +2,12 @@
                 <div class="blog_image_box">
                     <div class="blog_image_height">
                        <a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}">
-                        <img src="{{ asset('storage/' . $oneBlog->images->first()->path) }}" alt="">
+                        <img src="{{ asset('storage/' . $oneBlog->images->first()->path) }}" alt="{{ $oneBlog->images->first()->alt }}">
                     </a>
                     </div>
                 </div>
                 <div class="blog_text">
-                    <div class="text_two"><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" style="color: black;"><h2>{{$oneBlog->title}}</h2></a>
+                    <div class="text_two"><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" style="color: black;"><h1>{{$oneBlog->title}}</h1></a>
                         <p><a href="{{ route('blog.details', ['slug' => $oneBlog->slug]) }}" style="color: black;">{{$oneBlog->description}}</a></p>
                     </div>
                     <div class="blog_tag_name">

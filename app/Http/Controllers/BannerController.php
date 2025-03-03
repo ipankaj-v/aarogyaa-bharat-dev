@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\PinOffice;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class BannerController extends Controller
 {
@@ -84,10 +85,12 @@ class BannerController extends Controller
         'title' => 'required|string|max:255',
         'description' => 'nullable|string',
         'link' => 'nullable|url',
-        'image' => 'nullable|image',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'status' => 'nullable|boolean',
         'display_order' => 'nullable|integer',
+        // 'is_mobile' => 'boolean',
     ]);
+  
     $banner = Banner::find($id);
     
     if ($request->hasFile('image')) {
@@ -110,6 +113,7 @@ class BannerController extends Controller
     $banner->link = $validatedData['link'];  // Set the link
     $banner->status = $validatedData['status'];
     $banner->display_order = $validatedData['display_order'];
+    $banner->is_mobile = $request->has('is_mobile') ? 1 : 0;
 
     // Save the banner to the database
     $banner->save();
@@ -169,5 +173,45 @@ class BannerController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Something went wrong']);
         }
+    }
+
+    public function bannerStore(Request $request)
+    {
+        // Validation rules
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'link' => 'nullable|url',
+            'description' => 'nullable|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Max size: 2MB
+            'status' => 'boolean',
+            'display_order' => 'nullable|integer|min:0',
+            // 'is_mobile' => 'boolean',
+        ]);
+
+        // Check validation failure
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Handle file upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('banners', 'public'); // Stores in 'storage/app/public/banners'
+        }
+
+        // Create banner record
+        Banner::create([
+            'title' => $request->title,
+            'link' => $request->link,
+            'description' => $request->description,
+            'image' => $imagePath,
+            'status' => $request->status ?? 0,
+            'display_order' => $request->display_order ?? 0,
+            'is_mobile' => $request->has('is_mobile') ? 1 : 0, // Defaults to desktop if unchecked
+        ]);
+
+        return redirect()->route('banners.index')->with('success', 'Banner created successfully.');
     }
 }

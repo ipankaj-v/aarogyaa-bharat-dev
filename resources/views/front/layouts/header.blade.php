@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -37,7 +37,7 @@
                     <li class="{{ Route::currentRouteName() == 'products' ? 'active' : '' }}"><a href="{{ route('products') }}">Products</a></li>
                     <li id="offerLink"><a href="{{ route('home') }}#offer_Part">Offers</a></li>
                     <li class="{{ Route::currentRouteName() == 'blogs' ? 'active' : '' }}" ><a href="{{route('blogs')}}">Blogs</a></li>
-                    <li class="{{ Route::currentRouteName() == 'customer.about.us' ? 'active' : '' }}"><a href="{{route('customer.about.us')}}">About</a></li>
+                    {{-- <li class="{{ Route::currentRouteName() == 'customer.about.us' ? 'active' : '' }}"><a href="{{route('customer.about.us')}}">About</a></li> --}}
                 </ul>
                 @if(Auth::check() && Auth::user()->hasRole('Customer'))
                 <div class="loginBtn">
@@ -55,7 +55,13 @@
                 @endif
                 <ul class="cartsUl">
                     <li>
-                        <a class="notificationpopupjs"> <img src="{{ asset('front/images/notification.svg') }}" alt="notification"></a>
+                        <a class="notificationpopupjs"> <img src="{{ asset('front/images/notification.svg') }}" alt="notification">
+                            @if(auth()->check())
+                                <span id="notify-count">{{ auth()->user()->notifications->count() }}</span>
+                            @else
+                                <span id="notify-count">0</span>
+                            @endif
+                        </a>
                     </li>
                     <li>
                     @if(Auth::check() && Auth::user()->hasRole('Customer'))
@@ -180,4 +186,35 @@
         }
     });
 
+    </script>
+    <script>
+        $(document).on('click', '.notidelete', function () {
+            let notificationId = $(this).data('id');
+
+            $.ajax({
+                url: `/customer/notification/delete/${notificationId}`,
+                type: 'GET', 
+                success: function (response) {
+                    if (response.success) {
+                        if (response.notificationHtml) {
+                        $('#notification-pop').html(response.notificationHtml);
+                        $('#notify-count').text(response.count);
+                        $('.notificationPop').css('display', 'flex');
+                        } else {
+                            toastr.error('No notifications found.');
+                        }
+                        toastr.success(response.message); // Show success message
+                    } else {
+                        toastr.error('Failed to delete notification');
+                    }
+                },
+                error: function () {
+                    if (xhr.status === 401) {
+                        toastr.error('Please log to see your notifications.');
+                    } else {
+                        toastr.error('No notifications found.');
+                    }
+                }
+            });
+        });
     </script>

@@ -11,12 +11,12 @@
                     <p id="district">{{ Auth::user()->pincode->district }}</p>
                     <i id="state">{{ Auth::user()->pincode->state }}</i>
                 @else
-                    <p>Pune</p>
-                    <i>Maharashtra</i>
+                    <p>Select </p>
+                    <i>Location</i>
                 @endif
             @else
-                <p>Pune</p>
-                <i>Maharashtra</i>
+                <p>Select</p>
+                <i>Location</i>
             @endif
         @endif
     </div>

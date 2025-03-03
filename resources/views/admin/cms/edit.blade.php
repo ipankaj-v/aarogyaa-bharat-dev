@@ -128,6 +128,19 @@
                                     </div>
                                 </div>
 
+                                @if ($cms->images->isNotEmpty() && isset($cms->images->first()->alt) && !empty($cms->images->first()->alt))
+                                        <div class="form-group">
+                                            <label for="imagealt">Image Alt</label>
+                                            <input type="text" name="alt"
+                                                class="form-control @error('alt') is-invalid @enderror" id="imagealt"
+                                                placeholder="Image Alt"
+                                                value="{{ old('alt', $cms->images->first()->alt) }}">
+                                            @error('alt')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                @endif
+
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

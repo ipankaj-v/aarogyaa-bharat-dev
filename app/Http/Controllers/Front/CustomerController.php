@@ -16,6 +16,7 @@ use Spatie\Permission\Models\Role;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use App\Models\Admin\PinOffice;
+use App\Models\Admin\Page;
 
 class CustomerController extends Controller
 {
@@ -322,9 +323,15 @@ class CustomerController extends Controller
         ])
         ->where('id', Auth::user()->id)
         ->first();
-        $statuses = Status::all();    
+        $statuses = Status::all();
+
+         $lastSegment = basename(parse_url($request->url(), PHP_URL_PATH));
+         $contactPageData = Page::where('slug', $lastSegment)->with('cms.images')->first();
+         $seoMetaTag = $contactPageData->seo_meta_tag;
+         $seoMetaTagTitle = $contactPageData->seo_meta_tag_title;
+         $pageTitle = $contactPageData->page_title;    
         // if ($customerDetail && $customerDetail->hasRole('Customer')) {
-            return view('front.profile', compact('customerDetail','statuses'));
+            return view('front.profile', compact('customerDetail','statuses', 'seoMetaTag', 'seoMetaTagTitle', 'contactPageData' , 'pageTitle'));
         // } 
     }
 
@@ -464,5 +471,20 @@ class CustomerController extends Controller
             return response()->json(['success' => true, 'user' => $customer, 'userPincodeHtml' => $userPincodeHtml, 'message' => 'Address saved successfully.']);
         }
         return response()->json(['success' => true, 'user' => $customer, 'userPincodeHtml' => null, 'message' => 'Address saved successfully.']);
+    }
+
+
+    public function customerNotificationDestroy($id)
+    {
+        if (auth()->check() && auth()->user()->hasRole('Customer')) {
+            $notification = auth()->user()->notifications()->find($id);
+            if ($notification) {
+                $notification->delete();
+                $notifications = auth()->user()->notifications;   
+                $notificationHtml = view('front.common.notification', compact('notifications'))->render();
+                return response()->json(['success' => true,'message' => 'Notification deleted successfully', 'notificationHtml' => $notificationHtml, 'count' => $notifications->count()], 200);
+            }
+        }
+        return response()->json(['success' => false, 'message' => 'Notification not found'], 404);
     }
 }

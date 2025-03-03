@@ -186,7 +186,8 @@
                     @csrf
                     <div class="inputMainBlock fullwidth">
                         <span>Mobile number</span>
-                        <input type="tel" name="mobile" class="mobileVD" placeholder="9921407039" autocomplete="off">
+                        <input type="tel" name="mobile" class="mobileVD" placeholder="9921407039"
+                            autocomplete="off">
                         <div class="errormsg"></div>
                         <div class="addressNote2">
                             <img src="{{ asset('front/images/info-circle.svg') }}" alt="">
@@ -564,7 +565,33 @@
             }
         });
     });
+</script>
+
+<script>
+function updateBannerImages() {
+    let isMobile = window.innerWidth <= 768; // Adjust breakpoint if needed
+    // document.getElementById("mobile").style.display = isMobile ? "block" : "none";
+    // document.getElementById("desk").style.display = isMobile ? "none" : "block";
+    // document.querySelectorAll('.bannerImage').forEach(img => {
+    //     let isImageMobile = img.dataset.isMobile === "1" || img.dataset.isMobile === "true"; // Convert string to boolean
+
+    //     // Show the image only if it matches the screen type
+    //     if ((isMobile && isImageMobile) || (!isMobile && !isImageMobile)) {
+    //         img.style.display = "block";
+    //     } else {
+    //         img.style.display = "none";
+    //     }
+    // });
+}
+
+// Run on page load
+window.addEventListener('load', updateBannerImages);
+
+// Run on window resize
+window.addEventListener('resize', updateBannerImages);
 
 </script>
-    </body>
-    </html>
+
+</body>
+
+</html>

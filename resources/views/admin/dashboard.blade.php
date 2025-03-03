@@ -21,7 +21,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
+    {{-- <section class="content">
       <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
@@ -853,8 +853,7 @@
         </div>
         <!-- /.row -->
       </div><!--/. container-fluid -->
-    </section>
+    </section> --}}
     <!-- /.content -->
   </div>
-
   @endsection

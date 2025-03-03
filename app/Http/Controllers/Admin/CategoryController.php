@@ -47,6 +47,7 @@ class CategoryController extends Controller
         Category::create([
             'name' => $request->name,
             'image' => $imagePath ?? null,
+            'alt' => $request->alt,
             'slug' => \Str::slug($request->name),
         ]);
 
@@ -74,9 +75,9 @@ class CategoryController extends Controller
             $imagePath = $request->file('image')->store('categories', 'public');
             $category->image = $imagePath;
         }
-
         $category->name = $request->input('name');
         $category->slug = \Str::slug($request->input('name'));
+        $category->alt = $request->input('alt');
         $category->save();
 
         return redirect()->route('admin.categories')->with('success', 'Category updated successfully.');

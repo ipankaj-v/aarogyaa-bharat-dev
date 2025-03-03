@@ -3,7 +3,44 @@
 @section('content')
 
 <!-- @include('front.common.welcome-message') -->
+@php
+    $isMobile = request()->header('User-Agent') && preg_match('/mobile|android|iphone|ipad|phone/i', request()->header('User-Agent'));
+@endphp
+
 <section class="bannerPArt">
+    <div class="container">
+        <div class="bannerSlider getprogressWidth arrowOnProgress">
+            @if($isMobile)
+                @foreach($mobileBannerImages as $banner)
+                    <div class="bannerBlock">
+                        <a href="{{ $banner->link }}" target="_blank">
+                            <img class="bannerImage"
+                                 src="{{ asset('storage/' . $banner->image) }}" 
+                                 data-mobile="{{ asset('storage/' . $banner->image) }}"
+                                 data-desktop="{{ asset('storage/' . ($banner->desktop_image ?? $banner->image)) }}"
+                                 alt="Mobile Banner">
+                        </a>    
+                    </div>
+                @endforeach
+            @else
+                @foreach($bannerImages as $banner)
+                    <div class="bannerBlock">
+                        <a href="{{ $banner->link }}" target="_blank">
+                            <img class="bannerImage"
+                                 src="{{ asset('storage/' . $banner->image) }}" 
+                                 data-mobile="{{ asset('storage/' . ($banner->mobile_image ?? $banner->image)) }}"
+                                 data-desktop="{{ asset('storage/' . $banner->image) }}"
+                                 alt="Desktop Banner">
+                        </a>    
+                    </div>
+                @endforeach
+            @endif
+        </div> 
+        <div class="progressBar"></div>
+    </div>
+</section>
+
+{{-- <section class="bannerPArt">
     <div class="container">
         <div class="bannerSlider getprogressWidth arrowOnProgress">
             @if(isset($bannerImages))
@@ -18,7 +55,7 @@
         </div> 
         <div class="progressBar"></div>
     </div>
-</section>
+</section> --}}
 <!-- caterory part  -->
 <section class="category_part">
     <div class="container">
@@ -280,13 +317,13 @@
                     <div class="our_blog_box">
                         <div class="blog_image">
                         <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}">
-                            <img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="{{ $blog->title }}" />
+                            <img src="{{ asset('storage/' . $blog->images->first()->path) }}" alt="{{ $blog->images->first()->alt }}" />
                         </a>   
                         </div>
                         <div class="blog_text">
                             <div class="text_one">
                             <a href="{{ route('blog.details', ['slug' => $blog->slug]) }}">
-                                <h2>{{ $blog->title }}</h2>
+                                <h1>{{ $blog->title }}</h1>
                             </a>    
                                 {{-- <p>{{ Str::limit($blog->content, 150) }}</p> --}}
                                 <p>{{ $blog->description }}</p>
@@ -433,7 +470,7 @@
 <section class="about_aarogya_bharat">
     <div class="container">
         {{-- <div class="about_aarogya_title"><h2>About Aarogya Bharat</h2></div> --}}
-        <div class="about_aarogya_title"><h2>{{ $aboutAarogyaBharat->cms->description }}</h2></div>
+        <div class="about_aarogya_title"><h1>{{ $aboutAarogyaBharat->cms->title }}</h1></div>
         <div class="about_aarogya_bharat_text">
             <div id="content" class="short-content">
                 {!! $aboutAarogyaBharat->cms->content !!}
@@ -460,7 +497,7 @@
                 tempInput.setSelectionRange(0, 99999);
                 document.execCommand('copy');
                 document.body.removeChild(tempInput);
-                toastr.success('Offer code copied: ' + code +'.');
+                toastr.success('Offer code copied');
             });
         });
     });

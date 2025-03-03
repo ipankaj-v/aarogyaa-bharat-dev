@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 use Str;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Admin\Page;
 
 class BlogController extends Controller
 {
@@ -56,7 +57,12 @@ class BlogController extends Controller
             $recommendedBlogHtml = view('front.common.recommended-blog', compact('blogs', 'oneBlog', 'totalBlogs', 'perPage', 'currentPage'))->render();
             return response()->json(['success' => true, 'recommendedBlogHtml' => $recommendedBlogHtml]);
         }
-        return view('front.blogs', compact('blogs', 'oneBlog', 'trendingBlogs', 'totalBlogs', 'perPage', 'currentPage'));
+        $lastSegment = basename(parse_url($request->url(), PHP_URL_PATH));
+        $page = Page::where('slug', $lastSegment)->first();
+        $seoMetaTag = $page->seo_meta_tag;
+        $seoMetaTagTitle = $page->seo_meta_tag_title;
+        $pageTitle = $page->page_title;
+        return view('front.blogs', compact('blogs', 'oneBlog', 'trendingBlogs', 'totalBlogs', 'perPage', 'currentPage' , 'seoMetaTag','seoMetaTagTitle', 'pageTitle'));
     }
 
     public function blogDetials(Request $request, $slug)
@@ -68,9 +74,9 @@ class BlogController extends Controller
             $blogDetails->increment('views');            
             Cache::put($viewCacheKey, true, now()->addDay(1));            
         }
-        $seoMetaTag = $blogDetails->seo_meta_tag;
-        $seoMetaTagTitle = $blogDetails->seo_meta_tag_title;
-        $pageTitle = $blogDetails->page_title;
+        $seoMetaTag = $blogDetails->seo_meta_tag ?? '';
+        $seoMetaTagTitle = $blogDetails->seo_meta_tag_title ?? '';
+        $pageTitle = $blogDetails->page_title ?? '';
         return view('front.blog-details', compact('blogDetails', 'twoBlogs', 'seoMetaTag','seoMetaTagTitle', 'pageTitle'));
     }
 
@@ -106,7 +112,10 @@ class BlogController extends Controller
         // Handle file upload
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('blogs', 'public');
-            $blog->images()->create(['path' => $imagePath]);
+            $blog->images()->create([
+                'path' => $imagePath,
+                'alt' => $request->alt
+            ]);
         }
 
         return redirect()->route('admin.blogs')->with('success', 'Blog created successfully.');
@@ -130,7 +139,6 @@ class BlogController extends Controller
         ]);
         $blog = Blog::findOrFail($id);
         $blog->name = $request->input('name');
-        // $blog->slug = $request->input('name');
         $blog->title = $request->input('title');
         $blog->description = $request->input('description');
         $blog->content_html = $request->input('content_html');
@@ -149,9 +157,11 @@ class BlogController extends Controller
 
             // Store the new image
             $imagePath = $request->file('image')->store('blogs', 'public');
-            $blog->images()->create(['path' => $imagePath]);
+            $blog->images()->create([
+                'path' => $imagePath,
+                'alt' => $request->alt
+            ]);
         }
-
 
         return redirect()->route('admin.blogs')->with('success', 'Blog updated successfully');
     }

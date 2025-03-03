@@ -246,7 +246,7 @@ $(document).ready(function(){
         dots: true,
         infinite: false,
         speed: 300,
-        slidesToShow: 2.8,
+        slidesToShow: 3.95,
         slidesToScroll: 1,
         responsive: [
           {
@@ -281,7 +281,7 @@ $(document).ready(function(){
         dots: true,
         infinite: false,
         speed: 300,
-        slidesToShow: 4.2,
+        slidesToShow: 4,
         slidesToScroll: 1,
         responsive: [
           {

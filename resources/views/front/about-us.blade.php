@@ -20,7 +20,7 @@
 </div>
 <section class="termandconditions">
     <div class="container">
-        <div class="main_title"><h2>{{$page->cms->title}}</h2></div>
+        <div class="main_title"><h1>{{$page->cms->title}}</h1></div>
         {!! preg_replace('/\s+/', ' ', trim(strip_tags(html_entity_decode($page->cms->content), '<b><i><u><strong><em><p><ul><li>'))) !!}
     </div>
 </section>

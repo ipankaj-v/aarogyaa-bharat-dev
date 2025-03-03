@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="blogtext_title">
-            <h2>{{ $blogDetails->title  }}</h2>
+            <h1>{{ $blogDetails->title  }}</h1>
         </div>
         <div class="blog_tag_name">
             <p class="articalauthor"><img src="{{ asset('front/images/author.svg') }}" alt="" />{{ $blogDetails->author  }}</p>

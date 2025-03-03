@@ -44,7 +44,7 @@
             <div class="product_details_data">
                 <!-- <div class="rentorpurchase"><img src="images/info-circle_svg.svg" alt="" /><p>Rent or Purchase this product now.!</p></div> -->
                 <div class="product_name_details">
-                    <div class="nameshare"><h2>{{$productDetails->title}}</h2><a href="#;"><img src="images/ri_share-line.svg" alt="" /></a></div>
+                    <div class="nameshare"><h1>{{$productDetails->title}}</h1><a href="#;"><img src="images/ri_share-line.svg" alt="" /></a></div>
                     <div class="product_description">
                     <p>{{$productDetails->description}}</p>
                     </div>

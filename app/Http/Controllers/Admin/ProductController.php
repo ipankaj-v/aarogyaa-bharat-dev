@@ -71,6 +71,7 @@ class ProductController extends Controller
         $product->page_title = $request->page_title ?? null;
         $product->seo_meta_tag_title = $request->seo_meta_tag_title ??  null;
         $product->seo_meta_tag = $request->seo_meta_tag ?? null;
+        $product->delivery_and_installation_fees = $request->delivery_and_installation_fees;
         $product->save();
         if ($request->hasFile('image')) {
             $firstFile = $request->file('image')[0]; 
@@ -78,7 +79,10 @@ class ProductController extends Controller
             $product->update(['image' => $firstImagePath]);
             foreach ($request->file('image') as $key => $file) {
                 $imagePath = $file->store('products', 'public'); 
-                $product->images()->create(['path' => $imagePath]);
+                $product->images()->create([
+                    'path' => $imagePath,
+                    'alt' => $request->alt
+                ]);
             }
         }
 
@@ -127,6 +131,7 @@ class ProductController extends Controller
         $product->page_title = $request->page_title;
         $product->seo_meta_tag_title = $request->seo_meta_tag_title;
         $product->seo_meta_tag = $request->seo_meta_tag;
+        $product->delivery_and_installation_fees = $request->delivery_and_installation_fees;
         $product->save();
             if ($request->hasFile('image')) {
                 if ($product->images->isNotEmpty()) {
@@ -144,10 +149,12 @@ class ProductController extends Controller
                 $product->update(['image' => $firstImagePath]);
                 foreach ($request->file('image') as $key => $file) {
                     $imagePath = $file->store('products', 'public'); 
-                    $product->images()->create(['path' => $imagePath]);
+                    $product->images()->create([
+                        'path' => $imagePath,
+                        'alt' => $request->alt
+                    ]);
                 }
         }
-    
     
         return redirect()->route('admin.products')->with('success', 'Product updated successfully.');
     }

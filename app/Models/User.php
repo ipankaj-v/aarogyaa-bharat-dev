@@ -11,10 +11,12 @@ use Spatie\Permission\Models\Role;
 use App\Models\Admin\Order; 
 use App\Models\Admin\PinOffice; 
 use App\Models\Front\Adress;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use App\Notifications\AdminResetPasswordNotification;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
@@ -95,5 +97,9 @@ class User extends Authenticatable
     // {
     //     return $this->belongsToMany(Role::class);
     // }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPasswordNotification($token));
+    }
 }
 

@@ -8,11 +8,14 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
     public function index() {
-        $users = User::role('user')->get();
-        // dd($users);
+        $users = User::whereDoesntHave('roles', function ($query) {
+            $query->whereIn('name', ['Customer', 'Admin']);
+        })->get();
+        
         return view('admin.user.index', compact('users'));
     }
 

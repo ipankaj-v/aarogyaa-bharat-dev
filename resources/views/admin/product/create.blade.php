@@ -85,6 +85,13 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label for="imagealt">Image Alt</label>
+                                        <input type="text" name="alt" class="form-control @error('alt') is-invalid @enderror" id="imagealt" placeholder="Image Alt" value="{{ old('alt') }}">
+                                        @error('alt')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label for="productDescription">Description</label>
                                         <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="productDescription"
                                             placeholder="Enter Product Description">{{ old('description') }}</textarea>
@@ -119,6 +126,17 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <div class="form-group">
+                                        <label for="deliveryFees">Delivery And Installation Fees</label>
+                                        <input type="number" name="delivery_and_installation_fees" min="0"
+                                            class="form-control @error('delivery_and_installation_fees') is-invalid @enderror"
+                                            id="deliveryFees" placeholder="Enter Delivery and Installation Fees"
+                                            value="{{ old('delivery_and_installation_fees') }}">
+                                        @error('delivery_and_installation_fees')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    
                                     <div class="form-group">
                                         <label for="gst">GST Percentage</label>
                                         <input type="number" name="gst" min="0"

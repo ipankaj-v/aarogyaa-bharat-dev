@@ -29,6 +29,7 @@ class Product extends Model
         'page_title',          
         'seo_meta_tag_title',          
         'seo_meta_tag',          
+        'delivery_and_installation_fees'          
     ];
     
 

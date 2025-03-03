@@ -70,7 +70,10 @@ class CMSController extends Controller
         if ($request->hasFile('image')) {
             foreach ($request->file('image') as $file) {
                 $imagePath = $file->store('cms', 'public'); // Store each image
-                $cms->images()->create(['path' => $imagePath]); // Save the image to the images table
+                $cms->images()->create([
+                    'path' => $imagePath,
+                    'alt' => $request->alt
+                ]); // Save the image to the images table
             }
         }
         
@@ -115,7 +118,10 @@ class CMSController extends Controller
                 Storage::disk('public')->delete($cms->images->first()->path);
                 $cms->images()->delete();
                 $imagePath = $file->store('cms', 'public');
-                $cms->images()->create(['path' => $imagePath]);
+                $cms->images()->create([
+                    'path' => $imagePath,
+                    'alt' => $request->alt
+                ]);
             }
         }
     

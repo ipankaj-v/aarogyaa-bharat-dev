@@ -32,6 +32,9 @@ use App\Http\Controllers\Admin\ContactUsController as FrontContactUsController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\SocialLoginController;
 
+use Illuminate\Support\Facades\Mail;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,7 +70,7 @@ Route::controller(BannerController::class)->group(function () {
     // Display a list of banners
     Route::get('/banners', 'index')->name('banners.index');
     Route::get('/banners/create', 'create')->name('banners.create');
-    Route::post('/banners', 'store')->name('banners.store');
+    Route::post('/banners', 'bannerStore')->name('banners.store');
     Route::get('/banners/{id}/edit', 'edit')->name('banners.edit');
     Route::post('/banners/{id}', 'update')->name('banners.update');
     Route::get('/banners/{id}', 'destroy')->name('banners.destroy');
@@ -97,6 +100,7 @@ Route::middleware(['auth.customer'])->group(function () {
     Route::post('/profile/logout', [FrontCustomerController::class, 'customerLogout'])->name('customer.logout');
     Route::get('/customer/notification', [FrontCustomerController::class, 'Notification'])->name('customer.notification');
     Route::get('/customer/order/{id}', [FrontCustomerController::class, 'OrderStatusWise'])->name('customer.orderStatusWise');
+    Route::get('/customer/notification/delete/{id}', [FrontCustomerController::class, 'customerNotificationDestroy'])->name('customer.notifi.destroy');
 
 });
 
@@ -147,6 +151,23 @@ Route::post('verify-payment', [PaymentController::class, 'verifyPayment']);
 //admin routes
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('admin/login', [AdminController::class, 'loginAction'])->name('admin.login.submit');
+
+
+Route::get('/test-email', function () {
+    Mail::raw('This is a test email from Laravel.', function ($message) {
+        $message->to('falamec589@lxheir.com')
+                ->subject('Test Email')
+                ->from('pankajvajipara5191@gmail.com', 'Aarogyaa Bharat');
+    });
+
+    return 'Email sent!';
+});
+// Forgot Password Form (GET)
+Route::get('/admin/forgot-password', [AdminController::class, 'showLinkRequestForm'])->name('admin.forgot.password');
+Route::post('/admin/forgot-password', [AdminController::class, 'sendResetLinkEmail'])->name('admin.password.email');
+Route::get('/admin/reset-password/{token}', [AdminController::class, 'showResetForm'])->name('admin.password.reset');
+Route::post('/admin/reset-password', [AdminController::class, 'reset'])->name('admin.password.update');
+
 Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
         // Authentication and Dashboard Routes
@@ -282,6 +303,7 @@ Route::middleware(['auth'])->group(function () {
         
         Route::controller(ContactUsController::class)->group(function () {
             Route::get('/contactus', 'index')->name('admin.contactus');
+            Route::get('/contactus/show/{id}', 'showDetails')->name('admin.contactus.show');
         });
 
         Route::controller(AboutUsController::class)->group(function () {
@@ -314,7 +336,7 @@ Route::middleware(['auth'])->group(function () {
         // Logout Route
         Route::post('/logout', function () {
             Auth::logout();
-            return redirect('/login');
+            return redirect()->route('admin.login');
         })->name('admin.logout');
     });
 });

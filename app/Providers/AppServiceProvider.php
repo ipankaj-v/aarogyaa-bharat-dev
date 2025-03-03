@@ -38,7 +38,8 @@ class AppServiceProvider extends ServiceProvider
         $offerAndDiscounts = OfferAndDiscount::orderBy('updated_at', 'desc')->take(10)->get();
         $contactusBlog = Blog::with('images')->inRandomOrder()->take(4)->get();
         $faqs = FAQ::with('answers')->get();
-        $bannerImages = Banner::select('*')->limit(5)->get();
+        $bannerImages = Banner::select('*')->where('is_mobile', false)->get();
+        $mobileBannerImages = Banner::select('*')->where('is_mobile', true)->get();
         $happyCustomers = HappyCustomer::all();
 
         $partners = Page::where('slug', 'partners')->with('cms.images')->first();
@@ -52,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('offerAndDiscounts', $offerAndDiscounts);
         View::share('contactusBlog', $contactusBlog);
         View::share('bannerImages', $bannerImages);
+        View::share('mobileBannerImages', $mobileBannerImages);
         View::share('happyCustomers', $happyCustomers);
         View::share('partners', $partners);
         View::share('whyAarogyaBharat', $whyAarogyaBharat);

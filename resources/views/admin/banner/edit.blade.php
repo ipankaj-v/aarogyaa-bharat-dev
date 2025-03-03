@@ -75,6 +75,17 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="isMobile">Is Mobile Banner?</label>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="is_mobile" class="form-check-input" id="isMobile" value="1" {{ old('is_mobile', $banner->is_mobile) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="isMobile">Yes, this is a mobile banner</label>
+                                    </div>
+                                    @error('is_mobile')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                
+                                <div class="form-group">
                                     <label for="bannerStatus">Status {{ $banner->status }}</label>
                                     <div class="form-check">
                                         <input type="checkbox" name="status" class="form-check-input" id="bannerStatus" value="1" {{ old('status', $banner->status) ? 'checked' : '' }}>

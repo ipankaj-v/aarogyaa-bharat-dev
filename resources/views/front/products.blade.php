@@ -17,7 +17,7 @@
                     <div class="tabPadd">
                         <a href="#" data-category-id="{{ $category->id }}" class="{{ $loop->first ? 'active' : '' }}">
                             <div>
-                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" />
+                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->alt }}" />
                             </div>
                             <p>{{ $category->name }}</p>
                         </a>
