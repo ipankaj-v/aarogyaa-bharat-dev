@@ -23,7 +23,9 @@
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
                             </div>
                             <div class="productbox_text">
-                                <h2>{{ $product->name }}</h2>
+                                 <a href="{{ route('products.detail', $product->slug) }}">
+                                    <h2>{{ $product->name }}</h2>
+                                 </a>
                                 <div class="priceshare">
                                     <h3>₹ @indianCurrency($product->price)</h3>
                                     <a target="_blank"
@@ -62,103 +64,4 @@
             </a>
         </div>
     </section>
-
-    <!-- <section class="customer_part">
-            <div class="container">
-                <div class="titlePart">
-                    <h4>Happy Customers..!</h4>
-                    <a href="#;">View All <img src="images/orange_arrow.svg" alt=""> </a>
-                </div>
-                <div class="rowMob">
-                    <div class="customerSlider getprogressWidth arrowOnProgress">
-                        <div class="customerSlider_padd">
-                            <div class="customerSlider_block">
-                                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                                <strong>Piyush Gohil</strong>
-                                <ul>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                                </ul>
-                                <i>4.5</i>
-                            </div>
-                        </div>
-                        <div class="customerSlider_padd">
-                            <div class="customerSlider_block">
-                                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                                <strong>Piyush Gohil</strong>
-                                <ul>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                                </ul>
-                                <i>4.5</i>
-                            </div>
-                        </div>
-                        <div class="customerSlider_padd">
-                            <div class="customerSlider_block">
-                                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                                <strong>Piyush Gohil</strong>
-                                <ul>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                                </ul>
-                                <i>4.5</i>
-                            </div>
-                        </div>
-                        <div class="customerSlider_padd">
-                            <div class="customerSlider_block">
-                                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                                <strong>Piyush Gohil</strong>
-                                <ul>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                                </ul>
-                                <i>4.5</i>
-                            </div>
-                        </div>
-                        <div class="customerSlider_padd">
-                            <div class="customerSlider_block">
-                                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                                <strong>Piyush Gohil</strong>
-                                <ul>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                                </ul>
-                                <i>4.5</i>
-                            </div>
-                        </div>
-                        <div class="customerSlider_padd">
-                            <div class="customerSlider_block">
-                                <p>Kros samuktig och neturen, heteropaskade. Mikok höraniv eller mus i fuvåfar. Faliga mälig astronde. Bens </p>
-                                <strong>Piyush Gohil</strong>
-                                <ul>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/fill_star.svg" alt="" /> </a> </li>
-                                    <li><a href="#;"><img src="images/empty_star.svg" alt="" /> </a> </li>
-                                </ul>
-                                <i>4.5</i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progressBar"></div>
-                </div>
-            </div>
-        </section> -->
-
 @endsection('content')

@@ -43,7 +43,11 @@
             <div class="our_blog_box">
                 <div class="blog_image"><img src="{{ asset('storage/' .$randomBlog->images->first()->path) }}" alt="" /></div>
                 <div class="blog_text">
-                    <div class="text_one"><h2>{{$randomBlog->title}}</h2><p>{{$randomBlog->description}}</p></div>
+                    <div class="text_one">
+                        <a href="{{ route('blog.details', ['slug' => $randomBlog->slug]) }}">
+                            <h1>{{$randomBlog->title}}</h1>
+                        </a>    
+                        <p>{{$randomBlog->description}}</p></div>
                     <div class="blog_tag_name">
                         <ul>
                             <li class="tagBox"><p>{{ $randomBlog->tagname  }}</p></li>

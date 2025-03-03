@@ -57,8 +57,7 @@
                                                      @indianCurrency($product->price - ($product->price * $product->discount_percentage) / 100) </strong>
                                                 {{-- Discounted price --}}
                                                 <span
-                                                    class="discount-percentage">( @indianCurrency($product->discount_percentage) %
-                                                    OFF)</span> {{-- Discount percentage --}}
+                                                    class="discount-percentage">( @indianCurrency($product->discount_percentage)%OFF)</span> {{-- Discount percentage --}}
                                             @else
                                                 <strong class="discounted-price">₹
                                                     @indianCurrency($product->price)</strong> {{-- Price without discount --}}
