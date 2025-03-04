@@ -1132,11 +1132,9 @@ $(document).ready(function(){
         
         $(this).parent().toggleClass('active');
         $(this).parent().siblings().removeClass('active');
-        
-        
-        $('.faq_box a img').prop('src','front/images/jam_plus.svg');
+        $('.faq_box a img').prop('src',faqIcons.plus);
         if($(this).parent().hasClass('active')){
-            $(this).children('img').prop('src','front/images/jam_minus.svg');
+            $(this).children('img').prop('src',faqIcons.minus);
         }
         
     });

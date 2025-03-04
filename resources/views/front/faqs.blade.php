@@ -26,5 +26,10 @@ function changeTab(categoryId) {
     $('#category_' + categoryId).show();
 }
 
+var faqIcons = {
+        plus: "{{ asset('front/images/jam_plus.svg') }}",
+        minus: "{{ asset('front/images/jam_minus.svg') }}"
+    };
+
 </script>
 @endsection('content')

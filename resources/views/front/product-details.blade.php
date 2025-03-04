@@ -144,6 +144,7 @@
 
 
 @include('front.common.faq-section')
+<script src="{{ asset('front/js/jquery.min.js') }}"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 document.getElementById('buy-now-button').onclick = function(e) {
@@ -251,5 +252,13 @@ document.getElementById('buy-now-button').onclick = function(e) {
     });
 }
 
+function changeTab(categoryId) {
+    $('.faq_box').hide();
+    $('#category_' + categoryId).show();
+}
+var faqIcons = {
+        plus: "{{ asset('front/images/jam_plus.svg') }}",
+        minus: "{{ asset('front/images/jam_minus.svg') }}"
+    };
 </script>
 @endsection('content')

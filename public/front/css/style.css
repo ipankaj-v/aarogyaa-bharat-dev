@@ -247,7 +247,7 @@ margin-top: 6px;}
 .blog_image img{width: 128px;height: 128px;box-shadow: 0px 0px 5px 0px #233F8C1A;}
 .blog_text{float: left;padding-left: 16px;}
 .text_one{width: 100%;float: left;padding-bottom: 28px;}
-.text_one h2{width: 100%;float: left;color: #000000;font-size: 16px;font-family: 'Nunito-Reg';font-weight: 700;line-height: 26px;padding-bottom: 6px;}
+.text_one h1{width: 100%;float: left;color: #000000;font-size: 16px;font-family: 'Nunito-Reg';font-weight: 700;line-height: 26px;padding-bottom: 6px;}
 .text_one p{width: 100%;float: left;color: #504D4D;    font-size: 16px;font-family: 'Nunito-Reg';font-weight: 400;line-height: 21.82px;}
 .blog_tag_name{width: 100%;float: left;display: flex;flex-direction: row;align-items: center;justify-content:space-between;}
 .blog_tag_name ul{float: left;list-style-type: none;}
@@ -858,7 +858,7 @@ text-align: center;}
 .blog_image_height img {max-height: 100%;max-width: 100%;margin: 0 auto;}
 .right_part_blog .blog_text{padding-left: 0;}
 .text_two{width: 100%;float: left;}
-.text_two h2{width: 100%;float: left;font-family: 'Nunito-Reg';font-size: 16px;font-weight: 700;line-height: 26px;padding-bottom: 4px;color: #000;}
+.text_two h1{width: 100%;float: left;font-family: 'Nunito-Reg';font-size: 16px;font-weight: 700;line-height: 26px;padding-bottom: 4px;color: #000;}
 .text_two p{width: 100%;float: left;font-family: 'Nunito-Reg';font-size: 16px;font-weight: 400;line-height: 21.82px;color: #504D4D;padding-bottom: 16px;}
 .right_part_blog .read_more_blogs{display: none;}
 
@@ -1455,6 +1455,22 @@ text-align: center;}
 .category_all_box {    overflow: auto;    white-space: nowrap;}
 .category_all_box .category_box {    padding: 0 10px;    width: 100%;}
 .category_all_box .category_box a {display: flex;    flex-direction: column;    align-items: center;}
+}
+.product_slider_block h5 span a {
+      width: 100%;
+      font-size: 16px;
+      font-family: 'Nunito-Bold';
+      margin-bottom: -25px;
+      color: #000;
+}
+
+.product_slider2block p a{
+  float: left;
+  width: 100%;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 12px; 
+  font-family: 'Nunito-Bold';
 }
 
  

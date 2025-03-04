@@ -111,7 +111,9 @@
                                     <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                                 </a>   
                             </div>
-                            <h5>{{ $product->name }} </h5>
+                            <h5>
+                                <span> <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a> </span> 
+                            </h5>
                             <p>{{ $product->description }}</p>
                             <div class="discounted-product-price">
                                 @if (isset($product->discount_percentage) && $product->discount_percentage > 0)

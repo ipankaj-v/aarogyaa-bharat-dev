@@ -44,8 +44,9 @@
                                                     alt="{{ $product->name }}">
                                             </a>
                                         </div>
-                                        <h5>{{ $product->name }} <a target="_blank"
-                                                href="https://wa.me/?text={{ urlencode('Check out this product: ' . $product->title . ' ' . route('products.detail', $product->slug)) }}">
+                                        <h5>
+                                            <span> <a href="{{ route('products.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a> </span> 
+                                            <a target="_blank" href="https://wa.me/?text={{ urlencode('Check out this product: ' . $product->title . ' ' . route('products.detail', $product->slug)) }}">
                                                 <img src="{{ asset('front/images/Share.svg') }}" alt="Share on WhatsApp">
                                             </a></h5>
                                         <p>{{ $product->description }}</p>
